@@ -17,6 +17,7 @@ interface TextRevealProps {
   children: ReactNode;
   as?: 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'p';
   className?: string;
+  style?: React.CSSProperties;
   delay?: number;
   duration?: number;
   mode?: 'words' | 'lines' | 'block';
@@ -47,6 +48,7 @@ export function TextReveal({
   children,
   as: Tag = 'div',
   className = '',
+  style: customStyle = {},
   delay = 0,
   duration = 0.6,
   mode = 'words',
@@ -121,6 +123,7 @@ export function TextReveal({
         ref={elementRef as React.RefObject<HTMLDivElement>}
         className={className}
         style={{
+          ...customStyle,
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
           transition: `opacity ${duration}s cubic-bezier(0.25, 1, 0.5, 1), transform ${duration}s cubic-bezier(0.25, 1, 0.5, 1)`,
@@ -138,6 +141,7 @@ export function TextReveal({
       <Tag 
         ref={elementRef as React.RefObject<HTMLDivElement>} 
         className={`reveal-text ${isVisible ? 'revealed' : ''} ${className}`}
+        style={customStyle}
       >
         {words.map((word, index) => (
           <span
@@ -165,6 +169,7 @@ export function TextReveal({
       ref={elementRef as React.RefObject<HTMLDivElement>}
       className={className}
       style={{
+        ...customStyle,
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity ${duration}s cubic-bezier(0.25, 1, 0.5, 1), transform ${duration}s cubic-bezier(0.25, 1, 0.5, 1)`,
