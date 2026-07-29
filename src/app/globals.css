@@ -1,0 +1,257 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Sewar Waie Color Palette */
+:root {
+  --color-primary: #5D3C83;
+  --color-primary-light: #7A52A3;
+  --color-primary-dark: #4A2F6A;
+  --color-gold: #C29D44;
+  --color-gold-light: #D4B062;
+  --color-gold-dark: #A88535;
+  --color-navy: #1F3D73;
+  --color-navy-light: #2D5299;
+  --color-navy-dark: #152B54;
+  --color-sage: #90A36D;
+  --color-sage-light: #A8BA85;
+  --color-sage-dark: #7A8C5A;
+  --color-cream: #FAFAF8;
+  --color-cream-dark: #F5F5F0;
+  --background: var(--color-cream);
+  --foreground: #1a1a2e;
+  --card: #ffffff;
+  --card-foreground: #1a1a2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a2e;
+  --primary: var(--color-primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-sage);
+  --secondary-foreground: #ffffff;
+  --muted: #f0ede6;
+  --muted-foreground: #6b7280;
+  --accent: var(--color-gold);
+  --accent-foreground: #1a1a2e;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5e2db;
+  --input: #e5e2db;
+  --ring: var(--color-primary);
+  --radius: 1rem;
+  --chart-1: var(--color-primary);
+  --chart-2: var(--color-gold);
+  --chart-3: var(--color-navy);
+  --chart-4: var(--color-sage);
+  --chart-5: var(--color-gold-light);
+}
+
+.dark {
+  --background: #1a1a2e;
+  --foreground: #fafaf8;
+  --card: #252542;
+  --card-foreground: #fafaf8;
+  --popover: #252542;
+  --popover-foreground: #fafaf8;
+  --primary: var(--color-primary-light);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-sage-dark);
+  --secondary-foreground: #ffffff;
+  --muted: #2d2d4a;
+  --muted-foreground: #9ca3af;
+  --accent: var(--color-gold);
+  --accent-foreground: #fafaf8;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #3d3d5c;
+  --input: #3d3d5c;
+  --ring: var(--color-primary-light);
+  --chart-1: var(--color-primary-light);
+  --chart-2: var(--color-gold);
+  --chart-3: var(--color-navy-light);
+  --chart-4: var(--color-sage-light);
+  --chart-5: var(--color-gold-light);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Custom colors */
+  --color-sewar-purple: #5D3C83;
+  --color-sewar-gold: #C29D44;
+  --color-sewar-navy: #1F3D73;
+  --color-sewar-sage: #90A36D;
+  --color-sewar-cream: #FAFAF8;
+  
+  --font-family-arabic: 'Tajawal', 'Cairo', 'Noto Sans Arabic', sans-serif;
+  --font-family-english: 'Quicksand', 'Comfortaa', 'Nunito', sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-[family-name:var(--font-family-arabic)] antialiased;
+  }
+  
+  html[dir="rtl"] body {
+    font-family: var(--font-family-arabic);
+  }
+  
+  html[dir="ltr"] body {
+    font-family: var(--font-family-english);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sage-dark);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom utility classes */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-navy) 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+}
+
+.gradient-warm {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 50%, var(--color-sage) 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Decorative patterns */
+.pattern-dots {
+  background-image: radial-gradient(circle, var(--color-gold) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.15;
+}
+
+.pattern-leaves {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10c5.5 0 10 4.5 10 10s-4.5 10-10 10-10-4.5-10-10c0 5.5-4.5 10-10 10s-10-4.5-10-10 4.5-10 10-10c-5.5 0-10-4.5-10-10S14.5 0 20 0s10 4.5 10 10z' fill='%2390A36D' fill-opacity='0.08'/%3E%3C/svg%3E");
+}
+
+/* Animation classes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Glass effect */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass {
+  background: rgba(37, 37, 66, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(93, 60, 131, 0.15);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-[#5D3C83] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 
+         hover:bg-[#4A2F6A] hover:shadow-lg active:scale-[0.98];
+}
+
+.btn-gold {
+  @apply bg-[#C29D44] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 
+         hover:bg-[#A88535] hover:shadow-lg active:scale-[0.98];
+}
+
+.btn-outline {
+  @apply border-2 border-[#5D3C83] text-[#5D3C83] px-6 py-3 rounded-xl font-semibold transition-all duration-300 
+         hover:bg-[#5D3C83] hover:text-white active:scale-[0.98];
+}
+
+/* Section spacing */
+.section-padding {
+  @apply py-16 md:py-24 px-4 md:px-8;
+}
+
+/* Container */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
