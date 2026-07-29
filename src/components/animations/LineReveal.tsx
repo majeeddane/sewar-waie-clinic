@@ -156,6 +156,6 @@ export function AnimatedCounter({
     };
   }, [isVisible, value, suffix, prefix, duration]);
 
-  // Show initial value or 0 before animation
-  return <span ref={counterRef} className={className}>{hasAnimated ? `${prefix}0${suffix}` : `${prefix}0${suffix}`}</span>;
+  // Show 0 initially, then the animated value takes over via requestAnimationFrame
+  return <span ref={counterRef} className={className}>{prefix}0{suffix}</span>;
 }
