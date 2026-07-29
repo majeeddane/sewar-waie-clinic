@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, ReactNode } from 'react';
+import { useRef, useEffect, type ReactNode, type ElementType } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -13,7 +13,7 @@ interface ScrollRevealProps {
   duration?: number;
   distance?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
 }
 
 export default function ScrollReveal({

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, ReactNode } from 'react';
+import { useRef, useEffect, type ReactNode, type ElementType, Children } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -10,7 +10,7 @@ interface StaggerContainerProps {
   children: ReactNode;
   staggerDelay?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
 }
 
 export function StaggerContainer({
@@ -23,7 +23,7 @@ export function StaggerContainer({
 
   return (
     <Tag ref={containerRef} className={className} data-stagger-container>
-      {React.Children.map(children, (child, index) => (
+      {Children.map(children, (child, index) => (
         <StaggerItem
           key={index}
           index={index}
