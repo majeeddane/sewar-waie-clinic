@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '@/lib/LanguageContext';
-import { Menu, Globe, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Menu, Globe, ArrowLeft, ArrowRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 
@@ -16,7 +16,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       // Trigger scrolled state after 80px for Apple-like precision
-      setScrolled(window.scrollY > 80);
+      setScrolled(window.scrollY > 60);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -39,21 +39,19 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? 'header-scrolled shadow-sm' 
-          : 'header-main'
+        scrolled ? 'header-scrolled' : 'header-main'
       }`}
       style={{
-        height: scrolled ? '72px' : '96px',
+        height: scrolled ? '72px' : '88px',
         backgroundColor: scrolled 
-          ? 'rgba(255, 255, 255, 0.85)' 
+          ? 'rgba(250, 250, 248, 0.92)' 
           : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
+        backdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(93, 60, 131, 0.06)' : '1px solid transparent',
         transitionProperty: 'height, background-color, backdrop-filter, -webkit-backdrop-filter, border-color, box-shadow',
         transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        transitionDuration: '500ms',
+        transitionDuration: '450ms',
       }}
     >
       <div className="h-full px-6 lg:px-10 xl:px-16">
@@ -61,13 +59,13 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 group">
             <div 
-              className="flex items-center gap-3 transition-transform duration-300"
+              className="flex items-center gap-3 transition-all duration-300"
               style={{ 
                 transform: 'scale(1)',
                 transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.02)';
+                e.currentTarget.style.transform = 'scale(1.03)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'scale(1)';
@@ -76,25 +74,25 @@ export default function Header() {
               <Image
                 src="/images/logo.png"
                 alt="سوار وعي - Sewar Waie"
-                width={scrolled ? 40 : 48}
-                height={scrolled ? 40 : 48}
-                className="object-contain transition-all duration-500"
+                width={scrolled ? 38 : 46}
+                height={scrolled ? 38 : 46}
+                className="object-contain transition-all duration-450"
                 style={{
-                  width: scrolled ? '40px' : '48px',
-                  height: scrolled ? '40px' : '48px',
-                  transition: 'all 500ms cubic-bezier(0.16, 1, 0.3, 1)',
-                  filter: scrolled ? 'none' : 'drop-shadow(0 2px 8px rgba(93, 60, 131, 0.15))',
+                  width: scrolled ? '38px' : '46px',
+                  height: scrolled ? '38px' : '46px',
+                  transition: 'all 450ms cubic-bezier(0.16, 1, 0.3, 1)',
+                  filter: scrolled ? 'none' : 'drop-shadow(0 4px 12px rgba(93, 60, 131, 0.12))',
                 }}
                 priority
               />
               <span
-                className="hidden sm:block font-bold tracking-tight transition-all duration-500"
+                className="hidden sm:block font-bold tracking-tight transition-all duration-450"
                 style={{ 
                   fontFamily: 'var(--font-heading-ar)',
-                  fontSize: scrolled ? '18px' : '20px',
+                  fontSize: scrolled ? '17px' : '19px',
                   color: scrolled ? '#5D3C83' : '#1a1a2e',
-                  letterSpacing: '-0.02em',
-                  transition: 'all 500ms cubic-bezier(0.16, 1, 0.3, 1)',
+                  letterSpacing: '-0.025em',
+                  transition: 'all 450ms cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
               >
                 {locale === 'ar' ? 'سوار وعي' : 'Sewar Waie'}
@@ -117,25 +115,28 @@ export default function Header() {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 group"
+              className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full transition-all duration-300 group"
               style={{
                 color: scrolled ? '#5D3C83' : '#4a4a5a',
                 fontFamily: 'var(--font-body-arabic)',
                 fontSize: '13px',
                 fontWeight: 500,
-                backgroundColor: scrolled ? 'rgba(93, 60, 131, 0.04)' : 'transparent',
+                backgroundColor: scrolled ? 'rgba(93, 60, 131, 0.05)' : 'transparent',
+                border: '1px solid transparent',
                 transition: 'all 300ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(93, 60, 131, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(93, 60, 131, 0.12)';
                 e.currentTarget.style.color = '#5D3C83';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = scrolled ? 'rgba(93, 60, 131, 0.04)' : 'transparent';
+                e.currentTarget.style.backgroundColor = scrolled ? 'rgba(93, 60, 131, 0.05)' : 'transparent';
+                e.currentTarget.style.borderColor = 'transparent';
                 e.currentTarget.style.color = scrolled ? '#5D3C83' : '#4a4a5a';
               }}
             >
@@ -143,7 +144,7 @@ export default function Header() {
                 className="w-4 h-4 transition-transform duration-300" 
                 style={{ transform: 'rotate(0deg)' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'rotate(15deg)';
+                  e.currentTarget.style.transform = 'rotate(18deg)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'rotate(0deg)';
@@ -155,28 +156,28 @@ export default function Header() {
             {/* CTA Button */}
             <Link href="/#contact" className="hidden lg:block">
               <button
-                className="relative overflow-hidden px-6 py-2.5 rounded-full text-white font-medium transition-all duration-300 group"
+                className="relative overflow-hidden px-7 py-2.5 rounded-full text-white font-semibold transition-all duration-350 group"
                 style={{
                   fontFamily: 'var(--font-body-arabic)',
                   fontSize: '14px',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   backgroundColor: '#5D3C83',
                   boxShadow: scrolled 
-                    ? '0 2px 12px rgba(93, 60, 131, 0.25)' 
-                    : '0 4px 20px rgba(93, 60, 131, 0.3)',
+                    ? '0 4px 16px rgba(93, 60, 131, 0.22)' 
+                    : '0 6px 24px rgba(93, 60, 131, 0.28)',
                   transform: 'scale(1)',
-                  transition: 'all 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+                  transition: 'all 350ms cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#512D6F';
-                  e.currentTarget.style.boxShadow = '0 6px 24px rgba(93, 60, 131, 0.35)';
-                  e.currentTarget.style.transform = 'scale(1.02)';
+                  e.currentTarget.style.boxShadow = '0 8px 28px rgba(93, 60, 131, 0.35)';
+                  e.currentTarget.style.transform = 'scale(1.03)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '#5D3C83';
                   e.currentTarget.style.boxShadow = scrolled 
-                    ? '0 2px 12px rgba(93, 60, 131, 0.25)' 
-                    : '0 4px 20px rgba(93, 60, 131, 0.3)';
+                    ? '0 4px 16px rgba(93, 60, 131, 0.22)' 
+                    : '0 6px 24px rgba(93, 60, 131, 0.28)';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
@@ -203,6 +204,15 @@ export default function Header() {
                     }}
                   />
                 </span>
+                
+                {/* Shimmer effect on hover */}
+                <span 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                  style={{
+                    background: 'linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%)',
+                    transform: 'translateX(-100%)',
+                  }}
+                />
               </button>
             </Link>
 
@@ -216,10 +226,16 @@ export default function Header() {
                   style={{ 
                     color: scrolled ? '#5D3C83' : '#1a1a2e',
                     borderRadius: '12px',
+                    width: '42px',
+                    height: '42px',
                   }}
                 >
-                  <Menu className="h-5 w-5" strokeWidth={1.5} />
-                  <span className="sr-only">فتح القائمة</span>
+                  {isOpen ? (
+                    <X className="h-5 w-5" strokeWidth={1.8} />
+                  ) : (
+                    <Menu className="h-5 w-5" strokeWidth={1.5} />
+                  )}
+                  <span className="sr-only">{isOpen ? 'إغلاق القائمة' : 'فتح القائمة'}</span>
                 </Button>
               </SheetTrigger>
               <SheetContent 
@@ -241,8 +257,8 @@ export default function Header() {
                       <Image
                         src="/images/logo.png"
                         alt="سوار وعي"
-                        width={40}
-                        height={40}
+                        width={38}
+                        height={38}
                         className="object-contain"
                       />
                       <span
@@ -258,7 +274,7 @@ export default function Header() {
                   </div>
 
                   {/* Navigation Links */}
-                  <nav className="flex-1 py-6 px-4 space-y-1 overflow-y-auto">
+                  <nav className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto">
                     {navLinks.map((link, index) => (
                       <Link
                         key={link.href}
@@ -268,7 +284,7 @@ export default function Header() {
                         style={{ 
                           fontFamily: 'var(--font-body-arabic)',
                           color: '#1a1a2e',
-                          transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
+                          transition: 'all 220ms cubic-bezier(0.16, 1, 0.3, 1)',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'rgba(93, 60, 131, 0.05)';
@@ -301,13 +317,14 @@ export default function Header() {
                         toggleLanguage();
                         setIsOpen(false);
                       }}
-                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-medium transition-all duration-200"
+                      className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-medium transition-all duration-200"
                       style={{
                         fontFamily: 'var(--font-body-arabic)',
                         color: '#5D3C83',
-                        backgroundColor: 'rgba(93, 60, 131, 0.05)',
-                        border: '1px solid rgba(93, 60, 131, 0.12)',
+                        backgroundColor: 'rgba(93, 60, 131, 0.04)',
+                        border: '1px solid rgba(93, 60, 131, 0.1)',
                         fontSize: '14px',
+                        fontWeight: 600,
                       }}
                     >
                       <Globe className="w-4 h-4" />
@@ -316,12 +333,12 @@ export default function Header() {
                     
                     <Link href="/#contact" onClick={() => setIsOpen(false)}>
                       <button 
-                        className="w-full py-3.5 rounded-xl text-white font-semibold transition-all duration-300"
+                        className="w-full py-4 rounded-xl text-white font-bold transition-all duration-300"
                         style={{ 
                           fontFamily: 'var(--font-body-arabic)',
                           backgroundColor: '#5D3C83',
                           fontSize: '15px',
-                          boxShadow: '0 4px 16px rgba(93, 60, 131, 0.25)',
+                          boxShadow: '0 6px 20px rgba(93, 60, 131, 0.25)',
                         }}
                       >
                         {t.nav.bookNow}
@@ -360,7 +377,7 @@ function NavLink({ href, label, isScrolled, direction }: NavLinkProps) {
         fontSize: '14px',
         fontWeight: 500,
         color: isScrolled ? '#4a4a5a' : '#1a1a2e',
-        transition: 'color 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+        transition: 'color 280ms cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
       <span className="relative z-10">{label}</span>
@@ -377,7 +394,7 @@ function NavLink({ href, label, isScrolled, direction }: NavLinkProps) {
           transitionDuration: '300ms',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.width = '70%';
+          e.currentTarget.style.width = '65%';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.width = '0%';
@@ -386,9 +403,9 @@ function NavLink({ href, label, isScrolled, direction }: NavLinkProps) {
 
       {/* Hover Background Glow */}
       <span 
-        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-280 pointer-events-none"
         style={{
-          backgroundColor: 'rgba(194, 157, 68, 0.06)',
+          backgroundColor: 'rgba(194, 157, 68, 0.05)',
           transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       />
