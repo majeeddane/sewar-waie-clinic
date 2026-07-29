@@ -89,12 +89,11 @@ export default function AboutSection() {
               <div className="relative">
                 {/* Main Image Container with glassmorphism */}
                 <GlassCard blur="lg" className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] max-w-md mx-auto p-2">
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#FAFAF8] to-white">
+                  <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#FAFAF8] to-white flex items-center justify-center">
                     <img
                       src="/images/logo.png"
                       alt={t.about.title}
-                      fill
-                      className="object-contain p-8"
+                      className="w-3/4 h-3/4 object-contain"
                     />
                     
                     {/* Gradient overlay */}

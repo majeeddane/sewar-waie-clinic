@@ -352,16 +352,7 @@ export default function ContactSection() {
         </div>
       </div>
 
-      {/* Custom animation */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%, 100% { transform: scale(1); opacity: 0.7; }
-          50% { transform: scale(1.05); opacity: 1; }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow ease-in-out infinite;
-        }
-      `}</style>
+      {/* Custom animations are defined in globals.css */}
     </section>
   );
 }

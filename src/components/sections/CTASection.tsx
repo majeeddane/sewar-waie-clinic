@@ -101,7 +101,7 @@ export default function CTASection() {
                   </div>
 
                   {/* Decorative ring */}
-                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-white/20 animate-spin-slow pointer-events-none" style={{ animationDuration: '60s' }} />
+                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-white/20 animate-spin-slow pointer-events-none" />
                 </GlassCard>
               </div>
             </ScrollReveal>

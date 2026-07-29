@@ -100,16 +100,7 @@ export default function WhyUsSection() {
         </ScrollReveal>
       </div>
 
-      {/* Add custom animation for pulse-slow */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%, 100% { transform: scale(1); opacity: 0.3; }
-          50% { transform: scale(1.05); opacity: 0.5; }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow ease-in-out infinite;
-        }
-      `}</style>
+      {/* Custom animations are defined in globals.css */}
     </section>
   );
 }
