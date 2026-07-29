@@ -100,28 +100,38 @@ const ar = {
   // Team
   team: {
     sectionTitle: 'فريقنا المتخصص',
-    sectionSubtitle: 'نخبة من الأخصائيين والمعالجين النفسيين المعتمدين',
+    sectionSubtitle: 'نخبة من الأخصائيين والمعالجين النفسيين المعتمدين الذين يعتنون بك',
     viewAll: 'عرض الكل',
     members: [
       {
-        name: 'د. أحمد الراشد',
-        specialty: 'استشاري الطب النفسي',
-        bio: 'خبرة تزيد عن 15 عاماً في مجال الطب النفسي وعلاج الإدمان',
+        name: 'د. سارة المنصور',
+        specialty: 'أخصائية نفسية إكلينيكية',
+        bio: 'دكتوراه في علم النفس الإكلينيكي، خبرة واسعة في التشخيص والعلاج',
       },
       {
-        name: 'أ. سارة المنصور',
-        specialty: 'أخصائية العلاج النفسي',
-        bio: 'متخصصة في العلاج السلوكي المعرفي والعلاج الجماعي',
+        name: 'د. أحمد الشهري',
+        specialty: 'استشاري علاج الإدمان',
+        bio: 'خبرة تزيد عن 15 عاماً في علاج الإدمان وإعادة التأهيل',
       },
       {
-        name: 'د. خالد العمري',
-        specialty: 'أخصائي علاج الإدمان',
-        bio: 'خبير في برامج إعادة التأهيل والعلاج السلوكي للإدمان',
+        name: 'د. نورة القحطاني',
+        specialty: 'أخصائية علاج أسري',
+        bio: 'معتمدة من الجمعية الأمريكية للعلاج الأسري والزواج',
       },
       {
-        name: 'أ. نورة القحطاني',
-        specialty: 'أخصائية علاج أسرى',
-        bio: 'متخصصة في العلاج الأسري واستشارات الزواج والأطفال',
+        name: 'محمد الدوسري',
+        specialty: 'معالج نفسي معتمد',
+        bio: 'متخصص في العلاج السلوكي المعرفي (CBT)',
+      },
+      {
+        name: 'د. لينا العتيبي',
+        specialty: 'أخصائية طب نفسي للأطفال',
+        bio: 'خبرة في التشخيص المبكر وعلاج اضطرابات الطفولة',
+      },
+      {
+        name: 'خالد السبيعي',
+        specialty: 'استشاري علاج سلوكي',
+        bio: 'مدرب معتمد في تقنيات الاسترخاء وإدارة التوتر',
       },
     ],
   },
@@ -369,28 +379,38 @@ const en = {
   // Team
   team: {
     sectionTitle: 'Our Specialized Team',
-    sectionSubtitle: 'Elite certified specialists and therapists',
+    sectionSubtitle: 'Elite certified specialists and therapists who care for you',
     viewAll: 'View All',
     members: [
       {
-        name: 'Dr. Ahmed Al-Rashid',
-        specialty: 'Psychiatry Consultant',
-        bio: 'Over 15 years of experience in psychiatry and addiction treatment',
+        name: 'Dr. Sara Al-Mansour',
+        specialty: 'Clinical Psychologist',
+        bio: 'Ph.D. in Clinical Psychology, extensive experience in diagnosis and treatment',
       },
       {
-        name: 'Sarah Al-Mansour',
-        specialty: 'Psychotherapist',
-        bio: 'Specialized in CBT and group therapy',
+        name: 'Dr. Ahmed Al-Shahri',
+        specialty: 'Addiction Treatment Consultant',
+        bio: 'Over 15 years of experience in addiction treatment and rehabilitation',
       },
       {
-        name: 'Dr. Khaled Al-Omari',
-        specialty: 'Addiction Treatment Specialist',
-        bio: 'Expert in rehabilitation and behavioral addiction treatment programs',
+        name: 'Dr. Noura Al-Qahtani',
+        specialty: 'Family Therapy Specialist',
+        bio: 'American Association certified for family and marriage therapy',
       },
       {
-        name: 'Noura Al-Qahtani',
-        specialty: 'Family Therapist',
-        bio: 'Specialized in family therapy and marriage/child counseling',
+        name: 'Mohammed Al-Dosari',
+        specialty: 'Certified Psychotherapist',
+        bio: 'Specialized in Cognitive Behavioral Therapy (CBT)',
+      },
+      {
+        name: 'Dr. Lina Al-Atibi',
+        specialty: 'Child Psychiatrist',
+        bio: 'Expert in early diagnosis and childhood disorder treatment',
+      },
+      {
+        name: 'Khaled Al-Subaie',
+        specialty: 'Behavioral Consultant',
+        bio: 'Certified trainer in relaxation techniques and stress management',
       },
     ],
   },

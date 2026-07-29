@@ -4,8 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { FadeInUp } from '@/components/effects/TextReveal';
 
-// أيقونات التواصل الاجتماعي كـ SVG
+// Social Media Icons as inline SVG components
 function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -40,233 +41,341 @@ export default function Footer() {
   const { t, locale } = useLanguage();
 
   return (
-    <footer style={{ backgroundColor: '#1F3D73' }} className="text-white relative overflow-hidden mt-auto">
+    <footer 
+      style={{ backgroundColor: '#1F3D73' }} 
+      className="text-white relative overflow-hidden mt-auto"
+    >
       
-      {/* زخرفة خفيفة */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" aria-hidden="true">
+      {/* Subtle Decorative Elements - Radial Gradients at Very Low Opacity */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {/* Gold glow - top right */}
         <div 
-          className="absolute w-80 h-80 rounded-full"
+          className="absolute w-[500px] h-[500px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, #C29D44 0%, transparent 70%)',
-            top: '-20%',
+            background: 'radial-gradient(circle, rgba(194, 157, 68, 0.04) 0%, transparent 70%)',
+            top: '-15%',
             right: '-10%',
           }}
         />
+        {/* Sage glow - bottom left */}
         <div 
-          className="absolute w-64 h-64 rounded-full"
+          className="absolute w-[400px] h-[400px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, #90A36D 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(144, 163, 109, 0.03) 0%, transparent 70%)',
             bottom: '-10%',
             left: '-5%',
           }}
         />
+        {/* Purple accent - center right */}
+        <div 
+          className="absolute w-[300px] h-[300px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(93, 60, 131, 0.03) 0%, transparent 70%)',
+            top: '40%',
+            right: '20%',
+          }}
+        />
       </div>
 
-      <div className="container-custom relative z-10 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container-custom relative z-10 py-16 md:py-20 lg:py-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           
-          {/* العمود الأول - العلامة التجارية */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/images/logo.png"
-                  alt="سوار وعي"
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 object-contain brightness-0 invert"
-                />
-                <span 
-                  className="text-lg font-bold"
-                  style={{ fontFamily: 'var(--font-display-arabic)', color: '#C29D44' }}
-                >
-                  {locale === 'ar' ? 'سوار وعي' : 'Sewar Waie'}
-                </span>
-              </div>
-            </Link>
-            
-            <p 
-              className="text-sm leading-relaxed mb-6 opacity-80"
-              style={{ 
-                fontFamily: 'var(--font-body-arabic)',
-                color: 'rgba(250, 250, 248, 0.75)',
-              }}
-            >
-              {t.footer.description}
-            </p>
-
-            {/* روابط التواصل الاجتماعي */}
-            <div>
+          {/* Column 1: Brand - Widest on Desktop */}
+          <FadeInUp delay={0}>
+            <div className="lg:col-span-1 lg:pr-8">
+              {/* Logo + Clinic Name */}
+              <Link href="/" className="inline-block mb-6 group">
+                <div className="flex items-center gap-3">
+                  <Image
+                    src="/images/logo.png"
+                    alt="سوار وعي"
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 object-contain brightness-0 invert transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span 
+                    className="text-xl font-bold tracking-wide"
+                    style={{ 
+                      fontFamily: 'var(--font-display-arabic)', 
+                      color: '#C29D44',
+                    }}
+                  >
+                    {locale === 'ar' ? 'سوار وعي' : 'Sewar Waie'}
+                  </span>
+                </div>
+              </Link>
+              
+              {/* Brief Description */}
               <p 
-                className="text-sm font-semibold mb-4"
-                style={{ fontFamily: 'var(--font-body-arabic)', color: '#C29D44' }}
+                className="text-sm leading-relaxed mb-8 max-w-xs"
+                style={{ 
+                  fontFamily: 'var(--font-body-arabic)',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                }}
               >
-                {t.footer.followUs}
+                {t.footer.description}
               </p>
-              <div className="flex items-center gap-3">
-                {socialLinks.map((social) => {
-                  const IconComponent = social.icon;
-                  return (
-                    <a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-white/10"
-                      aria-label={social.name}
-                    >
-                      <IconComponent className="w-4 h-4 text-white/80 hover:text-white transition-colors" />
-                    </a>
-                  );
-                })}
+
+              {/* Social Media Icons Row */}
+              <div>
+                <p 
+                  className="text-xs font-semibold uppercase tracking-wider mb-4"
+                  style={{ 
+                    fontFamily: 'var(--font-body-arabic)',
+                    color: '#C29D44',
+                  }}
+                >
+                  {t.footer.followUs}
+                </p>
+                <div className="flex items-center gap-3">
+                  {socialLinks.map((social) => {
+                    const IconComponent = social.icon;
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          group/icon w-10 h-10 rounded-full flex items-center justify-center
+                          bg-white/5 border border-white/10
+                          transition-all duration-300 ease-out
+                          hover:bg-white/15 hover:border-white/20
+                          focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C29D44]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F3D73]
+                        "
+                        aria-label={`Follow us on ${social.name}`}
+                      >
+                        <IconComponent 
+                          className="w-[18px] h-[18px] text-white/70 transition-colors duration-300 group-hover/icon:text-white" 
+                        />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+          </FadeInUp>
 
-          {/* الروابط السريعة */}
-          <div>
-            <h4 
-              className="text-base font-bold mb-6"
-              style={{ fontFamily: 'var(--font-display-arabic)', color: '#C29D44' }}
-            >
-              {t.footer.quickLinks}
-            </h4>
-            <ul className="space-y-3">
-              {[
-                { href: '/', label: t.nav.home },
-                { href: '/#about', label: t.about.sectionTitle },
-                { href: '/#services', label: t.services.sectionTitle },
-                { href: '/#team', label: t.team.sectionTitle },
-                { href: '/#faq', label: t.faq.title },
-                { href: '/#contact', label: t.nav.contact },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-[#C29D44] transition-colors duration-200"
+          {/* Column 2: Quick Links */}
+          <FadeInUp delay={100}>
+            <div>
+              <h4 
+                className="text-sm font-bold uppercase tracking-wider mb-6"
+                style={{ 
+                  fontFamily: 'var(--font-display-arabic)',
+                  color: '#C29D44',
+                }}
+              >
+                {t.footer.quickLinks}
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  { href: '/', label: t.nav.home },
+                  { href: '/#about', label: t.about.sectionTitle },
+                  { href: '/#services', label: t.services.sectionTitle },
+                  { href: '/#team', label: t.team.sectionTitle },
+                  { href: '/#faq', label: t.faq.title },
+                  { href: '/#contact', label: t.nav.contact },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="
+                        inline-block text-sm transition-all duration-200
+                        hover:translate-x-1 hover:text-[#C29D44]
+                        focus:outline-none focus-visible:text-[#C29D44]
+                      "
+                      style={{ 
+                        fontFamily: 'var(--font-body-arabic)',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeInUp>
+
+          {/* Column 3: Services */}
+          <FadeInUp delay={200}>
+            <div>
+              <h4 
+                className="text-sm font-bold uppercase tracking-wider mb-6"
+                style={{ 
+                  fontFamily: 'var(--font-display-arabic)',
+                  color: '#C29D44',
+                }}
+              >
+                {t.footer.services}
+              </h4>
+              <ul className="space-y-3">
+                {t.services.items.slice(0, 6).map((service, index) => (
+                  <li key={index}>
+                    <Link
+                      href="/#services"
+                      className="
+                        inline-block text-sm transition-all duration-200
+                        hover:translate-x-1 hover:text-[#C29D44]
+                        focus:outline-none focus-visible:text-[#C29D44]
+                      "
+                      style={{ 
+                        fontFamily: 'var(--font-body-arabic)',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                      }}
+                    >
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeInUp>
+
+          {/* Column 4: Contact Information */}
+          <FadeInUp delay={300}>
+            <div>
+              <h4 
+                className="text-sm font-bold uppercase tracking-wider mb-6"
+                style={{ 
+                  fontFamily: 'var(--font-display-arabic)',
+                  color: '#C29D44',
+                }}
+              >
+                {t.footer.contactUs}
+              </h4>
+              <ul className="space-y-5">
+                {/* Address */}
+                <li className="flex items-start gap-3 group">
+                  <MapPin 
+                    className="w-[18px] h-[18px] flex-shrink-0 mt-0.5 transition-colors duration-200 group-hover:text-[#90A36D]" 
+                    style={{ color: 'rgba(144, 163, 109, 0.8)' }} 
+                  />
+                  <span 
+                    className="text-sm leading-relaxed"
                     style={{ 
                       fontFamily: 'var(--font-body-arabic)',
-                      color: 'rgba(250, 250, 248, 0.7)',
+                      color: 'rgba(255, 255, 255, 0.7)',
                     }}
                   >
-                    {link.label}
-                  </Link>
+                    {t.contact.info.addressValue}
+                  </span>
                 </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* الخدمات */}
-          <div>
-            <h4 
-              className="text-base font-bold mb-6"
-              style={{ fontFamily: 'var(--font-display-arabic)', color: '#C29D44' }}
-            >
-              {t.footer.services}
-            </h4>
-            <ul className="space-y-3">
-              {t.services.items.slice(0, 5).map((service, index) => (
-                <li key={index}>
-                  <Link
-                    href="/#services"
-                    className="text-sm hover:text-[#C29D44] transition-colors duration-200"
+                {/* Phone - Clickable */}
+                <li className="flex items-start gap-3 group">
+                  <Phone 
+                    className="w-[18px] h-[18px] flex-shrink-0 mt-0.5 transition-colors duration-200 group-hover:text-[#90A36D]" 
+                    style={{ color: 'rgba(144, 163, 109, 0.8)' }} 
+                  />
+                  <a
+                    href="tel:+966553008282"
+                    dir="ltr"
+                    className="
+                      text-sm transition-colors duration-200
+                      hover:text-[#C29D44]
+                      focus:outline-none focus-visible:text-[#C29D44]
+                    "
                     style={{ 
                       fontFamily: 'var(--font-body-arabic)',
-                      color: 'rgba(250, 250, 248, 0.7)',
+                      color: 'rgba(255, 255, 255, 0.7)',
                     }}
                   >
-                    {service.title}
-                  </Link>
+                    +966 55 300 8282
+                  </a>
                 </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* معلومات التواصل */}
-          <div>
-            <h4 
-              className="text-base font-bold mb-6"
-              style={{ fontFamily: 'var(--font-display-arabic)', color: '#C29D44' }}
-            >
-              {t.footer.contactUs}
-            </h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#90A36D' }} />
-                <span 
-                  className="text-sm"
-                  style={{ 
-                    fontFamily: 'var(--font-body-arabic)',
-                    color: 'rgba(250, 250, 248, 0.7)',
-                  }}
-                >
-                  {t.contact.info.addressValue}
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#90A36D' }} />
-                <a
-                  href="tel:+966553008282"
-                  dir="ltr"
-                  className="text-sm hover:text-[#C29D44] transition-colors"
-                  style={{ 
-                    fontFamily: 'var(--font-body-arabic)',
-                    color: 'rgba(250, 250, 248, 0.7)',
-                  }}
-                >
-                  +966 55 300 8282
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#90A36D' }} />
-                <a
-                  href="mailto:info@sewarwaie.com"
-                  className="text-sm hover:text-[#C29D44] transition-colors"
-                  style={{ 
-                    fontFamily: 'var(--font-body-arabic)',
-                    color: 'rgba(250, 250, 248, 0.7)',
-                  }}
-                >
-                  info@sewarwaie.com
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#90A36D' }} />
-                <span 
-                  className="text-sm"
-                  style={{ 
-                    fontFamily: 'var(--font-body-arabic)',
-                    color: 'rgba(250, 250, 248, 0.7)',
-                  }}
-                >
-                  {t.contact.info.workingHoursValue}
-                </span>
-              </li>
-            </ul>
-          </div>
+                {/* Email - Clickable */}
+                <li className="flex items-start gap-3 group">
+                  <Mail 
+                    className="w-[18px] h-[18px] flex-shrink-0 mt-0.5 transition-colors duration-200 group-hover:text-[#90A36D]" 
+                    style={{ color: 'rgba(144, 163, 109, 0.8)' }} 
+                  />
+                  <a
+                    href="mailto:info@sewarwaie.com"
+                    className="
+                      text-sm transition-colors duration-200
+                      hover:text-[#C29D44]
+                      focus:outline-none focus-visible:text-[#C29D44]
+                    "
+                    style={{ 
+                      fontFamily: 'var(--font-body-arabic)',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                    }}
+                  >
+                    info@sewarwaie.com
+                  </a>
+                </li>
+
+                {/* Working Hours */}
+                <li className="flex items-start gap-3 group">
+                  <Clock 
+                    className="w-[18px] h-[18px] flex-shrink-0 mt-0.5 transition-colors duration-200 group-hover:text-[#90A36D]" 
+                    style={{ color: 'rgba(144, 163, 109, 0.8)' }} 
+                  />
+                  <span 
+                    className="text-sm leading-relaxed"
+                    style={{ 
+                      fontFamily: 'var(--font-body-arabic)',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                    }}
+                  >
+                    {t.contact.info.workingHoursValue}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </FadeInUp>
         </div>
 
-        {/* الشريط السفلي */}
+        {/* Bottom Bar - Separator + Copyright + Legal Links */}
         <div 
-          className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4"
+          className="mt-16 pt-8 border-t border-white/[0.08]"
         >
-          <p 
-            className="text-xs text-center md:text-start"
-            style={{ 
-              fontFamily: 'var(--font-body-arabic)',
-              color: 'rgba(250, 250, 248, 0.5)',
-            }}
-          >
-            © {new Date().getFullYear()} {locale === 'ar' ? 'سوار وعي' : 'Sewar Waie'}. {t.footer.rights}
-          </p>
-          
-          <div className="flex items-center gap-6">
-            <Link href="#" className="text-xs hover:text-[#C29D44] transition-colors" style={{ fontFamily: 'var(--font-body-arabic)', color: 'rgba(250, 250, 248, 0.5)' }}>
-              {t.footer.privacyPolicy}
-            </Link>
-            <Link href="#" className="text-xs hover:text-[#C29D44] transition-colors" style={{ fontFamily: 'var(--font-body-arabic)', color: 'rgba(250, 250, 248, 0.5)' }}>
-              {t.footer.termsOfService}
-            </Link>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Copyright Text */}
+            <p 
+              className="text-xs text-center md:text-start order-2 md:order-1"
+              style={{ 
+                fontFamily: 'var(--font-body-arabic)',
+                color: 'rgba(255, 255, 255, 0.5)',
+              }}
+            >
+              © {new Date().getFullYear()} {locale === 'ar' ? 'سوار وعي' : 'Sewar Waie'}. {t.footer.rights}
+            </p>
+            
+            {/* Legal Links */}
+            <div className="flex items-center gap-6 order-1 md:order-2">
+              <Link 
+                href="#" 
+                className="
+                  text-xs transition-colors duration-200
+                  hover:text-[#C29D44]
+                  focus:outline-none focus-visible:text-[#C29D44]
+                " 
+                style={{ 
+                  fontFamily: 'var(--font-body-arabic)', 
+                  color: 'rgba(255, 255, 255, 0.5)' 
+                }}
+              >
+                {t.footer.privacyPolicy}
+              </Link>
+              <Link 
+                href="#" 
+                className="
+                  text-xs transition-colors duration-200
+                  hover:text-[#C29D44]
+                  focus:outline-none focus-visible:text-[#C29D44]
+                " 
+                style={{ 
+                  fontFamily: 'var(--font-body-arabic)', 
+                  color: 'rgba(255, 255, 255, 0.5)' 
+                }}
+              >
+                {t.footer.termsOfService}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

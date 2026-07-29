@@ -3,17 +3,19 @@
 
 /* ============================================
    SEWAR WAIE - GLOBAL STYLES
-   Clean Design System v2.0
+   Professional Design System v3.0
+   Apple-level discipline + ROSHN Arabic luxury
+   Cuberto/Lusion timing precision (toned down)
    ============================================ */
 
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================
    CSS CUSTOM PROPERTIES (Design Tokens)
-   60-30-10 Color Rule
+   60-30-10 Color Rule + Professional Easing
    ============================================ */
 
 :root {
@@ -60,47 +62,68 @@
   --input: #e5e2db;
   --ring: var(--color-primary);
 
+  /* ── PROFESSIONAL EASING CURVES ── */
+  /* Cuberto/Lusion-inspired precision timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  
   /* ── Typography Scale ── */
   /* Font Families */
   --font-heading-ar: 'Tajawal', sans-serif;
   --font-body-ar: 'IBM Plex Sans Arabic', sans-serif;
   --font-heading-en: 'Fraunces', serif;
 
-  /* Font Sizes - Desktop */
-  --text-h1-desktop: 56px;
-  --text-h2-desktop: 40px;
-  --text-h3-desktop: 28px;
+  /* Font Sizes - Desktop (Apple-like scale) */
+  --text-h1-desktop: clamp(48px, 5vw, 72px);
+  --text-h2-desktop: clamp(32px, 3.5vw, 48px);
+  --text-h3-desktop: clamp(24px, 2vw, 32px);
+  --text-h4-desktop: clamp(18px, 1.5vw, 22px);
   --text-body-desktop: 17px;
   --text-small-desktop: 14px;
 
   /* Font Sizes - Mobile */
-  --text-h1-mobile: 34px;
-  --text-h2-mobile: 26px;
-  --text-h3-mobile: 20px;
+  --text-h1-mobile: clamp(32px, 8vw, 42px);
+  --text-h2-mobile: clamp(24px, 6vw, 32px);
+  --text-h3-mobile: clamp(20px, 4vw, 26px);
   --text-body-mobile: 16px;
+  --text-small-mobile: 14px;
 
-  /* Line Heights */
-  --leading-tight: 1.15;
-  --leading-snug: 1.25;
+  /* Line Heights - Precise typography */
+  --leading-tight: 1.1;
+  --leading-snug: 1.2;
   --leading-normal: 1.5;
-  --leading-relaxed: 1.7;
+  --leading-relaxed: 1.75;
+  --leading-loose: 1.9;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
 
   /* ── Spacing System (8px base) ── */
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
   --space-4: 32px;
+  --space-5: 40px;
   --space-6: 48px;
   --space-8: 64px;
+  --space-10: 80px;
   --space-12: 96px;
   --space-16: 128px;
+  --space-20: 160px;
+  --space-24: 192px;
 
   /* ── Layout ── */
-  --max-width: 1200px;
+  --max-width: 1280px;
+  --max-width-narrow: 960px;
   --padding-mobile: 24px;
   --padding-desktop: 80px;
-  --section-spacing-mobile: 64px;
-  --section-spacing-desktop: 96px;
+  --section-spacing-mobile: 80px;
+  --section-spacing-desktop: 120px;
 
   /* ── Header ── */
   --header-height: 96px;
@@ -109,20 +132,23 @@
   /* ── Border Radius ── */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* ── Transitions ── */
-  --transition-fast: 200ms ease;
-  --transition-base: 300ms ease;
-  --transition-slow: 500ms ease;
+  /* ── Transitions (Professional timing) ── */
+  --transition-fast: 200ms var(--ease-out-expo);
+  --transition-base: 300ms var(--ease-out-expo);
+  --transition-slow: 500ms var(--ease-out-expo);
+  --transition-cinema: 800ms var(--ease-out-quart);
 
-  /* ── Shadows ── */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --shadow-header: 0 2px 20px rgba(0, 0, 0, 0.08);
+  /* ── Shadows (Subtle, Apple-like) ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+  --shadow-header: 0 1px 24px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(93, 60, 131, 0.1);
 
   /* Chart colors */
   --chart-1: var(--color-primary);
@@ -154,9 +180,9 @@
   --input: #3d3d5c;
   --ring: var(--color-primary-light);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-header: 0 2px 20px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-header: 0 1px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
@@ -206,6 +232,7 @@
 
 /* ============================================
    BASE LAYER - Reset & Global Styles
+   Apple-level base styling
    ============================================ */
 
 @layer base {
@@ -218,6 +245,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -226,6 +254,7 @@
     font-size: var(--text-body-mobile);
     line-height: var(--leading-relaxed);
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* RTL Arabic typography */
@@ -237,50 +266,90 @@
   html[dir="ltr"] body {
     font-family: var(--font-body-ar);
   }
+
+  /* Selection styling */
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
 }
 
 /* ============================================
    TYPOGRAPHY SYSTEM
+   Professional type scale with precise control
    ============================================ */
 
-/* ── Headings (Arabic) ── */
-h1, h2, h3,
-.h1, .h2, .h3 {
+/* ── Headings (Arabic) - Bold, confident ── */
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
   font-family: var(--font-heading-ar);
   font-weight: 800;
   line-height: var(--leading-tight);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tracking-tight);
+  color: var(--foreground);
 }
 
 /* Desktop heading sizes */
 @media (min-width: 1024px) {
-  h1, .h1 { font-size: var(--text-h1-desktop); }
-  h2, .h2 { font-size: var(--text-h2-desktop); }
-  h3, .h3 { font-size: var(--text-h3-desktop); }
-  body { font-size: var(--text-body-desktop); }
-  small, .text-small { font-size: var(--text-small-desktop); }
+  h1, .h1 { 
+    font-size: var(--text-h1-desktop); 
+    letter-spacing: -0.04em;
+  }
+  h2, .h2 { 
+    font-size: var(--text-h2-desktop); 
+    letter-spacing: -0.03em;
+  }
+  h3, .h3 { 
+    font-size: var(--text-h3-desktop); 
+  }
+  h4, .h4 { 
+    font-size: var(--text-h4-desktop); 
+  }
+  body { 
+    font-size: var(--text-body-desktop); 
+  }
+  small, .text-small { 
+    font-size: var(--text-small-desktop); 
+  }
 }
 
 /* Mobile heading sizes (default) */
-h1, .h1 { font-size: var(--text-h1-mobile); }
-h2, .h2 { font-size: var(--text-h2-mobile); }
-h3, .h3 { font-size: var(--text-h3-mobile); }
-small, .text-small { font-size: var(--text-small-mobile); }
+h1, .h1 { 
+  font-size: var(--text-h1-mobile); 
+  letter-spacing: -0.02em;
+}
+h2, .h2 { 
+  font-size: var(--text-h2-mobile); 
+}
+h3, .h3 { 
+  font-size: var(--text-h3-mobile); 
+}
+small, .text-small { 
+  font-size: var(--text-small-mobile); 
+}
 
 /* ── English Display Headings ── */
 .heading-en {
   font-family: var(--font-heading-en);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 /* ── Body Text ── */
 p {
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-3);
+  font-weight: 400;
 }
 
 p:last-child {
   margin-bottom: 0;
+}
+
+/* ── Large Display Text (for quotes, hero) ── */
+.text-display {
+  font-family: var(--font-heading-ar);
+  font-weight: 300;
+  line-height: 1.3;
 }
 
 /* ============================================
@@ -303,7 +372,22 @@ p:last-child {
   }
 }
 
-/* ── Section Spacing ── */
+.container-narrow {
+  max-width: var(--max-width-narrow);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--padding-mobile);
+  padding-right: var(--padding-mobile);
+}
+
+@media (min-width: 1024px) {
+  .container-narrow {
+    padding-left: var(--padding-desktop);
+    padding-right: var(--padding-desktop);
+  }
+}
+
+/* ── Section Spacing - Generous whitespace ── */
 .section-spacing {
   padding-top: var(--section-spacing-mobile);
   padding-bottom: var(--section-spacing-mobile);
@@ -318,7 +402,7 @@ p:last-child {
 
 /* ============================================
    BUTTON SYSTEM
-   Unified button styles
+   Unified button styles - Premium feel
    ============================================ */
 
 /* ── Base Button ── */
@@ -332,11 +416,13 @@ p:last-child {
   font-size: var(--text-body-mobile);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
   border: none;
   outline: none;
   text-decoration: none;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: 1024px) {
@@ -347,23 +433,38 @@ p:last-child {
 
 .btn:focus-visible {
   outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline-offset: 3px;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background var(--transition-fast);
+}
+
+.btn:hover::after {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 /* ── Primary Button ── */
 .btn-primary {
   background-color: var(--color-primary);
   color: var(--color-white);
-  padding: 14px 32px;
+  padding: 16px 36px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 12px rgba(93, 60, 131, 0.25);
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-hover);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
+  box-shadow: 0 4px 20px rgba(93, 60, 131, 0.35);
+  transform: translateY(-2px);
 }
 
 /* ── Secondary Button (Outline) ── */
@@ -371,32 +472,40 @@ p:last-child {
   background-color: transparent;
   color: var(--color-primary);
   border: 1.5px solid var(--color-primary);
-  padding: calc(14px - 1.5px) calc(32px - 1.5px);
+  padding: calc(16px - 1.5px) calc(36px - 1.5px);
+  border-radius: var(--radius-md);
 }
 
 .btn-secondary:hover {
   background-color: var(--color-primary);
   color: var(--color-white);
-}
-
-.btn-secondary:active {
-  transform: scale(0.98);
+  transform: translateY(-2px);
 }
 
 /* ── Gold Accent Button (Use sparingly!) ── */
 .btn-gold {
   background-color: var(--color-gold);
   color: var(--color-white);
-  padding: 14px 32px;
+  padding: 16px 36px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 12px rgba(194, 157, 68, 0.25);
 }
 
 .btn-gold:hover {
   background-color: var(--color-gold-dark);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 20px rgba(194, 157, 68, 0.35);
+  transform: translateY(-2px);
 }
 
-.btn-gold:active {
-  transform: scale(0.98);
+/* ── Ghost Button ── */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-primary);
+  padding: 16px 24px;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(93, 60, 131, 0.06);
 }
 
 /* ── Button Sizes ── */
@@ -406,13 +515,15 @@ p:last-child {
 }
 
 .btn-lg {
-  padding: 18px 40px;
+  padding: 20px 44px;
   font-size: 18px;
+  border-radius: var(--radius-lg);
 }
 
 /* ============================================
    HEADER SYSTEM
    Transparent → Solid on scroll
+   Cinematic transition
    ============================================ */
 
 .header-main {
@@ -428,20 +539,22 @@ p:last-child {
   align-items: center;
 }
 
-/* Scrolled state - after 50px scroll */
+/* Scrolled state - after 80px scroll for more tolerance */
 .header-scrolled {
-  background-color: var(--color-white);
+  background-color: rgba(250, 250, 248, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--shadow-header);
   height: var(--header-height-scrolled);
 }
 
 .dark .header-scrolled {
-  background-color: #252542;
+  background-color: rgba(37, 37, 66, 0.92);
 }
 
 /* ============================================
    HERO SECTION
-   Only place where gradient is allowed
+   Premium gradient with subtle depth
    ============================================ */
 
 .hero-gradient {
@@ -455,22 +568,357 @@ p:last-child {
   );
 }
 
+.hero-premium-gradient {
+  background: linear-gradient(
+    135deg,
+    #4a3570 0%,
+    #5D3C83 30%,
+    #6b4d94 60%,
+    #5a4278 100%
+  );
+}
+
 /* Hero text styling */
 .hero-title {
   font-family: var(--font-heading-ar);
-  font-weight: 800;
+  font-weight: 900;
   color: var(--color-white);
 }
 
 .hero-subtitle {
   font-family: var(--font-body-ar);
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
   line-height: var(--leading-relaxed);
 }
 
 /* Gold accent for hero only */
 .hero-accent-text {
   color: var(--color-gold);
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   Cuberto-inspired smooth cursor
+   ============================================ */
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 0.3s var(--ease-out-expo), 
+              height 0.3s var(--ease-out-expo),
+              background-color 0.3s var(--ease-out-expo);
+}
+
+.cursor-dot.hovering {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(93, 60, 131, 0.15);
+  border: 2px solid var(--color-primary);
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(93, 60, 131, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 0.4s var(--ease-out-expo),
+              height 0.4s var(--ease-out-expo),
+              border-color 0.3s var(--ease-out-expo);
+}
+
+.cursor-ring.hovering {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(93, 60, 131, 0.15);
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   TEXT REVEAL ANIMATION
+   Professional character/word reveal
+   ============================================ */
+
+.reveal-text {
+  overflow: hidden;
+}
+
+.reveal-text-inner {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.8s var(--ease-out-quart),
+              opacity 0.8s var(--ease-out-quart);
+}
+
+.reveal-text.revealed .reveal-text-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stagger children */
+.stagger-reveal > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--ease-out-quart),
+              transform 0.6s var(--ease-out-quart);
+}
+
+.stagger-reveal.revealed > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-reveal.revealed > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-reveal.revealed > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-reveal.revealed > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-reveal.revealed > *:nth-child(5) { transition-delay: 320ms; }
+.stagger-reveal.revealed > *:nth-child(6) { transition-delay: 400ms; }
+.stagger-reveal.revealed > *:nth-child(7) { transition-delay: 480ms; }
+.stagger-reveal.revealed > *:nth-child(8) { transition-delay: 560ms; }
+.stagger-reveal.revealed > *:nth-child(9) { transition-delay: 640ms; }
+.stagger-reveal.revealed > *:nth-child(10) { transition-delay: 720ms; }
+
+.stagger-reveal.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   GSAP-inspired CSS animations
+   ============================================ */
+
+/* Fade in up on scroll */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s var(--ease-out-quart) forwards;
+}
+
+/* Fade in on scroll */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s var(--ease-out-expo) forwards;
+}
+
+/* Scale in on scroll */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.7s var(--ease-out-expo) forwards;
+}
+
+/* Slide in from right (for RTL) */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.7s var(--ease-out-quart) forwards;
+}
+
+/* Slide in from left (for RTL) */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.7s var(--ease-out-quart) forwards;
+}
+
+/* Gentle float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+.animate-float {
+  animation: float 4s var(--ease-in-out-quart) infinite;
+}
+
+/* Gentle pulse */
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 3s var(--ease-in-out-quart) infinite;
+}
+
+/* Initial hidden state for scroll reveal */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s var(--ease-out-quart),
+              transform 0.8s var(--ease-out-quart);
+}
+
+/* ============================================
+   PAGE TRANSITION
+   Cinematic fade + slight scale
+   ============================================ */
+
+.page-transition-enter {
+  opacity: 0;
+  transform: scale(0.98) translateY(8px);
+}
+
+.page-transition-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 0.6s var(--ease-out-quart),
+              transform 0.6s var(--ease-out-quart);
+}
+
+/* ============================================
+   CARD SYSTEM
+   Premium card styles
+   ============================================ */
+
+.card {
+  background-color: var(--card);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.card-flat {
+  background-color: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: all var(--transition-base);
+}
+
+.card-flat:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* Glass effect (for overlays) */
+.glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass {
+  background: rgba(37, 37, 66, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   BENTO GRID LAYOUT
+   Non-uniform grid for services
+   ============================================ */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+.bento-item-span-2 {
+  grid-column: span 2;
+}
+
+.bento-item-row-span-2 {
+  grid-row: span 2;
+}
+
+/* ============================================
+   HORIZONTAL SCROLL
+   For team section
+   ============================================ */
+
+.horizontal-scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.horizontal-scroll-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 /* ============================================
@@ -482,12 +930,14 @@ p:last-child {
 .text-navy { color: var(--color-navy); }
 .text-gold { color: var(--color-gold); }
 .text-sage { color: var(--color-sage); }
+.text-cream { color: var(--color-cream); }
 
 /* ── Background Utilities ── */
 .bg-cream { background-color: var(--color-cream); }
 .bg-white { background-color: var(--color-white); }
 .bg-primary { background-color: var(--color-primary); }
 .bg-navy { background-color: var(--color-navy); }
+.bg-purple-dark { background-color: #3D2565; }
 
 /* ── Spacing Utilities (8px base) ── */
 .gap-1 { gap: var(--space-1); }
@@ -504,6 +954,7 @@ p:last-child {
 .mt-6 { margin-top: var(--space-6); }
 .mt-8 { margin-top: var(--space-8); }
 .mt-12 { margin-top: var(--space-12); }
+.mt-16 { margin-top: var(--space-16); }
 
 .mb-1 { margin-bottom: var(--space-1); }
 .mb-2 { margin-bottom: var(--space-2); }
@@ -512,6 +963,7 @@ p:last-child {
 .mb-6 { margin-bottom: var(--space-6); }
 .mb-8 { margin-bottom: var(--space-8); }
 .mb-12 { margin-bottom: var(--space-12); }
+.mb-16 { margin-bottom: var(--space-16); }
 
 .p-1 { padding: var(--space-1); }
 .p-2 { padding: var(--space-2); }
@@ -520,49 +972,56 @@ p:last-child {
 .p-6 { padding: var(--space-6); }
 .p-8 { padding: var(--space-8); }
 
-/* ── Card Styles ── */
-.card {
-  background-color: var(--card);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-base);
+/* Ghost number style for Why Us section */
+.ghost-number {
+  font-family: var(--font-heading-en);
+  font-size: clamp(120px, 15vw, 200px);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  pointer-events: none;
 }
 
-.card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+/* Large quote styling */
+.quote-large {
+  font-family: var(--font-heading-ar);
+  font-size: clamp(24px, 4vw, 42px);
+  font-weight: 300;
+  line-height: 1.5;
+  font-style: italic;
 }
 
-/* Glass effect (for overlays) */
-.glass {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.dark .glass {
-  background: rgba(37, 37, 66, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.quote-mark {
+  font-family: Georgia, serif;
+  font-size: clamp(80px, 10vw, 140px);
+  line-height: 0.8;
+  color: var(--color-gold);
+  opacity: 0.3;
 }
 
 /* ============================================
    SCROLLBAR STYLING
+   Minimal, elegant scrollbar
    ============================================ */
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-cream);
-  border-radius: var(--radius-sm);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-sage);
-  border-radius: var(--radius-sm);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -572,7 +1031,7 @@ p:last-child {
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-sage) var(--color-cream);
+  scrollbar-color: var(--color-sage) transparent;
 }
 
 /* ============================================
@@ -581,65 +1040,29 @@ p:last-child {
 
 *:focus-visible {
   outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
-/* Text selection */
-::selection {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 10000;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  transition: top var(--transition-fast);
 }
 
-::-moz-selection {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-}
-
-/* ============================================
-   ANIMATIONS (Minimal & Purposeful)
-   ============================================ */
-
-/* Fade in up on scroll */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-/* Gentle float */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Initial hidden state for scroll reveal */
-.reveal-hidden {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+.skip-to-content:focus {
+  top: var(--space-4);
 }
 
 /* ============================================
    REDUCED MOTION SUPPORT
+   Respect user preferences
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -653,13 +1076,24 @@ p:last-child {
   }
 
   .animate-float,
-  .animate-fade-in-up {
+  .animate-fade-in-up,
+  .animate-scale-in,
+  .animate-slide-in-right,
+  .animate-slide-in-left,
+  .animate-gentle-pulse {
     animation: none !important;
   }
 
   .reveal-hidden {
     opacity: 1;
     transform: none;
+  }
+
+  .stagger-reveal > *,
+  .reveal-text-inner {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
@@ -686,5 +1120,30 @@ p:last-child {
 @media (min-width: 1024px) {
   .show-mobile {
     display: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .header-main,
+  .cursor-dot,
+  .cursor-ring,
+  .btn,
+  .horizontal-scroll-container {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
   }
 }
