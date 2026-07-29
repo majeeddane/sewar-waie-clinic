@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import { SmoothScrollProvider } from "@/components/animations";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
@@ -46,13 +47,15 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-[#FAFAF8] text-gray-900 min-h-screen flex flex-col">
         <LanguageProvider>
-          <Header />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <WhatsAppButton />
-          <Toaster />
+          <SmoothScrollProvider>
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+            <WhatsAppButton />
+            <Toaster />
+          </SmoothScrollProvider>
         </LanguageProvider>
       </body>
     </html>
