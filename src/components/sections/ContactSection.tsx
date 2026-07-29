@@ -1,29 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { 
-  Send, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock,
-  MessageCircle,
-  CheckCircle,
-  QrCode,
-  ExternalLink
-} from 'lucide-react';
-import { ScrollReveal, StaggerContainer, MagneticButton, GlassCard, TiltCard, FloatingElement } from '@/components/animations';
-import { toast } from 'sonner';
+import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 
 export default function ContactSection() {
   const { t, locale, direction } = useLanguage();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -31,352 +13,340 @@ export default function ContactSection() {
     subject: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        toast.success(t.contact.form.success);
-        setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
-        
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        throw new Error('Failed to submit');
-      }
-    } catch (error) {
-      // For demo purposes, still show success
-      setIsSubmitted(true);
-      toast.success(t.contact.form.success);
+    
+    // محاكاة إرسال النموذج
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setSubmitStatus('success');
+    setIsSubmitting(false);
+    
+    // إعادة تعيين النموذج بعد 3 ثوانٍ
+    setTimeout(() => {
+      setSubmitStatus('idle');
       setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
-      setTimeout(() => setIsSubmitted(false), 5000);
-    } finally {
-      setIsSubmitting(false);
-    }
+    }, 3000);
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-[#FAFAF8] relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#5D3C83]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#90A36D]/8 rounded-full blur-3xl pointer-events-none" />
-      
-      {/* Floating decorative elements */}
-      <div className="absolute top-32 left-[8%] w-3 h-3 bg-[#C29D44]/30 rounded-full pointer-events-none" />
-      <div className="absolute bottom-24 right-[12%] w-4 h-4 bg-[#90A36D]/25 rounded-full pointer-events-none" />
-      
-      <div className="container-custom relative z-10">
-        {/* Section Header */}
-        <ScrollReveal direction="up" delay={0.1}>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium 
-                         bg-[#C29D44]/15 text-[#A88535] mb-4 backdrop-blur-sm border border-white/30">
-              <Mail className="w-4 h-4" />
-              {t.contact.title}
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1F3D73] mb-4">
-              {t.contact.subtitle}
-            </h2>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
+    <section id="contact" className="section-spacing bg-white">
+      <div className="container-custom">
+        {/* عنوان القسم */}
+        <div className="text-center mb-16">
+          {/* شريط ذهبي */}
+          <div 
+            className="w-16 h-1 mx-auto mb-8"
+            style={{ backgroundColor: '#C29D44' }}
+            aria-hidden="true"
+          />
           
-          {/* Contact Form - Takes ~60% width */}
-          <div className="lg:col-span-3">
-            <TiltCard tiltStrength={3}>
-              <GlassCard blur="lg" className="p-6 md:p-8 lg:p-10 shadow-sm hover:shadow-xl transition-all duration-500 h-full bg-white/80">
-                {isSubmitted ? (
-                  /* Success State */
-                  <div className="text-center py-16">
-                    <ScrollReveal direction="up" duration={0.8}>
-                      <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#90A36D] to-[#7A8C5A] flex items-center justify-center animate-pulse-slow shadow-lg shadow-[#90A36D]/30">
-                        <CheckCircle className="w-12 h-12 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-800 mb-3">
-                        {t.contact.form.success}
-                      </h3>
-                      <p className="text-gray-500 max-w-sm mx-auto leading-relaxed">
-                        {locale === 'ar' ? 'شكراً لتواصلك معنا. سنتواصل معك في أقرب وقت ممكن.' : 'Thank you for contacting us. We will reach out soon.'}
-                      </p>
-                    </ScrollReveal>
-                  </div>
+          <h2 
+            className="text-[26px] lg:text-[40px] font-extrabold mb-4"
+            style={{ 
+              fontFamily: 'var(--font-display-arabic)',
+              color: '#5D3C83',
+            }}
+          >
+            {t.contact.title}
+          </h2>
+          
+          <p 
+            className="text-[16px] lg:text-[17px] max-w-xl mx-auto leading-[1.7]"
+            style={{ 
+              fontFamily: 'var(--font-body-arabic)',
+              color: '#6b7280',
+            }}
+          >
+            {t.contact.subtitle}
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-12">
+          {/* نموذج التواصل (8 أعمدة) */}
+          <div className={direction === 'rtl' ? 'lg:col-span-7' : 'lg:col-span-7'}>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {/* الاسم */}
+                <div>
+                  <label 
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-2"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#4a4a5a' }}
+                  >
+                    {t.contact.form.name} *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#5D3C83] focus:ring-1 focus:ring-[#5D3C83]/20 outline-none transition-all duration-200 text-[15px]"
+                    style={{ fontFamily: 'var(--font-body-arabic)' }}
+                    placeholder={locale === 'ar' ? 'أدخل اسمك الكامل' : 'Enter your full name'}
+                  />
+                </div>
+
+                {/* الجوال */}
+                <div>
+                  <label 
+                    htmlFor="phone"
+                    className="block text-sm font-medium mb-2"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#4a4a5a' }}
+                  >
+                    {t.contact.form.phone} *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    dir="ltr"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#5D3C83] focus:ring-1 focus:ring-[#5D3C83]/20 outline-none transition-all duration-200 text-[15px]"
+                    placeholder="+966 5XX XXX XXXX"
+                  />
+                </div>
+
+                {/* البريد الإلكتروني */}
+                <div>
+                  <label 
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-2"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#4a4a5a' }}
+                  >
+                    {t.contact.form.email}
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    dir="ltr"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#5D3C83] focus:ring-1 focus:ring-[#5D3C83]/20 outline-none transition-all duration-200 text-[15px]"
+                    placeholder="email@example.com"
+                  />
+                </div>
+
+                {/* الموضوع */}
+                <div>
+                  <label 
+                    htmlFor="subject"
+                    className="block text-sm font-medium mb-2"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#4a4a5a' }}
+                  >
+                    {t.contact.form.subject}
+                  </label>
+                  <select
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#5D3C83] focus:ring-1 focus:ring-[#5D3C83]/20 outline-none transition-all duration-200 text-[15px]"
+                    style={{ fontFamily: 'var(--font-body-arabic)' }}
+                  >
+                    <option value="">{locale === 'ar' ? 'اختر الموضوع' : 'Select subject'}</option>
+                    <option value="therapy">{locale === 'ar' ? 'علاج نفسي' : 'Psychotherapy'}</option>
+                    <option value="addiction">{locale === 'ar' ? 'علاج إدمان' : 'Addiction Treatment'}</option>
+                    <option value="family">{locale === 'ar' ? 'استشارات أسرية' : 'Family Counseling'}</option>
+                    <option value="other">{locale === 'ar' ? 'أخرى' : 'Other'}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* الرسالة */}
+              <div>
+                <label 
+                  htmlFor="message"
+                  className="block text-sm font-medium mb-2"
+                  style={{ fontFamily: 'var(--font-body-arabic)', color: '#4a4a5a' }}
+                >
+                  {t.contact.form.message} *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#5D3C83] focus:ring-1 focus:ring-[#5D3C83]/20 outline-none transition-all duration-200 resize-none text-[15px]"
+                  style={{ fontFamily: 'var(--font-body-arabic)' }}
+                  placeholder={locale === 'ar' ? 'اكتب رسالتك هنا...' : 'Write your message here...'}
+                />
+              </div>
+
+              {/* ملاحظة الخصوصية */}
+              <p 
+                className="text-xs flex items-start gap-2"
+                style={{ fontFamily: 'var(--font-body-arabic)', color: '#9ca3af' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                {t.contact.privacy}
+              </p>
+
+              {/* زر الإرسال */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-primary inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{ fontFamily: 'var(--font-body-arabic)' }}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="animate-spin w-4 h-4 border-2 border-white/30 border-t-white rounded-full" />
+                    {locale === 'ar' ? 'جاري الإرسال...' : 'Sending...'}
+                  </>
+                ) : submitStatus === 'success' ? (
+                  <>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t.contact.form.success.split('!')[0]}!
+                  </>
                 ) : (
-                  /* Form */
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <StaggerContainer staggerDelay={0.08}>
-                      <div className="grid sm:grid-cols-2 gap-6">
-                        {/* Name Field */}
-                        <div className="space-y-2">
-                          <Label htmlFor="name" className="text-sm font-medium text-gray-700 transition-colors focus-within:text-[#5D3C83] flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#5D3C83]" />
-                            {t.contact.form.name} *
-                          </Label>
-                          <Input
-                            id="name"
-                            type="text"
-                            required
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            placeholder={t.contact.form.name}
-                            dir={direction}
-                            className="rounded-xl border-gray-200 focus:border-[#5D3C83] focus:ring-[#5D3C83]/20 transition-all duration-300 h-12 bg-white/80"
-                          />
-                        </div>
-
-                        {/* Phone Field */}
-                        <div className="space-y-2">
-                          <Label htmlFor="phone" className="text-sm font-medium text-gray-700 transition-colors focus-within:text-[#5D3C83] flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#C29D44]" />
-                            {t.contact.form.phone} *
-                          </Label>
-                          <Input
-                            id="phone"
-                            type="tel"
-                            required
-                            dir="ltr"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            placeholder="+966 5XX XXX XXXX"
-                            className="rounded-xl border-gray-200 focus:border-[#C29D44] focus:ring-[#C29D44]/20 transition-all duration-300 h-12 bg-white/80"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Email Field - Optional */}
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-sm font-medium text-gray-500 transition-colors focus-within:text-[#5D3C83] flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                          {t.contact.form.email}
-                          <span className="text-xs text-gray-400">({locale === 'ar' ? 'اختياري' : 'optional'})</span>
-                        </Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          dir="ltr"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="email@example.com"
-                          className="rounded-xl border-gray-200 focus:border-[#5D3C83] focus:ring-[#5D3C83]/20 transition-all duration-300 h-12 bg-white/80"
-                        />
-                      </div>
-
-                      {/* Subject Field */}
-                      <div className="space-y-2">
-                        <Label htmlFor="subject" className="text-sm font-medium text-gray-700 transition-colors focus-within:text-[#5D3C83] flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#90A36D]" />
-                          {t.contact.form.subject}
-                        </Label>
-                        <Input
-                          id="subject"
-                          type="text"
-                          value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          placeholder={t.contact.form.subject}
-                          dir={direction}
-                          className="rounded-xl border-gray-200 focus:border-[#90A36D] focus:ring-[#90A36D]/20 transition-all duration-300 h-12 bg-white/80"
-                        />
-                      </div>
-
-                      {/* Message Field */}
-                      <div className="space-y-2">
-                        <Label htmlFor="message" className="text-sm font-medium text-gray-700 transition-colors focus-within:text-[#5D3C83] flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#1F3D73]" />
-                          {t.contact.form.message} *
-                        </Label>
-                        <Textarea
-                          id="message"
-                          required
-                          rows={5}
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          placeholder={t.contact.form.message}
-                          dir={direction}
-                          className="rounded-xl border-gray-200 focus:border-[#1F3D73] focus:ring-[#1F3D73]/20 resize-none transition-all duration-300 bg-white/80"
-                        />
-                      </div>
-
-                      {/* Submit Button */}
-                      <MagneticButton strength={0.15}>
-                        <Button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="w-full bg-gradient-to-r from-[#5D3C83] to-[#4A2F6A] hover:from-[#4A2F6A] hover:to-[#3D2758] text-white py-4 rounded-xl 
-                                   font-semibold text-lg transition-all duration-500 disabled:opacity-70 group relative overflow-hidden
-                                   shadow-lg hover:shadow-xl hover:shadow-[#5D3C83]/25"
-                        >
-                          {isSubmitting ? (
-                            <span className="flex items-center justify-center gap-3">
-                              <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                              </svg>
-                              {locale === 'ar' ? 'جارٍ الإرسال...' : 'Sending...'}
-                            </span>
-                          ) : (
-                            <span className="flex items-center justify-center gap-3 relative z-10">
-                              <Send className="w-5 h-5 rtl:rotate-180" />
-                              {t.contact.form.submit}
-                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                            </span>
-                          )}
-                        </Button>
-                      </MagneticButton>
-
-                      {/* Privacy Notice */}
-                      <p className="text-xs text-gray-400 text-center flex items-start justify-center gap-2 pt-2">
-                        <svg className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#90A36D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                        {t.contact.privacy}
-                      </p>
-                    </StaggerContainer>
-                  </form>
+                  <>
+                    <Send width="16" height="16" />
+                    {t.contact.form.submit}
+                  </>
                 )}
-              </GlassCard>
-            </TiltCard>
+              </button>
+            </form>
           </div>
 
-          {/* Contact Info Sidebar - Takes ~40% width */}
-          <div className="lg:col-span-2 space-y-5">
+          {/* معلومات التواصل (4 أعمدة) */}
+          <div className={`${direction === 'rtl' ? 'lg:col-span-5' : 'lg:col-span-5'} space-y-8`}>
             
-            {/* WhatsApp Card - Prominent */}
-            <ScrollReveal direction="left" delay={0.15}>
-              <MagneticButton strength={0.2}>
-                <a
-                  href="https://wa.me/966553008282"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-gradient-to-br from-[#25D366] via-[#128C7E] to-[#075E54] rounded-2xl p-6 text-white 
-                           hover:shadow-2xl hover:shadow-[#25D366]/30 transition-all duration-500 group relative overflow-hidden"
+            {/* بطاقة معلومات */}
+            <div className="bg-[#FAFAF8] rounded-lg p-6 space-y-6">
+              
+              {/* العنوان */}
+              <div className="flex items-start gap-4">
+                <div 
+                  className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: 'rgba(93, 60, 131, 0.08)' }}
                 >
-                  {/* Background pattern */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full translate-y-1/2 -translate-x-1/2" />
-                  </div>
-                  
-                  <div className="flex items-center gap-4 relative z-10">
-                    <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                      <MessageCircle className="w-8 h-8 fill-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-lg mb-1">{t.contact.whatsappDirect}</h4>
-                      <p className="text-white/90 text-lg font-mono tracking-wide">+966 55 300 8282</p>
-                    </div>
-                    <ExternalLink className="w-5 h-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                  </div>
-                  
-                  {/* Pulse effect */}
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full animate-ping opacity-40" />
-                </a>
-              </MagneticButton>
-            </ScrollReveal>
-
-            {/* Contact Details Cards */}
-            <StaggerContainer staggerDelay={0.1}>
-              <GlassCard blur="md" className="bg-white/90 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-500 space-y-0 overflow-hidden">
-                
-                {/* Address Card */}
-                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-[#90A36D]/5 transition-colors duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#90A36D] to-[#7A8C5A] flex items-center justify-center flex-shrink-0 
-                                shadow-md shadow-[#90A36D]/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-800 text-sm mb-1">{t.contact.info.address}</p>
-                    <p className="text-gray-600 text-sm">{t.contact.info.addressValue}</p>
-                  </div>
+                  <MapPin width="20" height="20" style={{ color: '#5D3C83' }} />
                 </div>
-
-                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mx-2" />
-
-                {/* Phone Card */}
-                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-[#5D3C83]/5 transition-colors duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5D3C83] to-[#4A2F6A] flex items-center justify-center flex-shrink-0 
-                                shadow-md shadow-[#5D3C83]/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-800 text-sm mb-1">{t.contact.info.phone}</p>
-                    <a href="tel:+966553008282" dir="ltr" className="text-gray-600 text-sm hover:text-[#5D3C83] transition-colors font-mono">
-                      +966 55 300 8282
-                    </a>
-                  </div>
-                </div>
-
-                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mx-2" />
-
-                {/* Email Card */}
-                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-[#C29D44]/5 transition-colors duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C29D44] to-[#A88535] flex items-center justify-center flex-shrink-0 
-                                shadow-md shadow-[#C29D44]/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-800 text-sm mb-1">{t.contact.info.email}</p>
-                    <a href="mailto:info@sewarwaie.com" dir="ltr" className="text-gray-600 text-sm hover:text-[#C29D44] transition-colors break-all">
-                      info@sewarwaie.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mx-2" />
-
-                {/* Working Hours Card */}
-                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-[#1F3D73]/5 transition-colors duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1F3D73] to-[#163058] flex items-center justify-center flex-shrink-0 
-                                shadow-md shadow-[#1F3D73]/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <Clock className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-800 text-sm mb-1">{t.contact.info.workingHours}</p>
-                    <p className="text-gray-600 text-sm">{t.contact.info.workingHoursValue}</p>
-                  </div>
-                </div>
-
-              </GlassCard>
-            </StaggerContainer>
-
-            {/* WhatsApp QR / Direct Link Card */}
-            <ScrollReveal direction="left" delay={0.4}>
-              <GlassCard blur="md" className="bg-gradient-to-br from-[#FAFAF8] to-[#90A36D]/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-500">
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#25D366]/10 mb-4">
-                    <QrCode className="w-7 h-7 text-[#25D366]" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-2">
-                    {locale === 'ar' ? 'تواصل عبر واتساب' : 'Connect on WhatsApp'}
-                  </h4>
-                  <p className="text-gray-500 text-sm mb-4">
-                    {locale === 'ar' ? 'امسح الكود أو اضغط للتواصل المباشر' : 'Scan the code or click for direct contact'}
-                  </p>
-                  <a
-                    href="https://wa.me/966553008282?text=مرحباً، أريد الاستفسار عن خدماتكم"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold rounded-xl transition-all duration-300 group"
+                <div>
+                  <h4 
+                    className="text-sm font-semibold mb-1"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#1a1a2e' }}
                   >
-                    <MessageCircle className="w-5 h-5 fill-white" />
-                    {locale === 'ar' ? 'فتح المحادثة' : 'Open Chat'}
-                    <ExternalLink className="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                    {t.contact.info.address}
+                  </h4>
+                  <p 
+                    className="text-sm"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#6b7280' }}
+                  >
+                    {t.contact.info.addressValue}
+                  </p>
+                </div>
+              </div>
+
+              {/* الهاتف */}
+              <div className="flex items-start gap-4">
+                <div 
+                  className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: 'rgba(93, 60, 131, 0.08)' }}
+                >
+                  <Phone width="20" height="20" style={{ color: '#5D3C83' }} />
+                </div>
+                <div>
+                  <h4 
+                    className="text-sm font-semibold mb-1"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#1a1a2e' }}
+                  >
+                    {t.contact.info.phone}
+                  </h4>
+                  <a 
+                    href="tel:+966553008282"
+                    dir="ltr"
+                    className="text-sm block hover:text-[#5D3C83] transition-colors"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#6b7280' }}
+                  >
+                    +966 55 300 8282
                   </a>
                 </div>
-              </GlassCard>
-            </ScrollReveal>
+              </div>
 
+              {/* البريد */}
+              <div className="flex items-start gap-4">
+                <div 
+                  className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: 'rgba(93, 60, 131, 0.08)' }}
+                >
+                  <Mail width="20" height="20" style={{ color: '#5D3C83' }} />
+                </div>
+                <div>
+                  <h4 
+                    className="text-sm font-semibold mb-1"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#1a1a2e' }}
+                  >
+                    {t.contact.info.email}
+                  </h4>
+                  <a 
+                    href="mailto:info@sewarwaie.com"
+                    className="text-sm block hover:text-[#5D3C83] transition-colors"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#6b7280' }}
+                  >
+                    info@sewarwaie.com
+                  </a>
+                </div>
+              </div>
+
+              {/* ساعات العمل */}
+              <div className="flex items-start gap-4">
+                <div 
+                  className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: 'rgba(93, 60, 131, 0.08)' }}
+                >
+                  <Clock width="20" height="20" style={{ color: '#5D3C83' }} />
+                </div>
+                <div>
+                  <h4 
+                    className="text-sm font-semibold mb-1"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#1a1a2e' }}
+                  >
+                    {t.contact.info.workingHours}
+                  </h4>
+                  <p 
+                    className="text-sm"
+                    style={{ fontFamily: 'var(--font-body-arabic)', color: '#6b7280' }}
+                  >
+                    {t.contact.info.workingHoursValue}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* زر واتساب مباشر */}
+            <a 
+              href="https://wa.me/966553008282" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 w-full py-4 rounded-lg transition-all duration-200 hover:opacity-90"
+              style={{ backgroundColor: '#25D366', color: 'white', fontFamily: 'var(--font-body-arabic)', fontWeight: 500 }}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403c-4.073 0-7.41-3.366-7.41-7.503s3.337-7.503 7.41-7.503c4.074 0 7.41 3.366 7.41 7.503s-3.336 7.503-7.41 7.503M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.435 5.173L2 22l4.883-1.435C8.328 21.47 10.107 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2"/>
+              </svg>
+              {t.contact.whatsappDirect}
+            </a>
           </div>
         </div>
       </div>
