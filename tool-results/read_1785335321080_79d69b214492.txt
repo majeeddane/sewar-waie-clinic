@@ -1,0 +1,1192 @@
+     1→/* Fonts loaded via <link> in layout.tsx for optimal performance */
+     2→@import "tailwindcss";
+     3→@import "tw-animate-css";
+     4→
+     5→/* ============================================
+     6→   SEWAR WAIE - GLOBAL STYLES
+     7→   Professional Design System v4.0
+     8→   Apple-level discipline + ROSHN Arabic luxury
+     9→   Cuberto/Lusion timing precision (toned down)
+    10→   ============================================ */
+    11→
+    12→@custom-variant dark (&:is(.dark *));
+    13→
+    14→/* ============================================
+    15→   CSS CUSTOM PROPERTIES (Design Tokens)
+    16→   60-30-10 Color Rule + Professional Easing
+    17→   ============================================ */
+    18→
+    19→:root {
+    20→  /* ── Color Palette ── */
+    21→  /* Primary Colors (30%) - Purple & Navy for headings, buttons, icons */
+    22→  --color-primary: #5D3C83;
+    23→  --color-primary-hover: #512D6F;
+    24→  --color-primary-light: #7A52A3;
+    25→  --color-navy: #1F3D73;
+    26→  --color-navy-light: #2D5299;
+    27→
+    28→  /* Accent Color (10%) - Gold for limited highlights only */
+    29→  --color-gold: #C29D44;
+    30→  --color-gold-light: #D4B062;
+    31→  --color-gold-dark: #A88535;
+    32→
+    33→  /* Growth/Healing Green */
+    34→  --color-sage: #90A36D;
+    35→  --color-sage-light: #A8BA85;
+    36→  --color-sage-dark: #7A8C5A;
+    37→
+    38→  /* Background Colors (60%) - Creamy or pure white */
+    39→  --color-cream: #FAFAF8;
+    40→  --color-white: #FFFFFF;
+    41→
+    42→  /* Semantic Colors */
+    43→  --background: var(--color-cream);
+    44→  --foreground: #1a1a2e;
+    45→  --card: var(--color-white);
+    46→  --card-foreground: #1a1a2e;
+    47→  --popover: var(--color-white);
+    48→  --popover-foreground: #1a1a2e;
+    49→  --primary: var(--color-primary);
+    50→  --primary-foreground: var(--color-white);
+    51→  --secondary: var(--color-sage);
+    52→  --secondary-foreground: var(--color-white);
+    53→  --muted: #f0ede6;
+    54→  --muted-foreground: #6b7280;
+    55→  --accent: var(--color-gold);
+    56→  --accent-foreground: #1a1a2e;
+    57→  --destructive: #ef4444;
+    58→  --destructive-foreground: var(--color-white);
+    59→  --border: #e5e2db;
+    60→  --input: #e5e2db;
+    61→  --ring: var(--color-primary);
+    62→
+    63→  /* ── PROFESSIONAL EASING CURVES ── */
+    64→  /* Cuberto/Lusion-inspired precision timing */
+    65→  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    66→  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    67→  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    68→  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    69→  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    70→  
+    71→  /* ── Typography Scale ── */
+    72→  /* Font Families */
+    73→  --font-heading-ar: 'Tajawal', sans-serif;
+    74→  --font-body-ar: 'IBM Plex Sans Arabic', sans-serif;
+    75→  --font-heading-en: 'Fraunces', serif;
+    76→
+    77→  /* Font Sizes - Desktop (Apple-like scale) */
+    78→  --text-h1-desktop: clamp(48px, 5vw, 72px);
+    79→  --text-h2-desktop: clamp(32px, 3.5vw, 48px);
+    80→  --text-h3-desktop: clamp(24px, 2vw, 32px);
+    81→  --text-h4-desktop: clamp(18px, 1.5vw, 22px);
+    82→  --text-body-desktop: 17px;
+    83→  --text-small-desktop: 14px;
+    84→
+    85→  /* Font Sizes - Mobile */
+    86→  --text-h1-mobile: clamp(32px, 8vw, 42px);
+    87→  --text-h2-mobile: clamp(24px, 6vw, 32px);
+    88→  --text-h3-mobile: clamp(20px, 4vw, 26px);
+    89→  --text-body-mobile: 16px;
+    90→  --text-small-mobile: 14px;
+    91→
+    92→  /* Line Heights - Precise typography */
+    93→  --leading-tight: 1.1;
+    94→  --leading-snug: 1.2;
+    95→  --leading-normal: 1.5;
+    96→  --leading-relaxed: 1.75;
+    97→  --leading-loose: 1.9;
+    98→
+    99→  /* Letter Spacing */
+   100→  --tracking-tight: -0.03em;
+   101→  --tracking-normal: 0;
+   102→  --tracking-wide: 0.02em;
+   103→
+   104→  /* ── Spacing System (8px base) ── */
+   105→  --space-1: 8px;
+   106→  --space-2: 16px;
+   107→  --space-3: 24px;
+   108→  --space-4: 32px;
+   109→  --space-5: 40px;
+   110→  --space-6: 48px;
+   111→  --space-8: 64px;
+   112→  --space-10: 80px;
+   113→  --space-12: 96px;
+   114→  --space-16: 128px;
+   115→  --space-20: 160px;
+   116→  --space-24: 192px;
+   117→
+   118→  /* ── Layout ── */
+   119→  --max-width: 1280px;
+   120→  --max-width-narrow: 960px;
+   121→  --padding-mobile: 24px;
+   122→  --padding-desktop: 80px;
+   123→  --section-spacing-mobile: 80px;
+   124→  --section-spacing-desktop: 120px;
+   125→
+   126→  /* ── Header ── */
+   127→  --header-height: 96px;
+   128→  --header-height-scrolled: 72px;
+   129→
+   130→  /* ── Border Radius ── */
+   131→  --radius-sm: 4px;
+   132→  --radius-md: 8px;
+   133→  --radius-lg: 16px;
+   134→  --radius-xl: 24px;
+   135→  --radius-full: 9999px;
+   136→
+   137→  /* ── Transitions (Professional timing) ── */
+   138→  --transition-fast: 200ms var(--ease-out-expo);
+   139→  --transition-base: 300ms var(--ease-out-expo);
+   140→  --transition-slow: 500ms var(--ease-out-expo);
+   141→  --transition-cinema: 800ms var(--ease-out-quart);
+   142→
+   143→  /* ── Shadows (Subtle, Apple-like) ── */
+   144→  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+   145→  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+   146→  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+   147→  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+   148→  --shadow-header: 0 1px 24px rgba(0, 0, 0, 0.06);
+   149→  --shadow-card-hover: 0 12px 40px rgba(93, 60, 131, 0.1);
+   150→
+   151→  /* Chart colors */
+   152→  --chart-1: var(--color-primary);
+   153→  --chart-2: var(--color-gold);
+   154→  --chart-3: var(--color-navy);
+   155→  --chart-4: var(--color-sage);
+   156→  --chart-5: var(--color-gold-light);
+   157→}
+   158→
+   159→/* Dark mode variables */
+   160→.dark {
+   161→  --background: #1a1a2e;
+   162→  --foreground: #fafaf8;
+   163→  --card: #252542;
+   164→  --card-foreground: #fafaf8;
+   165→  --popover: #252542;
+   166→  --popover-foreground: #fafaf8;
+   167→  --primary: var(--color-primary-light);
+   168→  --primary-foreground: #ffffff;
+   169→  --secondary: var(--color-sage-dark);
+   170→  --secondary-foreground: #ffffff;
+   171→  --muted: #2d2d4a;
+   172→  --muted-foreground: #9ca3af;
+   173→  --accent: var(--color-gold);
+   174→  --accent-foreground: #fafaf8;
+   175→  --destructive: #dc2626;
+   176→  --destructive-foreground: #ffffff;
+   177→  --border: #3d3d5c;
+   178→  --input: #3d3d5c;
+   179→  --ring: var(--color-primary-light);
+   180→  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+   181→  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+   182→  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+   183→  --shadow-header: 0 1px 24px rgba(0, 0, 0, 0.3);
+   184→}
+   185→
+   186→/* ============================================
+   187→   TAILWIND THEME EXTENSION
+   188→   ============================================ */
+   189→
+   190→@theme inline {
+   191→  --color-background: var(--background);
+   192→  --color-foreground: var(--foreground);
+   193→  --color-card: var(--card);
+   194→  --color-card-foreground: var(--card-foreground);
+   195→  --color-popover: var(--popover);
+   196→  --color-popover-foreground: var(--popover-foreground);
+   197→  --color-primary: var(--primary);
+   198→  --color-primary-foreground: var(--primary-foreground);
+   199→  --color-secondary: var(--secondary);
+   200→  --color-secondary-foreground: var(--secondary-foreground);
+   201→  --color-muted: var(--muted);
+   202→  --color-muted-foreground: var(--muted-foreground);
+   203→  --color-accent: var(--accent);
+   204→  --color-accent-foreground: var(--accent-foreground);
+   205→  --color-destructive: var(--destructive);
+   206→  --color-destructive-foreground: var(--destructive-foreground);
+   207→  --color-border: var(--border);
+   208→  --color-input: var(--input);
+   209→  --color-ring: var(--ring);
+   210→  --color-chart-1: var(--chart-1);
+   211→  --color-chart-2: var(--chart-2);
+   212→  --color-chart-3: var(--chart-3);
+   213→  --color-chart-4: var(--chart-4);
+   214→  --color-chart-5: var(--chart-5);
+   215→
+   216→  /* Radius scale */
+   217→  --radius-sm: var(--radius-sm);
+   218→  --radius-md: var(--radius-md);
+   219→  --radius-lg: var(--radius-lg);
+   220→  --radius-xl: var(--radius-xl);
+   221→  --radius-full: var(--radius-full);
+   222→
+   223→  /* Custom color tokens */
+   224→  --color-sewar-purple: #5D3C83;
+   225→  --color-sewar-gold: #C29D44;
+   226→  --color-sewar-navy: #1F3D73;
+   227→  --color-sewar-sage: #90A36D;
+   228→  --color-sewar-cream: #FAFAF8;
+   229→}
+   230→
+   231→/* ============================================
+   232→   BASE LAYER - Reset & Global Styles
+   233→   Apple-level base styling
+   234→   ============================================ */
+   235→
+   236→@layer base {
+   237→  * {
+   238→    @apply border-border;
+   239→    box-sizing: border-box;
+   240→  }
+   241→
+   242→  html {
+   243→    scroll-behavior: smooth;
+   244→    -webkit-font-smoothing: antialiased;
+   245→    -moz-osx-font-smoothing: grayscale;
+   246→    text-rendering: optimizeLegibility;
+   247→  }
+   248→
+   249→  body {
+   250→    @apply bg-background text-foreground antialiased;
+   251→    font-family: var(--font-body-ar);
+   252→    font-size: var(--text-body-mobile);
+   253→    line-height: var(--leading-relaxed);
+   254→    min-height: 100vh;
+   255→    overflow-x: hidden;
+   256→  }
+   257→
+   258→  /* RTL Arabic typography */
+   259→  html[dir="rtl"] body {
+   260→    font-family: var(--font-body-ar);
+   261→  }
+   262→
+   263→  /* LTR English typography */
+   264→  html[dir="ltr"] body {
+   265→    font-family: var(--font-body-ar);
+   266→  }
+   267→
+   268→  /* Selection styling */
+   269→  ::selection {
+   270→    background-color: var(--color-primary);
+   271→    color: var(--color-white);
+   272→  }
+   273→}
+   274→
+   275→/* ============================================
+   276→   TYPOGRAPHY SYSTEM
+   277→   Professional type scale with precise control
+   278→   ============================================ */
+   279→
+   280→/* ── Headings (Arabic) - Bold, confident ── */
+   281→h1, h2, h3, h4,
+   282→.h1, .h2, .h3, .h4 {
+   283→  font-family: var(--font-heading-ar);
+   284→  font-weight: 800;
+   285→  line-height: var(--leading-tight);
+   286→  letter-spacing: var(--tracking-tight);
+   287→  color: var(--foreground);
+   288→}
+   289→
+   290→/* Desktop heading sizes */
+   291→@media (min-width: 1024px) {
+   292→  h1, .h1 { 
+   293→    font-size: var(--text-h1-desktop); 
+   294→    letter-spacing: -0.04em;
+   295→  }
+   296→  h2, .h2 { 
+   297→    font-size: var(--text-h2-desktop); 
+   298→    letter-spacing: -0.03em;
+   299→  }
+   300→  h3, .h3 { 
+   301→    font-size: var(--text-h3-desktop); 
+   302→  }
+   303→  h4, .h4 { 
+   304→    font-size: var(--text-h4-desktop); 
+   305→  }
+   306→  body { 
+   307→    font-size: var(--text-body-desktop); 
+   308→  }
+   309→  small, .text-small { 
+   310→    font-size: var(--text-small-desktop); 
+   311→  }
+   312→}
+   313→
+   314→/* Mobile heading sizes (default) */
+   315→h1, .h1 { 
+   316→  font-size: var(--text-h1-mobile); 
+   317→  letter-spacing: -0.02em;
+   318→}
+   319→h2, .h2 { 
+   320→  font-size: var(--text-h2-mobile); 
+   321→}
+   322→h3, .h3 { 
+   323→  font-size: var(--text-h3-mobile); 
+   324→}
+   325→small, .text-small { 
+   326→  font-size: var(--text-small-mobile); 
+   327→}
+   328→
+   329→/* ── English Display Headings ── */
+   330→.heading-en {
+   331→  font-family: var(--font-heading-en);
+   332→  font-weight: 600;
+   333→}
+   334→
+   335→/* ── Body Text ── */
+   336→p {
+   337→  line-height: var(--leading-relaxed);
+   338→  margin-bottom: var(--space-3);
+   339→  font-weight: 400;
+   340→}
+   341→
+   342→p:last-child {
+   343→  margin-bottom: 0;
+   344→}
+   345→
+   346→/* ── Large Display Text (for quotes, hero) ── */
+   347→.text-display {
+   348→  font-family: var(--font-heading-ar);
+   349→  font-weight: 300;
+   350→  line-height: 1.3;
+   351→}
+   352→
+   353→/* ============================================
+   354→   LAYOUT SYSTEM
+   355→   ============================================ */
+   356→
+   357→/* ── Custom Container ── */
+   358→.container-custom {
+   359→  max-width: var(--max-width);
+   360→  margin-left: auto;
+   361→  margin-right: auto;
+   362→  padding-left: var(--padding-mobile);
+   363→  padding-right: var(--padding-mobile);
+   364→}
+   365→
+   366→@media (min-width: 1024px) {
+   367→  .container-custom {
+   368→    padding-left: var(--padding-desktop);
+   369→    padding-right: var(--padding-desktop);
+   370→  }
+   371→}
+   372→
+   373→.container-narrow {
+   374→  max-width: var(--max-width-narrow);
+   375→  margin-left: auto;
+   376→  margin-right: auto;
+   377→  padding-left: var(--padding-mobile);
+   378→  padding-right: var(--padding-mobile);
+   379→}
+   380→
+   381→@media (min-width: 1024px) {
+   382→  .container-narrow {
+   383→    padding-left: var(--padding-desktop);
+   384→    padding-right: var(--padding-desktop);
+   385→  }
+   386→}
+   387→
+   388→/* ── Section Spacing - Generous whitespace ── */
+   389→.section-spacing {
+   390→  padding-top: var(--section-spacing-mobile);
+   391→  padding-bottom: var(--section-spacing-mobile);
+   392→}
+   393→
+   394→@media (min-width: 1024px) {
+   395→  .section-spacing {
+   396→    padding-top: var(--section-spacing-desktop);
+   397→    padding-bottom: var(--section-spacing-desktop);
+   398→  }
+   399→}
+   400→
+   401→/* ============================================
+   402→   BUTTON SYSTEM
+   403→   Unified button styles - Premium feel
+   404→   ============================================ */
+   405→
+   406→/* ── Base Button ── */
+   407→.btn {
+   408→  display: inline-flex;
+   409→  align-items: center;
+   410→  justify-content: center;
+   411→  gap: var(--space-2);
+   412→  font-family: var(--font-heading-ar);
+   413→  font-weight: 700;
+   414→  font-size: var(--text-body-mobile);
+   415→  border-radius: var(--radius-md);
+   416→  cursor: pointer;
+   417→  transition: all var(--transition-base);
+   418→  border: none;
+   419→  outline: none;
+   420→  text-decoration: none;
+   421→  white-space: nowrap;
+   422→  position: relative;
+   423→  overflow: hidden;
+   424→}
+   425→
+   426→@media (min-width: 1024px) {
+   427→  .btn {
+   428→    font-size: var(--text-body-desktop);
+   429→  }
+   430→}
+   431→
+   432→.btn:focus-visible {
+   433→  outline: 2px solid var(--color-primary);
+   434→  outline-offset: 3px;
+   435→}
+   436→
+   437→.btn::after {
+   438→  content: '';
+   439→  position: absolute;
+   440→  inset: 0;
+   441→  background: rgba(255, 255, 255, 0);
+   442→  transition: background var(--transition-fast);
+   443→}
+   444→
+   445→.btn:hover::after {
+   446→  background: rgba(255, 255, 255, 0.1);
+   447→}
+   448→
+   449→.btn:active {
+   450→  transform: scale(0.97);
+   451→}
+   452→
+   453→/* ── Primary Button ── */
+   454→.btn-primary {
+   455→  background-color: var(--color-primary);
+   456→  color: var(--color-white);
+   457→  padding: 16px 36px;
+   458→  border-radius: var(--radius-md);
+   459→  box-shadow: 0 2px 12px rgba(93, 60, 131, 0.25);
+   460→}
+   461→
+   462→.btn-primary:hover {
+   463→  background-color: var(--color-primary-hover);
+   464→  box-shadow: 0 4px 20px rgba(93, 60, 131, 0.35);
+   465→  transform: translateY(-2px);
+   466→}
+   467→
+   468→/* ── Secondary Button (Outline) ── */
+   469→.btn-secondary {
+   470→  background-color: transparent;
+   471→  color: var(--color-primary);
+   472→  border: 1.5px solid var(--color-primary);
+   473→  padding: calc(16px - 1.5px) calc(36px - 1.5px);
+   474→  border-radius: var(--radius-md);
+   475→}
+   476→
+   477→.btn-secondary:hover {
+   478→  background-color: var(--color-primary);
+   479→  color: var(--color-white);
+   480→  transform: translateY(-2px);
+   481→}
+   482→
+   483→/* ── Gold Accent Button (Use sparingly!) ── */
+   484→.btn-gold {
+   485→  background-color: var(--color-gold);
+   486→  color: var(--color-white);
+   487→  padding: 16px 36px;
+   488→  border-radius: var(--radius-md);
+   489→  box-shadow: 0 2px 12px rgba(194, 157, 68, 0.25);
+   490→}
+   491→
+   492→.btn-gold:hover {
+   493→  background-color: var(--color-gold-dark);
+   494→  box-shadow: 0 4px 20px rgba(194, 157, 68, 0.35);
+   495→  transform: translateY(-2px);
+   496→}
+   497→
+   498→/* ── Ghost Button ── */
+   499→.btn-ghost {
+   500→  background-color: transparent;
+   501→  color: var(--color-primary);
+   502→  padding: 16px 24px;
+   503→}
+   504→
+   505→.btn-ghost:hover {
+   506→  background-color: rgba(93, 60, 131, 0.06);
+   507→}
+   508→
+   509→/* ── Button Sizes ── */
+   510→.btn-sm {
+   511→  padding: 10px 20px;
+   512→  font-size: 14px;
+   513→}
+   514→
+   515→.btn-lg {
+   516→  padding: 20px 44px;
+   517→  font-size: 18px;
+   518→  border-radius: var(--radius-lg);
+   519→}
+   520→
+   521→/* ============================================
+   522→   HEADER SYSTEM
+   523→   Transparent → Solid on scroll
+   524→   Cinematic transition
+   525→   ============================================ */
+   526→
+   527→.header-main {
+   528→  position: fixed;
+   529→  top: 0;
+   530→  left: 0;
+   531→  right: 0;
+   532→  z-index: 1000;
+   533→  height: var(--header-height);
+   534→  background-color: transparent;
+   535→  transition: all var(--transition-base);
+   536→  display: flex;
+   537→  align-items: center;
+   538→}
+   539→
+   540→/* Scrolled state - after 80px scroll for more tolerance */
+   541→.header-scrolled {
+   542→  background-color: rgba(250, 250, 248, 0.92);
+   543→  backdrop-filter: blur(20px);
+   544→  -webkit-backdrop-filter: blur(20px);
+   545→  box-shadow: var(--shadow-header);
+   546→  height: var(--header-height-scrolled);
+   547→}
+   548→
+   549→.dark .header-scrolled {
+   550→  background-color: rgba(37, 37, 66, 0.92);
+   551→}
+   552→
+   553→/* ============================================
+   554→   HERO SECTION
+   555→   Premium gradient with subtle depth
+   556→   ============================================ */
+   557→
+   558→.hero-gradient {
+   559→  background: linear-gradient(
+   560→    165deg,
+   561→    #5a4278 0%,
+   562→    #6b4d94 25%,
+   563→    #5D3C83 50%,
+   564→    #4a3570 75%,
+   565→    #5a4068 100%
+   566→  );
+   567→}
+   568→
+   569→.hero-premium-gradient {
+   570→  background: linear-gradient(
+   571→    135deg,
+   572→    #4a3570 0%,
+   573→    #5D3C83 30%,
+   574→    #6b4d94 60%,
+   575→    #5a4278 100%
+   576→  );
+   577→}
+   578→
+   579→/* Hero text styling */
+   580→.hero-title {
+   581→  font-family: var(--font-heading-ar);
+   582→  font-weight: 900;
+   583→  color: var(--color-white);
+   584→}
+   585→
+   586→.hero-subtitle {
+   587→  font-family: var(--font-body-ar);
+   588→  color: rgba(255, 255, 255, 0.88);
+   589→  line-height: var(--leading-relaxed);
+   590→}
+   591→
+   592→/* Gold accent for hero only */
+   593→.hero-accent-text {
+   594→  color: var(--color-gold);
+   595→}
+   596→
+   597→/* ============================================
+   598→   CUSTOM CURSOR
+   599→   Premium smooth cursor - Apple-level refinement
+   600→   Subtle, calming presence for healthcare context
+   601→   ============================================ */
+   602→
+   603→/* Inner dot - precise interaction point */
+   604→.custom-cursor-dot {
+   605→  position: fixed;
+   606→  pointer-events: none;
+   607→  z-index: 9999;
+   608→  border-radius: 50%;
+   609→  will-change: transform, width, height, background-color;
+   610→}
+   611→
+   612→/* Hover state - gentle expansion */
+   613→.custom-cursor-dot.is-hovering {
+   614→  background-color: rgba(93, 60, 131, 0.4) !important;
+   615→}
+   616→
+   617→/* Click state - subtle shrink feedback */
+   618→.custom-cursor-dot.is-clicking {
+   619→  transform: translate(-50%, -50%) scale(0.85) !important;
+   620→}
+   621→
+   622→/* Outer ring - elegant trailing effect */
+   623→.custom-cursor-ring {
+   624→  position: fixed;
+   625→  pointer-events: none;
+   626→  z-index: 9998;
+   627→  border-radius: 50%;
+   628→  will-change: transform, width, height, border-color, background-color;
+   629→}
+   630→
+   631→/* Ring hover state - expands gracefully */
+   632→.custom-cursor-ring.is-hovering {
+   633→  width: 64px !important;
+   634→  height: 64px !important;
+   635→  border-color: rgba(93, 60, 131, 0.18) !important;
+   636→  background-color: rgba(93, 60, 131, 0.04) !important;
+   637→}
+   638→
+   639→/* Ring click state - subtle contract */
+   640→.custom-cursor-ring.is-clicking {
+   641→  transform: translate(-50%, -50%) scale(0.92) !important;
+   642→}
+   643→
+   644→/* Legacy support - old class names */
+   645→.cursor-dot {
+   646→  width: 8px;
+   647→  height: 8px;
+   648→  background-color: var(--color-primary);
+   649→  border-radius: 50%;
+   650→  position: fixed;
+   651→  pointer-events: none;
+   652→  z-index: 9999;
+   653→  transition: width 0.3s var(--ease-out-expo), 
+   654→              height 0.3s var(--ease-out-expo),
+   655→              background-color 0.3s var(--ease-out-expo);
+   656→}
+   657→
+   658→.cursor-dot.hovering {
+   659→  width: 48px;
+   660→  height: 48px;
+   661→  background-color: rgba(93, 60, 131, 0.15);
+   662→  border: 2px solid var(--color-primary);
+   663→}
+   664→
+   665→.cursor-ring {
+   666→  width: 40px;
+   667→  height: 40px;
+   668→  border: 1.5px solid rgba(93, 60, 131, 0.3);
+   669→  border-radius: 50%;
+   670→  position: fixed;
+   671→  pointer-events: none;
+   672→  z-index: 9998;
+   673→  transition: width 0.4s var(--ease-out-expo),
+   674→              height 0.4s var(--ease-out-expo),
+   675→              border-color 0.3s var(--ease-out-expo);
+   676→}
+   677→
+   678→.cursor-ring.hovering {
+   679→  width: 64px;
+   680→  height: 64px;
+   681→  border-color: rgba(93, 60, 131, 0.15);
+   682→}
+   683→
+   684→/* Hide custom cursor on touch devices */
+   685→@media (hover: none) and (pointer: coarse) {
+   686→  .cursor-dot,
+   687→  .cursor-ring,
+   688→  .custom-cursor-dot,
+   689→  .custom-cursor-ring {
+   690→    display: none !important;
+   691→  }
+   692→}
+   693→
+   694→/* ============================================
+   695→   TEXT REVEAL ANIMATION
+   696→   Professional character/word reveal
+   697→   ============================================ */
+   698→
+   699→.reveal-text {
+   700→  overflow: hidden;
+   701→}
+   702→
+   703→.reveal-text-inner {
+   704→  transform: translateY(100%);
+   705→  opacity: 0;
+   706→  transition: transform 0.8s var(--ease-out-quart),
+   707→              opacity 0.8s var(--ease-out-quart);
+   708→}
+   709→
+   710→.reveal-text.revealed .reveal-text-inner {
+   711→  transform: translateY(0);
+   712→  opacity: 1;
+   713→}
+   714→
+   715→/* Stagger children */
+   716→.stagger-reveal > * {
+   717→  opacity: 0;
+   718→  transform: translateY(24px);
+   719→  transition: opacity 0.6s var(--ease-out-quart),
+   720→              transform 0.6s var(--ease-out-quart);
+   721→}
+   722→
+   723→.stagger-reveal.revealed > *:nth-child(1) { transition-delay: 0ms; }
+   724→.stagger-reveal.revealed > *:nth-child(2) { transition-delay: 80ms; }
+   725→.stagger-reveal.revealed > *:nth-child(3) { transition-delay: 160ms; }
+   726→.stagger-reveal.revealed > *:nth-child(4) { transition-delay: 240ms; }
+   727→.stagger-reveal.revealed > *:nth-child(5) { transition-delay: 320ms; }
+   728→.stagger-reveal.revealed > *:nth-child(6) { transition-delay: 400ms; }
+   729→.stagger-reveal.revealed > *:nth-child(7) { transition-delay: 480ms; }
+   730→.stagger-reveal.revealed > *:nth-child(8) { transition-delay: 560ms; }
+   731→.stagger-reveal.revealed > *:nth-child(9) { transition-delay: 640ms; }
+   732→.stagger-reveal.revealed > *:nth-child(10) { transition-delay: 720ms; }
+   733→
+   734→.stagger-reveal.revealed > * {
+   735→  opacity: 1;
+   736→  transform: translateY(0);
+   737→}
+   738→
+   739→/* ============================================
+   740→   SCROLL REVEAL ANIMATIONS
+   741→   GSAP-inspired CSS animations
+   742→   ============================================ */
+   743→
+   744→/* Fade in up on scroll */
+   745→@keyframes fadeInUp {
+   746→  from {
+   747→    opacity: 0;
+   748→    transform: translateY(32px);
+   749→  }
+   750→  to {
+   751→    opacity: 1;
+   752→    transform: translateY(0);
+   753→  }
+   754→}
+   755→
+   756→.animate-fade-in-up {
+   757→  animation: fadeInUp 0.8s var(--ease-out-quart) forwards;
+   758→}
+   759→
+   760→/* Fade in on scroll */
+   761→@keyframes fadeIn {
+   762→  from { opacity: 0; }
+   763→  to { opacity: 1; }
+   764→}
+   765→
+   766→.animate-fade-in {
+   767→  animation: fadeIn 0.6s var(--ease-out-expo) forwards;
+   768→}
+   769→
+   770→/* Scale in on scroll */
+   771→@keyframes scaleIn {
+   772→  from {
+   773→    opacity: 0;
+   774→    transform: scale(0.96);
+   775→  }
+   776→  to {
+   777→    opacity: 1;
+   778→    transform: scale(1);
+   779→  }
+   780→}
+   781→
+   782→.animate-scale-in {
+   783→  animation: scaleIn 0.7s var(--ease-out-expo) forwards;
+   784→}
+   785→
+   786→/* Slide in from right (for RTL) */
+   787→@keyframes slideInRight {
+   788→  from {
+   789→    opacity: 0;
+   790→    transform: translateX(40px);
+   791→  }
+   792→  to {
+   793→    opacity: 1;
+   794→    transform: translateX(0);
+   795→  }
+   796→}
+   797→
+   798→.animate-slide-in-right {
+   799→  animation: slideInRight 0.7s var(--ease-out-quart) forwards;
+   800→}
+   801→
+   802→/* Slide in from left (for RTL) */
+   803→@keyframes slideInLeft {
+   804→  from {
+   805→    opacity: 0;
+   806→    transform: translateX(-40px);
+   807→  }
+   808→  to {
+   809→    opacity: 1;
+   810→    transform: translateX(0);
+   811→  }
+   812→}
+   813→
+   814→.animate-slide-in-left {
+   815→  animation: slideInLeft 0.7s var(--ease-out-quart) forwards;
+   816→}
+   817→
+   818→/* Gentle float animation */
+   819→@keyframes float {
+   820→  0%, 100% { transform: translateY(0) rotate(0deg); }
+   821→  50% { transform: translateY(-12px) rotate(1deg); }
+   822→}
+   823→
+   824→.animate-float {
+   825→  animation: float 4s var(--ease-in-out-quart) infinite;
+   826→}
+   827→
+   828→/* Gentle pulse */
+   829→@keyframes gentle-pulse {
+   830→  0%, 100% { opacity: 1; }
+   831→  50% { opacity: 0.7; }
+   832→}
+   833→
+   834→.animate-gentle-pulse {
+   835→  animation: gentle-pulse 3s var(--ease-in-out-quart) infinite;
+   836→}
+   837→
+   838→/* Initial hidden state for scroll reveal */
+   839→.reveal-hidden {
+   840→  opacity: 0;
+   841→  transform: translateY(32px);
+   842→}
+   843→
+   844→.reveal-visible {
+   845→  opacity: 1;
+   846→  transform: translateY(0);
+   847→  transition: opacity 0.8s var(--ease-out-quart),
+   848→              transform 0.8s var(--ease-out-quart);
+   849→}
+   850→
+   851→/* ============================================
+   852→   PAGE TRANSITION
+   853→   Cinematic fade + slight scale
+   854→   ============================================ */
+   855→
+   856→.page-transition-enter {
+   857→  opacity: 0;
+   858→  transform: scale(0.98) translateY(8px);
+   859→}
+   860→
+   861→.page-transition-active {
+   862→  opacity: 1;
+   863→  transform: scale(1) translateY(0);
+   864→  transition: opacity 0.6s var(--ease-out-quart),
+   865→              transform 0.6s var(--ease-out-quart);
+   866→}
+   867→
+   868→/* ============================================
+   869→   CARD SYSTEM
+   870→   Premium card styles
+   871→   ============================================ */
+   872→
+   873→.card {
+   874→  background-color: var(--card);
+   875→  border-radius: var(--radius-lg);
+   876→  transition: all var(--transition-base);
+   877→  border: 1px solid rgba(0, 0, 0, 0.04);
+   878→}
+   879→
+   880→.card:hover {
+   881→  box-shadow: var(--shadow-card-hover);
+   882→  transform: translateY(-4px);
+   883→}
+   884→
+   885→.card-flat {
+   886→  background-color: var(--card);
+   887→  border-radius: var(--radius-lg);
+   888→  border: 1px solid var(--border);
+   889→  transition: all var(--transition-base);
+   890→}
+   891→
+   892→.card-flat:hover {
+   893→  border-color: var(--color-primary);
+   894→  box-shadow: var(--shadow-md);
+   895→}
+   896→
+   897→/* Glass effect (for overlays) */
+   898→.glass {
+   899→  backdrop-filter: blur(20px);
+   900→  -webkit-backdrop-filter: blur(20px);
+   901→  background: rgba(255, 255, 255, 0.88);
+   902→  border: 1px solid rgba(255, 255, 255, 0.4);
+   903→}
+   904→
+   905→.dark .glass {
+   906→  background: rgba(37, 37, 66, 0.88);
+   907→  border: 1px solid rgba(255, 255, 255, 0.08);
+   908→}
+   909→
+   910→/* ============================================
+   911→   BENTO GRID LAYOUT
+   912→   Non-uniform grid for services
+   913→   ============================================ */
+   914→
+   915→.bento-grid {
+   916→  display: grid;
+   917→  grid-template-columns: repeat(2, 1fr);
+   918→  gap: var(--space-3);
+   919→}
+   920→
+   921→@media (min-width: 768px) {
+   922→  .bento-grid {
+   923→    grid-template-columns: repeat(3, 1fr);
+   924→    gap: var(--space-4);
+   925→  }
+   926→}
+   927→
+   928→@media (min-width: 1024px) {
+   929→  .bento-grid {
+   930→    grid-template-columns: repeat(4, 1fr);
+   931→    gap: var(--space-4);
+   932→  }
+   933→}
+   934→
+   935→.bento-item-span-2 {
+   936→  grid-column: span 2;
+   937→}
+   938→
+   939→.bento-item-row-span-2 {
+   940→  grid-row: span 2;
+   941→}
+   942→
+   943→/* ============================================
+   944→   HORIZONTAL SCROLL
+   945→   For team section
+   946→   ============================================ */
+   947→
+   948→.horizontal-scroll-container {
+   949→  overflow-x: auto;
+   950→  overflow-y: hidden;
+   951→  -webkit-overflow-scrolling: touch;
+   952→  scrollbar-width: none;
+   953→  -ms-overflow-style: none;
+   954→  scroll-snap-type: x mandatory;
+   955→}
+   956→
+   957→.horizontal-scroll-container::-webkit-scrollbar {
+   958→  display: none;
+   959→}
+   960→
+   961→.horizontal-scroll-item {
+   962→  scroll-snap-align: start;
+   963→  flex-shrink: 0;
+   964→}
+   965→
+   966→/* ============================================
+   967→   UTILITY CLASSES
+   968→   ============================================ */
+   969→
+   970→/* ── Text Utilities ── */
+   971→.text-primary { color: var(--color-primary); }
+   972→.text-navy { color: var(--color-navy); }
+   973→.text-gold { color: var(--color-gold); }
+   974→.text-sage { color: var(--color-sage); }
+   975→.text-cream { color: var(--color-cream); }
+   976→
+   977→/* ── Background Utilities ── */
+   978→.bg-cream { background-color: var(--color-cream); }
+   979→.bg-white { background-color: var(--color-white); }
+   980→.bg-primary { background-color: var(--color-primary); }
+   981→.bg-navy { background-color: var(--color-navy); }
+   982→.bg-purple-dark { background-color: #3D2565; }
+   983→
+   984→/* ── Spacing Utilities (8px base) ── */
+   985→.gap-1 { gap: var(--space-1); }
+   986→.gap-2 { gap: var(--space-2); }
+   987→.gap-3 { gap: var(--space-3); }
+   988→.gap-4 { gap: var(--space-4); }
+   989→.gap-6 { gap: var(--space-6); }
+   990→.gap-8 { gap: var(--space-8); }
+   991→
+   992→.mt-1 { margin-top: var(--space-1); }
+   993→.mt-2 { margin-top: var(--space-2); }
+   994→.mt-3 { margin-top: var(--space-3); }
+   995→.mt-4 { margin-top: var(--space-4); }
+   996→.mt-6 { margin-top: var(--space-6); }
+   997→.mt-8 { margin-top: var(--space-8); }
+   998→.mt-12 { margin-top: var(--space-12); }
+   999→.mt-16 { margin-top: var(--space-16); }
+  1000→
+  1001→.mb-1 { margin-bottom: var(--space-1); }
+  1002→.mb-2 { margin-bottom: var(--space-2); }
+  1003→.mb-3 { margin-bottom: var(--space-3); }
+  1004→.mb-4 { margin-bottom: var(--space-4); }
+  1005→.mb-6 { margin-bottom: var(--space-6); }
+  1006→.mb-8 { margin-bottom: var(--space-8); }
+  1007→.mb-12 { margin-bottom: var(--space-12); }
+  1008→.mb-16 { margin-bottom: var(--space-16); }
+  1009→
+  1010→.p-1 { padding: var(--space-1); }
+  1011→.p-2 { padding: var(--space-2); }
+  1012→.p-3 { padding: var(--space-3); }
+  1013→.p-4 { padding: var(--space-4); }
+  1014→.p-6 { padding: var(--space-6); }
+  1015→.p-8 { padding: var(--space-8); }
+  1016→
+  1017→/* Ghost number style for Why Us section */
+  1018→.ghost-number {
+  1019→  font-family: var(--font-heading-en);
+  1020→  font-size: clamp(120px, 15vw, 200px);
+  1021→  font-weight: 700;
+  1022→  color: transparent;
+  1023→  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+  1024→  line-height: 1;
+  1025→  position: absolute;
+  1026→  top: 50%;
+  1027→  left: 50%;
+  1028→  transform: translate(-50%, -50%);
+  1029→  user-select: none;
+  1030→  pointer-events: none;
+  1031→}
+  1032→
+  1033→/* Large quote styling */
+  1034→.quote-large {
+  1035→  font-family: var(--font-heading-ar);
+  1036→  font-size: clamp(24px, 4vw, 42px);
+  1037→  font-weight: 300;
+  1038→  line-height: 1.5;
+  1039→  font-style: italic;
+  1040→}
+  1041→
+  1042→.quote-mark {
+  1043→  font-family: Georgia, serif;
+  1044→  font-size: clamp(80px, 10vw, 140px);
+  1045→  line-height: 0.8;
+  1046→  color: var(--color-gold);
+  1047→  opacity: 0.3;
+  1048→}
+  1049→
+  1050→/* ============================================
+  1051→   SCROLLBAR STYLING
+  1052→   Minimal, elegant scrollbar
+  1053→   ============================================ */
+  1054→
+  1055→::-webkit-scrollbar {
+  1056→  width: 6px;
+  1057→  height: 6px;
+  1058→}
+  1059→
+  1060→::-webkit-scrollbar-track {
+  1061→  background: transparent;
+  1062→}
+  1063→
+  1064→::-webkit-scrollbar-thumb {
+  1065→  background: var(--color-sage);
+  1066→  border-radius: 3px;
+  1067→}
+  1068→
+  1069→::-webkit-scrollbar-thumb:hover {
+  1070→  background: var(--color-sage-dark);
+  1071→}
+  1072→
+  1073→/* Firefox scrollbar */
+  1074→* {
+  1075→  scrollbar-width: thin;
+  1076→  scrollbar-color: var(--color-sage) transparent;
+  1077→}
+  1078→
+  1079→/* ============================================
+  1080→   FOCUS & ACCESSIBILITY
+  1081→   ============================================ */
+  1082→
+  1083→*:focus-visible {
+  1084→  outline: 2px solid var(--color-primary);
+  1085→  outline-offset: 3px;
+  1086→}
+  1087→
+  1088→/* Skip to content link */
+  1089→.skip-to-content {
+  1090→  position: absolute;
+  1091→  top: -100%;
+  1092→  left: var(--space-4);
+  1093→  z-index: 10000;
+  1094→  padding: var(--space-2) var(--space-4);
+  1095→  background: var(--color-primary);
+  1096→  color: white;
+  1097→  border-radius: var(--radius-md);
+  1098→  transition: top var(--transition-fast);
+  1099→}
+  1100→
+  1101→.skip-to-content:focus {
+  1102→  top: var(--space-4);
+  1103→}
+  1104→
+  1105→/* ============================================
+  1106→   REDUCED MOTION SUPPORT
+  1107→   Respect user preferences
+  1108→   ============================================ */
+  1109→
+  1110→@media (prefers-reduced-motion: reduce) {
+  1111→  *,
+  1112→  *::before,
+  1113→  *::after {
+  1114→    animation-duration: 0.01ms !important;
+  1115→    animation-iteration-count: 1 !important;
+  1116→    transition-duration: 0.01ms !important;
+  1117→    scroll-behavior: auto !important;
+  1118→  }
+  1119→
+  1120→  .animate-float,
+  1121→  .animate-fade-in-up,
+  1122→  .animate-scale-in,
+  1123→  .animate-slide-in-right,
+  1124→  .animate-slide-in-left,
+  1125→  .animate-gentle-pulse {
+  1126→    animation: none !important;
+  1127→  }
+  1128→
+  1129→  .reveal-hidden {
+  1130→    opacity: 1;
+  1131→    transform: none;
+  1132→  }
+  1133→
+  1134→  .stagger-reveal > *,
+  1135→  .reveal-text-inner {
+  1136→    opacity: 1;
+  1137→    transform: none;
+  1138→    transition: none;
+  1139→  }
+  1140→}
+  1141→
+  1142→/* ============================================
+  1143→   RESPONSIVE HELPERS
+  1144→   ============================================ */
+  1145→
+  1146→/* Hide on mobile, show on desktop */
+  1147→.hide-mobile {
+  1148→  display: none;
+  1149→}
+  1150→
+  1151→@media (min-width: 1024px) {
+  1152→  .hide-mobile {
+  1153→    display: initial;
+  1154→  }
+  1155→}
+  1156→
+  1157→/* Show on mobile, hide on desktop */
+  1158→.show-mobile {
+  1159→  display: initial;
+  1160→}
+  1161→
+  1162→@media (min-width: 1024px) {
+  1163→  .show-mobile {
+  1164→    display: none;
+  1165→  }
+  1166→}
+  1167→
+  1168→/* ============================================
+  1169→   PRINT STYLES
+  1170→   ============================================ */
+  1171→
+  1172→@media print {
+  1173→  .header-main,
+  1174→  .cursor-dot,
+  1175→  .cursor-ring,
+  1176→  .btn,
+  1177→  .horizontal-scroll-container {
+  1178→    display: none !important;
+  1179→  }
+  1180→
+  1181→  body {
+  1182→    background: white;
+  1183→    color: black;
+  1184→  }
+  1185→
+  1186→  .card {
+  1187→    break-inside: avoid;
+  1188→    box-shadow: none;
+  1189→    border: 1px solid #ddd;
+  1190→  }
+  1191→}
+  1192→

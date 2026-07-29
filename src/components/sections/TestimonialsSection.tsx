@@ -254,14 +254,7 @@ export default function TestimonialsSection() {
             <button
               onClick={handlePrev}
               disabled={isTransitioning}
-              className="
-                group w-12 h-12 flex items-center justify-center
-                border border-gray-300/50 rounded-full
-                transition-all duration-300 ease-out
-                hover:border-[#5D3C83]/30 hover:bg-[#5D3C83]/5
-                disabled:opacity-40 disabled:cursor-not-allowed
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5D3C83]/50 focus-visible:ring-offset-2
-              "
+              className={`group w-12 h-12 flex items-center justify-center border border-gray-300/50 rounded-full transition-all duration-300 ease-out hover:border-[#5D3C83]/30 hover:bg-[#5D3C83]/5 disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5D3C83]/50 focus-visible:ring-offset-2`}
               aria-label={locale === 'ar' ? 'الشهادة السابقة' : 'Previous testimonial'}
             >
               <svg 
@@ -290,11 +283,7 @@ export default function TestimonialsSection() {
                   key={index}
                   onClick={() => handleDotClick(index)}
                   disabled={isTransitioning}
-                  className="
-                    relative transition-all duration-400 ease-out
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C29D44]/50 focus-visible:ring-offset-2 rounded-full
-                    disabled:cursor-not-allowed
-                  "
+                  className={`relative transition-all duration-400 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C29D44]/50 focus-visible:ring-offset-2 rounded-full disabled:cursor-not-allowed`}
                   style={{
                     width: index === currentIndex ? '32px' : '8px',
                     height: '8px',
@@ -313,14 +302,7 @@ export default function TestimonialsSection() {
             <button
               onClick={handleNext}
               disabled={isTransitioning}
-              className="
-                group w-12 h-12 flex items-center justify-center
-                border border-gray-300/50 rounded-full
-                transition-all duration-300 ease-out
-                hover:border-[#5D3C83]/30 hover:bg-[#5D3C83]/5
-                disabled:opacity-40 disabled:cursor-not-allowed
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5D3C83]/50 focus-visible:ring-offset-2
-              "
+              className={`group w-12 h-12 flex items-center justify-center border border-gray-300/50 rounded-full transition-all duration-300 ease-out hover:border-[#5D3C83]/30 hover:bg-[#5D3C83]/5 disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5D3C83]/50 focus-visible:ring-offset-2`}
               aria-label={locale === 'ar' ? 'الشهادة التالية' : 'Next testimonial'}
             >
               <svg 

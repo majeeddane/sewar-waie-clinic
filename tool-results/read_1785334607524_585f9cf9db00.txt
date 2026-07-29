@@ -1,0 +1,756 @@
+     1→'use client';
+     2→
+     3→import { useEffect, useState, useRef } from 'react';
+     4→import Link from 'next/link';
+     5→import { useLanguage } from '@/lib/LanguageContext';
+     6→import { ArrowLeft, ArrowRight } from 'lucide-react';
+     7→
+     8→export default function HeroSection() {
+     9→  const { t, locale, direction } = useLanguage();
+    10→  const [isAnimated, setIsAnimated] = useState(false);
+    11→  const sectionRef = useRef<HTMLElement>(null);
+    12→
+    13→  // Trigger animation on mount with proper timing
+    14→  useEffect(() => {
+    15→    // Check for reduced motion preference
+    16→    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    17→    
+    18→    if (prefersReducedMotion) {
+    19→      requestAnimationFrame(() => setIsAnimated(true));
+    20→      return;
+    21→    }
+    22→
+    23→    // Small delay for natural feel - defer state update
+    24→    const timer = setTimeout(() => {
+    25→      requestAnimationFrame(() => setIsAnimated(true));
+    26→    }, 100);
+    27→
+    28→    return () => clearTimeout(timer);
+    29→  }, []);
+    30→
+    31→  return (
+    32→    <section 
+    33→      ref={sectionRef}
+    34→      className="relative overflow-hidden"
+    35→      style={{
+    36→        minHeight: 'calc(100vh - 96px)',
+    37→        backgroundColor: '#FAFAF8',
+    38→        display: 'flex',
+    39→        alignItems: 'center',
+    40→      }}
+    41→    >
+    42→      {/* ───────────────────────────────────────────────
+    43→          SUBTLE BACKGROUND GRADIENT (5% opacity max)
+    44→          Very gentle purple radial gradient for depth
+    45→         ─────────────────────────────────────────────── */}
+    46→      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+    47→        {/* Primary gradient - top area */}
+    48→        <div 
+    49→          className="absolute rounded-full"
+    50→          style={{
+    51→            width: '800px',
+    52→            height: '800px',
+    53→            background: 'radial-gradient(circle, rgba(93, 60, 131, 0.04) 0%, transparent 70%)',
+    54→            top: '-15%',
+    55→            right: direction === 'rtl' ? 'auto' : '-10%',
+    56→            left: direction === 'rtl' ? '-10%' : 'auto',
+    57→          }}
+    58→        />
+    59→        
+    60→        {/* Secondary gradient - bottom area */}
+    61→        <div 
+    62→          className="absolute rounded-full"
+    63→          style={{
+    64→            width: '600px',
+    65→            height: '600px',
+    66→            background: 'radial-gradient(circle, rgba(194, 157, 68, 0.03) 0%, transparent 70%)',
+    67→            bottom: '-20%',
+    68→            left: direction === 'rtl' ? '-10%' : 'auto',
+    69→            right: direction === 'ltr' ? '-10%' : 'auto',
+    70→          }}
+    71→        />
+    72→
+    73→        {/* Subtle noise texture overlay */}
+    74→        <div 
+    75→          className="absolute inset-0 opacity-[0.015]"
+    76→          style={{
+    77→            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+    78→          }}
+    79→        />
+    80→      </div>
+    81→
+    82→      {/* ───────────────────────────────────────────────
+    83→          MAIN CONTENT CONTAINER
+    84→          Asymmetric split: Text (55-60%) | Illustration (40-45%)
+    85→         ─────────────────────────────────────────────── */}
+    86→      <div 
+    87→        className="relative z-10 w-full px-6 lg:px-10 xl:px-16 py-16 lg:py-24"
+    88→        style={{ maxWidth: '1440px', margin: '0 auto' }}
+    89→      >
+    90→        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${direction === 'rtl' ? '' : ''}`}>
+    91→          
+    92→          {/* ── TEXT CONTENT COLUMN (7/12 ≈ 58%) ── */}
+    93→          <div className={`${direction === 'rtl' ? 'lg:col-span-7 xl:col-span-7' : 'lg:col-span-7 xl:col-span-7'} order-2 lg:order-1`}>
+    94→            
+    95→            {/* ─── BADGE / PILL (Animation #1: delay 0ms) ─── */}
+    96→            <div
+    97→              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-8"
+    98→              style={{
+    99→                backgroundColor: 'rgba(93, 60, 131, 0.06)',
+   100→                opacity: isAnimated ? 1 : 0,
+   101→                transform: isAnimated ? 'translateY(0)' : 'translateY(16px)',
+   102→                transition: 'opacity 700ms cubic-bezier(0.25, 1, 0.5, 1), transform 700ms cubic-bezier(0.25, 1, 0.5, 1)',
+   103→                transitionDelay: '0ms',
+   104→              }}
+   105→            >
+   106→              <span 
+   107→                className="w-2 h-2 rounded-full animate-pulse"
+   108→                style={{ 
+   109→                  backgroundColor: '#C29D44',
+   110→                  boxShadow: '0 0 8px rgba(194, 157, 68, 0.5)',
+   111→                }} 
+   112→              />
+   113→              <span 
+   114→                className="text-sm font-medium tracking-wide"
+   115→                style={{ 
+   116→                  fontFamily: 'var(--font-body-arabic)',
+   117→                  color: '#5D3C83',
+   118→                  fontSize: '13px',
+   119→                  fontWeight: 500,
+   120→                }}
+   121→              >
+   122→                {locale === 'ar' ? 'مركز رعاية نفسية متكامل' : 'Integrated Mental Health Care Center'}
+   123→              </span>
+   124→            </div>
+   125→
+   126→            {/* ─── H1 TITLE (Animation #2: delay 150ms) ─── */}
+   127→            <h1 
+   128→              className="mb-5 leading-[1.12]"
+   129→              style={{ 
+   130→                fontFamily: 'var(--font-heading-ar)',
+   131→                fontSize: 'clamp(32px, 5vw, 56px)',
+   132→                fontWeight: 800,
+   133→                color: '#5D3C83',
+   134→                letterSpacing: '-0.03em',
+   135→                lineHeight: 1.15,
+   136→                opacity: isAnimated ? 1 : 0,
+   137→                transform: isAnimated ? 'translateY(0)' : 'translateY(28px)',
+   138→                transition: 'opacity 750ms cubic-bezier(0.25, 1, 0.5, 1), transform 750ms cubic-bezier(0.25, 1, 0.5, 1)',
+   139→                transitionDelay: '150ms',
+   140→              }}
+   141→            >
+   142→              {t.hero.title}
+   143→            </h1>
+   144→
+   145→            {/* ─── H1 SUBTITLE ─── */}
+   146→            <h2 
+   147→              className="mb-6 leading-[1.2]"
+   148→              style={{ 
+   149→                fontFamily: 'var(--font-heading-ar)',
+   150→                fontSize: 'clamp(24px, 3.5vw, 38px)',
+   151→                fontWeight: 500,
+   152→                color: '#1a1a2e',
+   153→                letterSpacing: '-0.02em',
+   154→                opacity: isAnimated ? 1 : 0,
+   155→                transform: isAnimated ? 'translateY(0)' : 'translateY(28px)',
+   156→                transition: 'opacity 750ms cubic-bezier(0.25, 1, 0.5, 1), transform 750ms cubic-bezier(0.25, 1, 0.5, 1)',
+   157→                transitionDelay: '220ms',
+   158→              }}
+   159→            >
+   160→              {t.hero.subtitle}
+   161→            </h2>
+   162→
+   163→            {/* ─── DESCRIPTION PARAGRAPH (Animation #3: delay 400ms) ─── */}
+   164→            <p 
+   165→              className="mb-10 max-w-xl leading-relaxed"
+   166→              style={{ 
+   167→                fontFamily: 'var(--font-body-arabic)',
+   168→                fontSize: 'clamp(15px, 1.8vw, 17px)',
+   169→                color: '#4a4a5a',
+   170→                fontWeight: 400,
+   171→                lineHeight: 1.75,
+   172→                opacity: isAnimated ? 1 : 0,
+   173→                transform: isAnimated ? 'translateY(0)' : 'translateY(24px)',
+   174→                transition: 'opacity 700ms cubic-bezier(0.25, 1, 0.5, 1), transform 700ms cubic-bezier(0.25, 1, 0.5, 1)',
+   175→                transitionDelay: '400ms',
+   176→              }}
+   177→            >
+   178→              {t.hero.description}
+   179→            </p>
+   180→
+   181→            {/* ─── CTA BUTTONS (Animation #4: delay 550ms) ─── */}
+   182→            <div 
+   183→              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-14"
+   184→              style={{
+   185→                opacity: isAnimated ? 1 : 0,
+   186→                transform: isAnimated ? 'scale(1) translateY(0)' : 'scale(0.96) translateY(12px)',
+   187→                transition: 'opacity 650ms cubic-bezier(0.25, 1, 0.5, 1), transform 650ms cubic-bezier(0.25, 1, 0.5, 1)',
+   188→                transitionDelay: '550ms',
+   189→              }}
+   190→            >
+   191→              {/* Primary Button */}
+   192→              <Link href="/#contact">
+   193→                <button
+   194→                  className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-white font-semibold overflow-hidden transition-all duration-300"
+   195→                  style={{
+   196→                    fontFamily: 'var(--font-body-arabic)',
+   197→                    fontSize: '15px',
+   198→                    fontWeight: 600,
+   199→                    backgroundColor: '#5D3C83',
+   200→                    boxShadow: '0 8px 32px rgba(93, 60, 131, 0.28)',
+   201→                    transition: 'all 350ms cubic-bezier(0.16, 1, 0.3, 1)',
+   202→                  }}
+   203→                  onMouseEnter={(e) => {
+   204→                    e.currentTarget.style.backgroundColor = '#512D6F';
+   205→                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(93, 60, 131, 0.38)';
+   206→                    e.currentTarget.style.transform = 'translateY(-2px)';
+   207→                  }}
+   208→                  onMouseLeave={(e) => {
+   209→                    e.currentTarget.style.backgroundColor = '#5D3C83';
+   210→                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(93, 60, 131, 0.28)';
+   211→                    e.currentTarget.style.transform = 'translateY(0)';
+   212→                  }}
+   213→                >
+   214→                  <span className="relative z-10">{t.hero.cta}</span>
+   215→                  {direction === 'rtl' ? (
+   216→                    <ArrowLeft className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+   217→                  ) : (
+   218→                    <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
+   219→                  )}
+   220→                  
+   221→                  {/* Shimmer effect on hover */}
+   222→                  <span 
+   223→                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+   224→                    style={{
+   225→                      background: 'linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%)',
+   226→                      transform: 'translateX(-100%)',
+   227→                      animation: 'shimmer 1.2s ease forwards',
+   228→                    }}
+   229→                  />
+   230→                </button>
+   231→              </Link>
+   232→
+   233→              {/* Secondary Outline Button */}
+   234→              <Link href="/#about">
+   235→                <button
+   236→                  className="group inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold transition-all duration-300"
+   237→                  style={{
+   238→                    fontFamily: 'var(--font-body-arabic)',
+   239→                    fontSize: '15px',
+   240→                    fontWeight: 600,
+   241→                    color: '#5D3C83',
+   242→                    backgroundColor: 'transparent',
+   243→                    border: '1.5px solid rgba(93, 60, 131, 0.2)',
+   244→                    boxShadow: 'none',
+   245→                    transition: 'all 350ms cubic-bezier(0.16, 1, 0.3, 1)',
+   246→                  }}
+   247→                  onMouseEnter={(e) => {
+   248→                    e.currentTarget.style.borderColor = 'rgba(93, 60, 131, 0.45)';
+   249→                    e.currentTarget.style.backgroundColor = 'rgba(93, 60, 131, 0.04)';
+   250→                    e.currentTarget.style.transform = 'translateY(-2px)';
+   251→                  }}
+   252→                  onMouseLeave={(e) => {
+   253→                    e.currentTarget.style.borderColor = 'rgba(93, 60, 131, 0.2)';
+   254→                    e.currentTarget.style.backgroundColor = 'transparent';
+   255→                    e.currentTarget.style.transform = 'translateY(0)';
+   256→                  }}
+   257→                >
+   258→                  <span>{t.hero.learnMore}</span>
+   259→                  {direction === 'rtl' ? (
+   260→                    <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
+   261→                  ) : (
+   262→                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+   263→                  )}
+   264→                </button>
+   265→              </Link>
+   266→            </div>
+   267→
+   268→            {/* ─── STATS ROW (Animation #5: delay 700ms) ─── */}
+   269→            <div 
+   270→              className="flex flex-wrap items-center"
+   271→              style={{
+   272→                opacity: isAnimated ? 1 : 0,
+   273→                transform: isAnimated ? 'translateY(0)' : 'translateY(20px)',
+   274→                transition: 'opacity 700ms cubic-bezier(0.25, 1, 0.5, 1), transform 700ms cubic-bezier(0.25, 1, 0.5, 1)',
+   275→                transitionDelay: '700ms',
+   276→              }}
+   277→            >
+   278→              {/* Stat 1: Clients */}
+   279→              <div className="flex items-center gap-3">
+   280→                <span 
+   281→                  className="font-bold"
+   282→                  style={{ 
+   283→                    fontFamily: 'var(--font-heading-ar)',
+   284→                    fontSize: 'clamp(22px, 2.5vw, 30px)',
+   285→                    color: '#5D3C83',
+   286→                    letterSpacing: '-0.02em',
+   287→                  }}
+   288→                >
+   289→                  500+
+   290→                </span>
+   291→                <span 
+   292→                  className="text-sm font-medium"
+   293→                  style={{ 
+   294→                    fontFamily: 'var(--font-body-arabic)',
+   295→                    color: '#6b7280',
+   296→                    fontSize: '14px',
+   297→                  }}
+   298→                >
+   299→                  {locale === 'ar' ? 'مستفيد' : 'Clients'}
+   300→                </span>
+   301→              </div>
+   302→
+   303→              {/* Separator */}
+   304→              <div 
+   305→                className="hidden sm:block mx-5 md:mx-7"
+   306→                style={{ 
+   307→                  width: '1px', 
+   308→                  height: '32px',
+   309→                  background: 'linear-gradient(to bottom, transparent, rgba(93, 60, 131, 0.2), transparent)',
+   310→                }} 
+   311→              />
+   312→
+   313→              {/* Stat 2: Experts */}
+   314→              <div className="flex items-center gap-3">
+   315→                <span 
+   316→                  className="font-bold"
+   317→                  style={{ 
+   318→                    fontFamily: 'var(--font-heading-ar)',
+   319→                    fontSize: 'clamp(22px, 2.5vw, 30px)',
+   320→                    color: '#5D3C83',
+   321→                    letterSpacing: '-0.02em',
+   322→                  }}
+   323→                >
+   324→                  15+
+   325→                </span>
+   326→                <span 
+   327→                  className="text-sm font-medium"
+   328→                  style={{ 
+   329→                    fontFamily: 'var(--font-body-arabic)',
+   330→                    color: '#6b7280',
+   331→                    fontSize: '14px',
+   332→                  }}
+   333→                >
+   334→                  {locale === 'ar' ? 'أخصائي' : 'Experts'}
+   335→                </span>
+   336→              </div>
+   337→
+   338→              {/* Separator */}
+   339→              <div 
+   340→                className="hidden sm:block mx-5 md:mx-7"
+   341→                style={{ 
+   342→                  width: '1px', 
+   343→                  height: '32px',
+   344→                  background: 'linear-gradient(to bottom, transparent, rgba(93, 60, 131, 0.2), transparent)',
+   345→                }} 
+   346→              />
+   347→
+   348→              {/* Stat 3: Satisfaction */}
+   349→              <div className="flex items-center gap-3">
+   350→                <span 
+   351→                  className="font-bold"
+   352→                  style={{ 
+   353→                    fontFamily: 'var(--font-heading-ar)',
+   354→                    fontSize: 'clamp(22px, 2.5vw, 30px)',
+   355→                    color: '#5D3C83',
+   356→                    letterSpacing: '-0.02em',
+   357→                  }}
+   358→                >
+   359→                  98%
+   360→                </span>
+   361→                <span 
+   362→                  className="text-sm font-medium"
+   363→                  style={{ 
+   364→                    fontFamily: 'var(--font-body-arabic)',
+   365→                    color: '#6b7280',
+   366→                    fontSize: '14px',
+   367→                  }}
+   368→                >
+   369→                  {locale === 'ar' ? 'رضا' : 'Satisfaction'}
+   370→                </span>
+   371→              </div>
+   372→            </div>
+   373→          </div>
+   374→
+   375→          {/* ── ILLUSTRATION COLUMN (5/12 ≈ 42%) ── */}
+   376→          <div className={`${direction === 'rtl' ? 'lg:col-span-5 xl:col-span-5' : 'lg:col-span-5 xl:col-span-5'} order-1 lg:order-2 flex items-center justify-center`}>
+   377→            <div 
+   378→              className="relative w-full max-w-[380px] mx-auto lg:max-w-[450px] xl:max-w-[480px]"
+   379→              style={{
+   380→                opacity: isAnimated ? 1 : 0,
+   381→                transform: isAnimated ? 'scale(1) translateX(0)' : `scale(0.92) translateX(${direction === 'rtl' ? '40px' : '-40px'})`,
+   382→                transition: 'opacity 900ms cubic-bezier(0.25, 1, 0.5, 1), transform 900ms cubic-bezier(0.25, 1, 0.5, 1)',
+   383→                transitionDelay: '300ms',
+   384→              }}
+   385→            >
+   386→              {/* Main Tree Illustration with Floating Animation */}
+   387→              <HeroTreeIllustration />
+   388→              
+   389→              {/* Decorative Crescent Moon Element (Arabic Touch) */}
+   390→              <div 
+   391→                className="absolute pointer-events-none"
+   392→                style={{
+   393→                  top: '-8%',
+   394→                  [direction === 'rtl' ? 'left' : 'right']: '-5%',
+   395→                  width: '80px',
+   396→                  height: '80px',
+   397→                  opacity: 0.18,
+   398→                  animation: 'float-crescent 6s ease-in-out infinite',
+   399→                }}
+   400→              >
+   401→                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+   402→                  <defs>
+   403→                    <linearGradient id="crescent-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+   404→                      <stop offset="0%" stopColor="#C29D44" stopOpacity="1" />
+   405→                      <stop offset="100%" stopColor="#D4B062" stopOpacity="0.8" />
+   406→                    </linearGradient>
+   407→                  </defs>
+   408→                  {/* Crescent shape */}
+   409→                  <path
+   410→                    d="M42 8C26.536 8 14 20.536 14 36c0 5.04 1.35 9.76 3.71 13.82A27.92 27.92 0 0042 64c15.464 0 28-12.536 28-28 0-5.04-1.35-9.76-3.71-13.82A27.92 27.92 0 0042 8z"
+   411→                    stroke="url(#crescent-gold)"
+   412→                    strokeWidth="1.5"
+   413→                    fill="none"
+   414→                  />
+   415→                  <path
+   416→                    d="M48 18a20 20 0 0120 20c0 5-1.84 9.57-4.87 13.07A19.94 19.94 0 0148 62a20 20 0 01-15.13-33.55A19.94 19.94 0 0148 18z"
+   417→                    fill="#5D3C83"
+   418→                    opacity="0.08"
+   419→                  />
+   420→                  {/* Small star near crescent */}
+   421→                  <circle cx="62" cy="16" r="2" fill="#C29D44" opacity="0.6" />
+   422→                  <circle cx="18" cy="54" r="1.5" fill="#90A36D" opacity="0.5" />
+   423→                </svg>
+   424→              </div>
+   425→
+   426→              {/* Ambient glow behind tree */}
+   427→              <div 
+   428→                className="absolute inset-0 pointer-events-none -z-10"
+   429→                style={{
+   430→                  background: 'radial-gradient(ellipse at center, rgba(144, 163, 109, 0.08) 0%, transparent 65%)',
+   431→                  filter: 'blur(40px)',
+   432→                  transform: 'scale(1.2)',
+   433→                }}
+   434→              />
+   435→            </div>
+   436→          </div>
+   437→        </div>
+   438→      </div>
+   439→
+   440→      {/* ───────────────────────────────────────────────
+   441→          BOTTOM WAVE SEPARATOR
+   442→          Smooth transition to next section
+   443→         ─────────────────────────────────────────────── */}
+   444→      <div 
+   445→        className="absolute bottom-0 left-0 right-0 leading-none pointer-events-none" 
+   446→        aria-hidden="true"
+   447→        style={{ zIndex: 5 }}
+   448→      >
+   449→        <svg 
+   450→          viewBox="0 0 1440 72" 
+   451→          fill="none" 
+   452→          xmlns="http://www.w3.org/2000/svg" 
+   453→          className="w-full h-auto"
+   454→          preserveAspectRatio="none"
+   455→          style={{ display: 'block' }}
+   456→        >
+   457→          <path
+   458→            d="M0 28C96 48 288 64 480 56C672 48 864 24 1056 16C1248 8 1344 20 1440 28V72H0V28Z"
+   459→            fill="#FFFFFF"
+   460→            opacity="0.95"
+   461→          />
+   462→        </svg>
+   463→      </div>
+   464→
+   465→      {/* ───────────────────────────────────────────────
+   466→          CUSTOM ANIMATION KEYFRAMES (Inline Styles)
+   467→         ─────────────────────────────────────────────── */}
+   468→      <style jsx global>{`
+   469→        @keyframes float-tree {
+   470→          0%, 100% {
+   471→            transform: translateY(0px) rotate(0deg);
+   472→          }
+   473→          50% {
+   474→            transform: translateY(-12px) rotate(0.5deg);
+   475→          }
+   476→        }
+   477→        
+   478→        @keyframes float-crescent {
+   479→          0%, 100% {
+   480→            transform: translateY(0px) rotate(-15deg);
+   481→          }
+   482→          33% {
+   483→            transform: translateY(-8px) rotate(-10deg);
+   484→          }
+   485→          66% {
+   486→            transform: translateY(-4px) rotate(-20deg);
+   487→          }
+   488→        }
+   489→        
+   490→        @keyframes shimmer {
+   491→          0% {
+   492→            transform: translateX(-100%);
+   493→          }
+   494→          100% {
+   495→            transform: translateX(100%);
+   496→          }
+   497→        }
+   498→        
+   499→        .tree-float {
+   500→          animation: float-tree 4s ease-in-out infinite;
+   501→        }
+   502→        
+   503→        /* Respect reduced motion */
+   504→        @media (prefers-reduced-motion: reduce) {
+   505→          .tree-float {
+   506→            animation: none;
+   507→          }
+   508→          * {
+   509→            animation-duration: 0.01ms !important;
+   510→            animation-iteration-count: 1 !important;
+   511→            transition-duration: 0.01ms !important;
+   512→          }
+   513→        }
+   514→      `}</style>
+   515→    </section>
+   516→  );
+   517→}
+   518→
+   519→/* ════════════════════════════════════════════════════════
+   520→   HERO TREE ILLUSTRATION COMPONENT
+   521→   Enhanced SVG tree with:
+   522→   - Larger, more prominent design
+   523→   - Gentle floating animation
+   524→   - Professional gradients
+   525→   - Arabic-inspired decorative elements
+   526→   ════════════════════════════════════════════════════════ */
+   527→function HeroTreeIllustration() {
+   528→  return (
+   529→    <div className="tree-float relative w-full">
+   530→      <svg 
+   531→        viewBox="0 0 360 420" 
+   532→        fill="none" 
+   533→        xmlns="http://www.w3.org/2000/svg"
+   534→        className="w-full h-auto drop-shadow-sm"
+   535→        aria-hidden="true"
+   536→        role="img"
+   537→      >
+   538→        <defs>
+   539→          {/* Root Gradient - Deep to Light */}
+   540→          <linearGradient id="hero-root-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+   541→            <stop offset="0%" stopColor="#5D3C83" stopOpacity="0.7" />
+   542→            <stop offset="50%" stopColor="#3D2858" stopOpacity="0.55" />
+   543→            <stop offset="100%" stopColor="#1F3D73" stopOpacity="0.35" />
+   544→          </linearGradient>
+   545→          
+   546→          {/* Trunk Gradient - Navy to Purple to Sage */}
+   547→          <linearGradient id="hero-trunk-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+   548→            <stop offset="0%" stopColor="#1F3D73" stopOpacity="0.85" />
+   549→            <stop offset="40%" stopColor="#3D4A7A" stopOpacity="0.75" />
+   550→            <stop offset="70%" stopColor="#5D3C83" stopOpacity="0.7" />
+   551→            <stop offset="100%" stopColor="#90A36D" stopOpacity="0.55" />
+   552→          </linearGradient>
+   553→          
+   554→          {/* Branch Gradient */}
+   555→          <linearGradient id="hero-branch-grad" x1="50%" y1="100%" x2="50%" y2="0%">
+   556→            <stop offset="0%" stopColor="#5D3C83" stopOpacity="0.65" />
+   557→            <stop offset="60%" stopColor="#6B5490" stopOpacity="0.5" />
+   558→            <stop offset="100%" stopColor="#90A36D" stopOpacity="0.4" />
+   559→          </linearGradient>
+   560→          
+   561→          {/* Leaf Glow Gradient */}
+   562→          <radialGradient id="hero-leaf-glow" cx="35%" cy="30%" r="60%">
+   563→            <stop offset="0%" stopColor="#C29D44" stopOpacity="0.85" />
+   564→            <stop offset="50%" stopColor="#D4B062" stopOpacity="0.6" />
+   565→            <stop offset="100%" stopColor="#90A36D" stopOpacity="0.45" />
+   566→          </radialGradient>
+   567→          
+   568→          {/* Soft Leaf Gradient */}
+   569→          <radialGradient id="hero-leaf-soft" cx="50%" cy="50%" r="50%">
+   570→            <stop offset="0%" stopColor="#A8BA85" stopOpacity="0.7" />
+   571→            <stop offset="100%" stopColor="#90A36D" stopOpacity="0.4" />
+   572→          </radialGradient>
+   573→          
+   574→          {/* Glow Filter */}
+   575→          <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+   576→            <feGaussianBlur stdDeviation="3" result="blur" />
+   577→            <feMerge>
+   578→              <feMergeNode in="blur" />
+   579→              <feMergeNode in="SourceGraphic" />
+   580→            </feMerge>
+   581→          </filter>
+   582→        </defs>
+   583→
+   584→        {/* ═══ ROOTS - Foundation of Growth ═══ */}
+   585→        <g className="tree-roots" opacity="0.9">
+   586→          {/* Main root branches spreading outward */}
+   587→          <path
+   588→            d="M175 375 Q165 392 150 405 Q135 418 115 428 M175 375 Q185 392 200 408 Q215 422 235 432"
+   589→            stroke="url(#hero-root-grad)"
+   590→            strokeWidth="3"
+   591→            strokeLinecap="round"
+   592→            fill="none"
+   593→          />
+   594→          <path
+   595→            d="M175 375 Q170 395 158 415 Q148 432 132 445 M175 375 Q180 398 192 418 Q202 438 218 450"
+   596→            stroke="url(#hero-root-grad)"
+   597→            strokeWidth="2.2"
+   598→            strokeLinecap="round"
+   599→            fill="none"
+   600→          />
+   601→          {/* Fine root hairs */}
+   602→          <path
+   603→            d="M115 428 Q105 434 95 438 M115 428 Q110 436 102 444 M235 432 Q245 438 255 440 M235 432 Q242 440 250 448"
+   604→            stroke="url(#hero-root-grad)"
+   605→            strokeWidth="1.5"
+   606→            strokeLinecap="round"
+   607→            fill="none"
+   608→            opacity="0.6"
+   609→          />
+   610→        </g>
+   611→
+   612→        {/* ═══ TRUNK - Main Growth Path ═══ */}
+   613→        <g className="tree-trunk">
+   614→          {/* Central trunk with organic curve */}
+   615→          <path
+   616→            d="M172 372 L168 320 Q165 290 169 260 L174 215 Q177 195 180 172 L183 140 Q186 122 184 100"
+   617→            stroke="url(#hero-trunk-grad)"
+   618→            strokeWidth="4.5"
+   619→            strokeLinecap="round"
+   620→            fill="none"
+   621→          />
+   622→          
+   623→          {/* Lower side branches from trunk */}
+   624→          <path
+   625→            d="M174 215 Q158 205 142 212 Q126 220 114 232"
+   626→            stroke="url(#hero-trunk-grad)"
+   627→            strokeWidth="2.5"
+   628→            strokeLinecap="round"
+   629→            fill="none"
+   630→          />
+   631→          <path
+   632→            d="M180 190 Q196 182 212 188 Q228 198 238 210"
+   633→            stroke="url(#hero-trunk-grad)"
+   634→            strokeWidth="2.5"
+   635→            strokeLinecap="round"
+   636→            fill="none"
+   637→          />
+   638→        </g>
+   639→
+   640→        {/* ═══ MAIN BRANCHES - Spreading Support ═══ */}
+   641→        <g className="tree-branches">
+   642→          {/* Left primary branch */}
+   643→          <path
+   644→            d="M184 140 Q158 125 134 116 Q108 109 82 114"
+   645→            stroke="url(#hero-branch-grad)"
+   646→            strokeWidth="2.5"
+   647→            strokeLinecap="round"
+   648→            fill="none"
+   649→          />
+   650→          {/* Left secondary branch */}
+   651→          <path
+   652→            d="M178 160 Q156 152 138 158 Q118 168 102 178"
+   653→            stroke="url(#hero-branch-grad)"
+   654→            strokeWidth="2"
+   655→            strokeLinecap="round"
+   656→            fill="none"
+   657→          />
+   658→          
+   659→          {/* Right primary branch */}
+   660→          <path
+   661→            d="M183 122 Q204 110 226 104 Q250 98 274 106"
+   662→            stroke="url(#hero-branch-grad)"
+   663→            strokeWidth="2.5"
+   664→            strokeLinecap="round"
+   665→            fill="none"
+   666→          />
+   667→          {/* Right secondary branch */}
+   668→          <path
+   669→            d="M179 136 Q198 128 216 134 Q234 142 248 154"
+   670→            stroke="url(#hero-branch-grad)"
+   671→            strokeWidth="2"
+   672→            strokeLinecap="round"
+   673→            fill="none"
+   674→          />
+   675→          
+   676→          {/* Top delicate branches */}
+   677→          <path
+   678→            d="M184 100 Q172 88 158 84 Q142 82 126 88"
+   679→            stroke="url(#hero-branch-grad)"
+   680→            strokeWidth="1.8"
+   681→            strokeLinecap="round"
+   682→            fill="none"
+   683→            opacity="0.8"
+   684→          />
+   685→          <path
+   686→            d="M183 104 Q196 95 210 92 Q226 90 240 96"
+   687→            stroke="url(#hero-branch-grad)"
+   688→            strokeWidth="1.8"
+   689→            strokeLinecap="round"
+   690→            fill="none"
+   691→            opacity="0.8"
+   692→          />
+   693→        </g>
+   694→
+   695→        {/* ═══ LEAVES & FRUITS - Results of Care ═══ */}
+   696→        <g className="tree-leaves">
+   697→          {/* Left side leaves - main cluster */}
+   698→          <circle cx="82" cy="114" r="9" fill="url(#hero-leaf-glow)" opacity="0.75" filter="url(#soft-glow)" />
+   699→          <circle cx="102" cy="106" r="6.5" fill="url(#hero-leaf-soft)" opacity="0.6" />
+   700→          <circle cx="68" cy="124" r="7.5" fill="url(#hero-leaf-glow)" opacity="0.65" />
+   701→          <circle cx="96" cy="130" r="5" fill="#90A36D" opacity="0.45" />
+   702→          
+   703→          {/* Left lower leaves */}
+   704→          <circle cx="102" cy="178" r="6" fill="url(#hero-leaf-soft)" opacity="0.55" />
+   705→          <circle cx="118" cy="170" r="4.5" fill="#90A36D" opacity="0.4" />
+   706→          
+   707→          {/* Right side leaves - main cluster */}
+   708→          <circle cx="274" cy="106" r="9" fill="url(#hero-leaf-glow)" opacity="0.75" filter="url(#soft-glow)" />
+   709→          <circle cx="254" cy="96" r="6.5" fill="url(#hero-leaf-soft)" opacity="0.6" />
+   710→          <circle cx="288" cy="118" r="7.5" fill="url(#hero-leaf-glow)" opacity="0.65" />
+   711→          <circle cx="260" cy="124" r="5" fill="#90A36D" opacity="0.45" />
+   712→          
+   713→          {/* Right lower leaves */}
+   714→          <circle cx="248" cy="154" r="6" fill="url(#hero-leaf-soft)" opacity="0.55" />
+   715→          <circle cx="232" cy="146" r="4.5" fill="#90A36D" opacity="0.4" />
+   716→          
+   717→          {/* Middle leaves */}
+   718→          <circle cx="134" cy="116" r="5.5" fill="url(#hero-leaf-soft)" opacity="0.5" />
+   719→          <circle cx="226" cy="104" r="5.5" fill="url(#hero-leaf-soft)" opacity="0.5" />
+   720→          <circle cx="158" cy="86" r="5" fill="#90A36D" opacity="0.4" />
+   721→          <circle cx="206" cy="94" r="5" fill="#90A36D" opacity="0.4" />
+   722→          <circle cx="126" cy="88" r="4.5" fill="url(#hero-leaf-glow)" opacity="0.45" />
+   723→          <circle cx="240" cy="96" r="4.5" fill="url(#hero-leaf-glow)" opacity="0.45" />
+   724→        </g>
+   725→
+   726→        {/* ═══ DECORATIVE CRESCENT MOON (Arabic Element) ═══ */}
+   727→        <g className="decorative-crescent" opacity="0.18">
+   728→          <path
+   729→            d="M295 52 A24 24 0 1 1 317 30 A19 19 0 1 0 295 52"
+   730→            fill="#C29D44"
+   731→          />
+   732→        </g>
+   733→
+   734→        {/* ═══ DECORATIVE STARS ═══ */}
+   735→        <g className="decorative-stars" opacity="0.25">
+   736→          <circle cx="302" cy="58" r="3.5" fill="#C29D44" />
+   737→          <circle cx="58" cy="78" r="3" fill="#C29D44" />
+   738→          <circle cx="285" cy="78" r="2.5" fill="#90A36D" />
+   739→          <circle cx="72" cy="96" r="2" fill="#C29D44" opacity="0.6" />
+   740→        </g>
+   741→
+   742→        {/* ═══ SUBTLE GROUND LINE ═══ */}
+   743→        <g className="ground-line" opacity="0.15">
+   744→          <path
+   745→            d="M100 410 Q180 400 260 410"
+   746→            stroke="#5D3C83"
+   747→            strokeWidth="1.5"
+   748→            strokeLinecap="round"
+   749→            fill="none"
+   750→          />
+   751→        </g>
+   752→      </svg>
+   753→    </div>
+   754→  );
+   755→}
+   756→

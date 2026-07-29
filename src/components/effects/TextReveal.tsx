@@ -43,7 +43,7 @@ function getInitialVisibility(): boolean {
   return getReducedMotionSnapshot();
 }
 
-export default function TextReveal({
+export function TextReveal({
   children,
   as: Tag = 'div',
   className = '',

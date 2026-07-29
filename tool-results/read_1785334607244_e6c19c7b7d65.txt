@@ -1,0 +1,1150 @@
+     1→@import "tailwindcss";
+     2→@import "tw-animate-css";
+     3→
+     4→/* ============================================
+     5→   SEWAR WAIE - GLOBAL STYLES
+     6→   Professional Design System v3.0
+     7→   Apple-level discipline + ROSHN Arabic luxury
+     8→   Cuberto/Lusion timing precision (toned down)
+     9→   ============================================ */
+    10→
+    11→/* Google Fonts Import */
+    12→@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap');
+    13→
+    14→@custom-variant dark (&:is(.dark *));
+    15→
+    16→/* ============================================
+    17→   CSS CUSTOM PROPERTIES (Design Tokens)
+    18→   60-30-10 Color Rule + Professional Easing
+    19→   ============================================ */
+    20→
+    21→:root {
+    22→  /* ── Color Palette ── */
+    23→  /* Primary Colors (30%) - Purple & Navy for headings, buttons, icons */
+    24→  --color-primary: #5D3C83;
+    25→  --color-primary-hover: #512D6F;
+    26→  --color-primary-light: #7A52A3;
+    27→  --color-navy: #1F3D73;
+    28→  --color-navy-light: #2D5299;
+    29→
+    30→  /* Accent Color (10%) - Gold for limited highlights only */
+    31→  --color-gold: #C29D44;
+    32→  --color-gold-light: #D4B062;
+    33→  --color-gold-dark: #A88535;
+    34→
+    35→  /* Growth/Healing Green */
+    36→  --color-sage: #90A36D;
+    37→  --color-sage-light: #A8BA85;
+    38→  --color-sage-dark: #7A8C5A;
+    39→
+    40→  /* Background Colors (60%) - Creamy or pure white */
+    41→  --color-cream: #FAFAF8;
+    42→  --color-white: #FFFFFF;
+    43→
+    44→  /* Semantic Colors */
+    45→  --background: var(--color-cream);
+    46→  --foreground: #1a1a2e;
+    47→  --card: var(--color-white);
+    48→  --card-foreground: #1a1a2e;
+    49→  --popover: var(--color-white);
+    50→  --popover-foreground: #1a1a2e;
+    51→  --primary: var(--color-primary);
+    52→  --primary-foreground: var(--color-white);
+    53→  --secondary: var(--color-sage);
+    54→  --secondary-foreground: var(--color-white);
+    55→  --muted: #f0ede6;
+    56→  --muted-foreground: #6b7280;
+    57→  --accent: var(--color-gold);
+    58→  --accent-foreground: #1a1a2e;
+    59→  --destructive: #ef4444;
+    60→  --destructive-foreground: var(--color-white);
+    61→  --border: #e5e2db;
+    62→  --input: #e5e2db;
+    63→  --ring: var(--color-primary);
+    64→
+    65→  /* ── PROFESSIONAL EASING CURVES ── */
+    66→  /* Cuberto/Lusion-inspired precision timing */
+    67→  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    68→  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    69→  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    70→  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    71→  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    72→  
+    73→  /* ── Typography Scale ── */
+    74→  /* Font Families */
+    75→  --font-heading-ar: 'Tajawal', sans-serif;
+    76→  --font-body-ar: 'IBM Plex Sans Arabic', sans-serif;
+    77→  --font-heading-en: 'Fraunces', serif;
+    78→
+    79→  /* Font Sizes - Desktop (Apple-like scale) */
+    80→  --text-h1-desktop: clamp(48px, 5vw, 72px);
+    81→  --text-h2-desktop: clamp(32px, 3.5vw, 48px);
+    82→  --text-h3-desktop: clamp(24px, 2vw, 32px);
+    83→  --text-h4-desktop: clamp(18px, 1.5vw, 22px);
+    84→  --text-body-desktop: 17px;
+    85→  --text-small-desktop: 14px;
+    86→
+    87→  /* Font Sizes - Mobile */
+    88→  --text-h1-mobile: clamp(32px, 8vw, 42px);
+    89→  --text-h2-mobile: clamp(24px, 6vw, 32px);
+    90→  --text-h3-mobile: clamp(20px, 4vw, 26px);
+    91→  --text-body-mobile: 16px;
+    92→  --text-small-mobile: 14px;
+    93→
+    94→  /* Line Heights - Precise typography */
+    95→  --leading-tight: 1.1;
+    96→  --leading-snug: 1.2;
+    97→  --leading-normal: 1.5;
+    98→  --leading-relaxed: 1.75;
+    99→  --leading-loose: 1.9;
+   100→
+   101→  /* Letter Spacing */
+   102→  --tracking-tight: -0.03em;
+   103→  --tracking-normal: 0;
+   104→  --tracking-wide: 0.02em;
+   105→
+   106→  /* ── Spacing System (8px base) ── */
+   107→  --space-1: 8px;
+   108→  --space-2: 16px;
+   109→  --space-3: 24px;
+   110→  --space-4: 32px;
+   111→  --space-5: 40px;
+   112→  --space-6: 48px;
+   113→  --space-8: 64px;
+   114→  --space-10: 80px;
+   115→  --space-12: 96px;
+   116→  --space-16: 128px;
+   117→  --space-20: 160px;
+   118→  --space-24: 192px;
+   119→
+   120→  /* ── Layout ── */
+   121→  --max-width: 1280px;
+   122→  --max-width-narrow: 960px;
+   123→  --padding-mobile: 24px;
+   124→  --padding-desktop: 80px;
+   125→  --section-spacing-mobile: 80px;
+   126→  --section-spacing-desktop: 120px;
+   127→
+   128→  /* ── Header ── */
+   129→  --header-height: 96px;
+   130→  --header-height-scrolled: 72px;
+   131→
+   132→  /* ── Border Radius ── */
+   133→  --radius-sm: 4px;
+   134→  --radius-md: 8px;
+   135→  --radius-lg: 16px;
+   136→  --radius-xl: 24px;
+   137→  --radius-full: 9999px;
+   138→
+   139→  /* ── Transitions (Professional timing) ── */
+   140→  --transition-fast: 200ms var(--ease-out-expo);
+   141→  --transition-base: 300ms var(--ease-out-expo);
+   142→  --transition-slow: 500ms var(--ease-out-expo);
+   143→  --transition-cinema: 800ms var(--ease-out-quart);
+   144→
+   145→  /* ── Shadows (Subtle, Apple-like) ── */
+   146→  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+   147→  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+   148→  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+   149→  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+   150→  --shadow-header: 0 1px 24px rgba(0, 0, 0, 0.06);
+   151→  --shadow-card-hover: 0 12px 40px rgba(93, 60, 131, 0.1);
+   152→
+   153→  /* Chart colors */
+   154→  --chart-1: var(--color-primary);
+   155→  --chart-2: var(--color-gold);
+   156→  --chart-3: var(--color-navy);
+   157→  --chart-4: var(--color-sage);
+   158→  --chart-5: var(--color-gold-light);
+   159→}
+   160→
+   161→/* Dark mode variables */
+   162→.dark {
+   163→  --background: #1a1a2e;
+   164→  --foreground: #fafaf8;
+   165→  --card: #252542;
+   166→  --card-foreground: #fafaf8;
+   167→  --popover: #252542;
+   168→  --popover-foreground: #fafaf8;
+   169→  --primary: var(--color-primary-light);
+   170→  --primary-foreground: #ffffff;
+   171→  --secondary: var(--color-sage-dark);
+   172→  --secondary-foreground: #ffffff;
+   173→  --muted: #2d2d4a;
+   174→  --muted-foreground: #9ca3af;
+   175→  --accent: var(--color-gold);
+   176→  --accent-foreground: #fafaf8;
+   177→  --destructive: #dc2626;
+   178→  --destructive-foreground: #ffffff;
+   179→  --border: #3d3d5c;
+   180→  --input: #3d3d5c;
+   181→  --ring: var(--color-primary-light);
+   182→  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+   183→  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+   184→  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+   185→  --shadow-header: 0 1px 24px rgba(0, 0, 0, 0.3);
+   186→}
+   187→
+   188→/* ============================================
+   189→   TAILWIND THEME EXTENSION
+   190→   ============================================ */
+   191→
+   192→@theme inline {
+   193→  --color-background: var(--background);
+   194→  --color-foreground: var(--foreground);
+   195→  --color-card: var(--card);
+   196→  --color-card-foreground: var(--card-foreground);
+   197→  --color-popover: var(--popover);
+   198→  --color-popover-foreground: var(--popover-foreground);
+   199→  --color-primary: var(--primary);
+   200→  --color-primary-foreground: var(--primary-foreground);
+   201→  --color-secondary: var(--secondary);
+   202→  --color-secondary-foreground: var(--secondary-foreground);
+   203→  --color-muted: var(--muted);
+   204→  --color-muted-foreground: var(--muted-foreground);
+   205→  --color-accent: var(--accent);
+   206→  --color-accent-foreground: var(--accent-foreground);
+   207→  --color-destructive: var(--destructive);
+   208→  --color-destructive-foreground: var(--destructive-foreground);
+   209→  --color-border: var(--border);
+   210→  --color-input: var(--input);
+   211→  --color-ring: var(--ring);
+   212→  --color-chart-1: var(--chart-1);
+   213→  --color-chart-2: var(--chart-2);
+   214→  --color-chart-3: var(--chart-3);
+   215→  --color-chart-4: var(--chart-4);
+   216→  --color-chart-5: var(--chart-5);
+   217→
+   218→  /* Radius scale */
+   219→  --radius-sm: var(--radius-sm);
+   220→  --radius-md: var(--radius-md);
+   221→  --radius-lg: var(--radius-lg);
+   222→  --radius-xl: var(--radius-xl);
+   223→  --radius-full: var(--radius-full);
+   224→
+   225→  /* Custom color tokens */
+   226→  --color-sewar-purple: #5D3C83;
+   227→  --color-sewar-gold: #C29D44;
+   228→  --color-sewar-navy: #1F3D73;
+   229→  --color-sewar-sage: #90A36D;
+   230→  --color-sewar-cream: #FAFAF8;
+   231→}
+   232→
+   233→/* ============================================
+   234→   BASE LAYER - Reset & Global Styles
+   235→   Apple-level base styling
+   236→   ============================================ */
+   237→
+   238→@layer base {
+   239→  * {
+   240→    @apply border-border;
+   241→    box-sizing: border-box;
+   242→  }
+   243→
+   244→  html {
+   245→    scroll-behavior: smooth;
+   246→    -webkit-font-smoothing: antialiased;
+   247→    -moz-osx-font-smoothing: grayscale;
+   248→    text-rendering: optimizeLegibility;
+   249→  }
+   250→
+   251→  body {
+   252→    @apply bg-background text-foreground antialiased;
+   253→    font-family: var(--font-body-ar);
+   254→    font-size: var(--text-body-mobile);
+   255→    line-height: var(--leading-relaxed);
+   256→    min-height: 100vh;
+   257→    overflow-x: hidden;
+   258→  }
+   259→
+   260→  /* RTL Arabic typography */
+   261→  html[dir="rtl"] body {
+   262→    font-family: var(--font-body-ar);
+   263→  }
+   264→
+   265→  /* LTR English typography */
+   266→  html[dir="ltr"] body {
+   267→    font-family: var(--font-body-ar);
+   268→  }
+   269→
+   270→  /* Selection styling */
+   271→  ::selection {
+   272→    background-color: var(--color-primary);
+   273→    color: var(--color-white);
+   274→  }
+   275→}
+   276→
+   277→/* ============================================
+   278→   TYPOGRAPHY SYSTEM
+   279→   Professional type scale with precise control
+   280→   ============================================ */
+   281→
+   282→/* ── Headings (Arabic) - Bold, confident ── */
+   283→h1, h2, h3, h4,
+   284→.h1, .h2, .h3, .h4 {
+   285→  font-family: var(--font-heading-ar);
+   286→  font-weight: 800;
+   287→  line-height: var(--leading-tight);
+   288→  letter-spacing: var(--tracking-tight);
+   289→  color: var(--foreground);
+   290→}
+   291→
+   292→/* Desktop heading sizes */
+   293→@media (min-width: 1024px) {
+   294→  h1, .h1 { 
+   295→    font-size: var(--text-h1-desktop); 
+   296→    letter-spacing: -0.04em;
+   297→  }
+   298→  h2, .h2 { 
+   299→    font-size: var(--text-h2-desktop); 
+   300→    letter-spacing: -0.03em;
+   301→  }
+   302→  h3, .h3 { 
+   303→    font-size: var(--text-h3-desktop); 
+   304→  }
+   305→  h4, .h4 { 
+   306→    font-size: var(--text-h4-desktop); 
+   307→  }
+   308→  body { 
+   309→    font-size: var(--text-body-desktop); 
+   310→  }
+   311→  small, .text-small { 
+   312→    font-size: var(--text-small-desktop); 
+   313→  }
+   314→}
+   315→
+   316→/* Mobile heading sizes (default) */
+   317→h1, .h1 { 
+   318→  font-size: var(--text-h1-mobile); 
+   319→  letter-spacing: -0.02em;
+   320→}
+   321→h2, .h2 { 
+   322→  font-size: var(--text-h2-mobile); 
+   323→}
+   324→h3, .h3 { 
+   325→  font-size: var(--text-h3-mobile); 
+   326→}
+   327→small, .text-small { 
+   328→  font-size: var(--text-small-mobile); 
+   329→}
+   330→
+   331→/* ── English Display Headings ── */
+   332→.heading-en {
+   333→  font-family: var(--font-heading-en);
+   334→  font-weight: 600;
+   335→}
+   336→
+   337→/* ── Body Text ── */
+   338→p {
+   339→  line-height: var(--leading-relaxed);
+   340→  margin-bottom: var(--space-3);
+   341→  font-weight: 400;
+   342→}
+   343→
+   344→p:last-child {
+   345→  margin-bottom: 0;
+   346→}
+   347→
+   348→/* ── Large Display Text (for quotes, hero) ── */
+   349→.text-display {
+   350→  font-family: var(--font-heading-ar);
+   351→  font-weight: 300;
+   352→  line-height: 1.3;
+   353→}
+   354→
+   355→/* ============================================
+   356→   LAYOUT SYSTEM
+   357→   ============================================ */
+   358→
+   359→/* ── Custom Container ── */
+   360→.container-custom {
+   361→  max-width: var(--max-width);
+   362→  margin-left: auto;
+   363→  margin-right: auto;
+   364→  padding-left: var(--padding-mobile);
+   365→  padding-right: var(--padding-mobile);
+   366→}
+   367→
+   368→@media (min-width: 1024px) {
+   369→  .container-custom {
+   370→    padding-left: var(--padding-desktop);
+   371→    padding-right: var(--padding-desktop);
+   372→  }
+   373→}
+   374→
+   375→.container-narrow {
+   376→  max-width: var(--max-width-narrow);
+   377→  margin-left: auto;
+   378→  margin-right: auto;
+   379→  padding-left: var(--padding-mobile);
+   380→  padding-right: var(--padding-mobile);
+   381→}
+   382→
+   383→@media (min-width: 1024px) {
+   384→  .container-narrow {
+   385→    padding-left: var(--padding-desktop);
+   386→    padding-right: var(--padding-desktop);
+   387→  }
+   388→}
+   389→
+   390→/* ── Section Spacing - Generous whitespace ── */
+   391→.section-spacing {
+   392→  padding-top: var(--section-spacing-mobile);
+   393→  padding-bottom: var(--section-spacing-mobile);
+   394→}
+   395→
+   396→@media (min-width: 1024px) {
+   397→  .section-spacing {
+   398→    padding-top: var(--section-spacing-desktop);
+   399→    padding-bottom: var(--section-spacing-desktop);
+   400→  }
+   401→}
+   402→
+   403→/* ============================================
+   404→   BUTTON SYSTEM
+   405→   Unified button styles - Premium feel
+   406→   ============================================ */
+   407→
+   408→/* ── Base Button ── */
+   409→.btn {
+   410→  display: inline-flex;
+   411→  align-items: center;
+   412→  justify-content: center;
+   413→  gap: var(--space-2);
+   414→  font-family: var(--font-heading-ar);
+   415→  font-weight: 700;
+   416→  font-size: var(--text-body-mobile);
+   417→  border-radius: var(--radius-md);
+   418→  cursor: pointer;
+   419→  transition: all var(--transition-base);
+   420→  border: none;
+   421→  outline: none;
+   422→  text-decoration: none;
+   423→  white-space: nowrap;
+   424→  position: relative;
+   425→  overflow: hidden;
+   426→}
+   427→
+   428→@media (min-width: 1024px) {
+   429→  .btn {
+   430→    font-size: var(--text-body-desktop);
+   431→  }
+   432→}
+   433→
+   434→.btn:focus-visible {
+   435→  outline: 2px solid var(--color-primary);
+   436→  outline-offset: 3px;
+   437→}
+   438→
+   439→.btn::after {
+   440→  content: '';
+   441→  position: absolute;
+   442→  inset: 0;
+   443→  background: rgba(255, 255, 255, 0);
+   444→  transition: background var(--transition-fast);
+   445→}
+   446→
+   447→.btn:hover::after {
+   448→  background: rgba(255, 255, 255, 0.1);
+   449→}
+   450→
+   451→.btn:active {
+   452→  transform: scale(0.97);
+   453→}
+   454→
+   455→/* ── Primary Button ── */
+   456→.btn-primary {
+   457→  background-color: var(--color-primary);
+   458→  color: var(--color-white);
+   459→  padding: 16px 36px;
+   460→  border-radius: var(--radius-md);
+   461→  box-shadow: 0 2px 12px rgba(93, 60, 131, 0.25);
+   462→}
+   463→
+   464→.btn-primary:hover {
+   465→  background-color: var(--color-primary-hover);
+   466→  box-shadow: 0 4px 20px rgba(93, 60, 131, 0.35);
+   467→  transform: translateY(-2px);
+   468→}
+   469→
+   470→/* ── Secondary Button (Outline) ── */
+   471→.btn-secondary {
+   472→  background-color: transparent;
+   473→  color: var(--color-primary);
+   474→  border: 1.5px solid var(--color-primary);
+   475→  padding: calc(16px - 1.5px) calc(36px - 1.5px);
+   476→  border-radius: var(--radius-md);
+   477→}
+   478→
+   479→.btn-secondary:hover {
+   480→  background-color: var(--color-primary);
+   481→  color: var(--color-white);
+   482→  transform: translateY(-2px);
+   483→}
+   484→
+   485→/* ── Gold Accent Button (Use sparingly!) ── */
+   486→.btn-gold {
+   487→  background-color: var(--color-gold);
+   488→  color: var(--color-white);
+   489→  padding: 16px 36px;
+   490→  border-radius: var(--radius-md);
+   491→  box-shadow: 0 2px 12px rgba(194, 157, 68, 0.25);
+   492→}
+   493→
+   494→.btn-gold:hover {
+   495→  background-color: var(--color-gold-dark);
+   496→  box-shadow: 0 4px 20px rgba(194, 157, 68, 0.35);
+   497→  transform: translateY(-2px);
+   498→}
+   499→
+   500→/* ── Ghost Button ── */
+   501→.btn-ghost {
+   502→  background-color: transparent;
+   503→  color: var(--color-primary);
+   504→  padding: 16px 24px;
+   505→}
+   506→
+   507→.btn-ghost:hover {
+   508→  background-color: rgba(93, 60, 131, 0.06);
+   509→}
+   510→
+   511→/* ── Button Sizes ── */
+   512→.btn-sm {
+   513→  padding: 10px 20px;
+   514→  font-size: 14px;
+   515→}
+   516→
+   517→.btn-lg {
+   518→  padding: 20px 44px;
+   519→  font-size: 18px;
+   520→  border-radius: var(--radius-lg);
+   521→}
+   522→
+   523→/* ============================================
+   524→   HEADER SYSTEM
+   525→   Transparent → Solid on scroll
+   526→   Cinematic transition
+   527→   ============================================ */
+   528→
+   529→.header-main {
+   530→  position: fixed;
+   531→  top: 0;
+   532→  left: 0;
+   533→  right: 0;
+   534→  z-index: 1000;
+   535→  height: var(--header-height);
+   536→  background-color: transparent;
+   537→  transition: all var(--transition-base);
+   538→  display: flex;
+   539→  align-items: center;
+   540→}
+   541→
+   542→/* Scrolled state - after 80px scroll for more tolerance */
+   543→.header-scrolled {
+   544→  background-color: rgba(250, 250, 248, 0.92);
+   545→  backdrop-filter: blur(20px);
+   546→  -webkit-backdrop-filter: blur(20px);
+   547→  box-shadow: var(--shadow-header);
+   548→  height: var(--header-height-scrolled);
+   549→}
+   550→
+   551→.dark .header-scrolled {
+   552→  background-color: rgba(37, 37, 66, 0.92);
+   553→}
+   554→
+   555→/* ============================================
+   556→   HERO SECTION
+   557→   Premium gradient with subtle depth
+   558→   ============================================ */
+   559→
+   560→.hero-gradient {
+   561→  background: linear-gradient(
+   562→    165deg,
+   563→    #5a4278 0%,
+   564→    #6b4d94 25%,
+   565→    #5D3C83 50%,
+   566→    #4a3570 75%,
+   567→    #5a4068 100%
+   568→  );
+   569→}
+   570→
+   571→.hero-premium-gradient {
+   572→  background: linear-gradient(
+   573→    135deg,
+   574→    #4a3570 0%,
+   575→    #5D3C83 30%,
+   576→    #6b4d94 60%,
+   577→    #5a4278 100%
+   578→  );
+   579→}
+   580→
+   581→/* Hero text styling */
+   582→.hero-title {
+   583→  font-family: var(--font-heading-ar);
+   584→  font-weight: 900;
+   585→  color: var(--color-white);
+   586→}
+   587→
+   588→.hero-subtitle {
+   589→  font-family: var(--font-body-ar);
+   590→  color: rgba(255, 255, 255, 0.88);
+   591→  line-height: var(--leading-relaxed);
+   592→}
+   593→
+   594→/* Gold accent for hero only */
+   595→.hero-accent-text {
+   596→  color: var(--color-gold);
+   597→}
+   598→
+   599→/* ============================================
+   600→   CUSTOM CURSOR
+   601→   Cuberto-inspired smooth cursor
+   602→   ============================================ */
+   603→
+   604→.cursor-dot {
+   605→  width: 8px;
+   606→  height: 8px;
+   607→  background-color: var(--color-primary);
+   608→  border-radius: 50%;
+   609→  position: fixed;
+   610→  pointer-events: none;
+   611→  z-index: 9999;
+   612→  mix-blend-mode: difference;
+   613→  transition: width 0.3s var(--ease-out-expo), 
+   614→              height 0.3s var(--ease-out-expo),
+   615→              background-color 0.3s var(--ease-out-expo);
+   616→}
+   617→
+   618→.cursor-dot.hovering {
+   619→  width: 48px;
+   620→  height: 48px;
+   621→  background-color: rgba(93, 60, 131, 0.15);
+   622→  border: 2px solid var(--color-primary);
+   623→}
+   624→
+   625→.cursor-ring {
+   626→  width: 40px;
+   627→  height: 40px;
+   628→  border: 1.5px solid rgba(93, 60, 131, 0.3);
+   629→  border-radius: 50%;
+   630→  position: fixed;
+   631→  pointer-events: none;
+   632→  z-index: 9998;
+   633→  transition: width 0.4s var(--ease-out-expo),
+   634→              height 0.4s var(--ease-out-expo),
+   635→              border-color 0.3s var(--ease-out-expo);
+   636→}
+   637→
+   638→.cursor-ring.hovering {
+   639→  width: 64px;
+   640→  height: 64px;
+   641→  border-color: rgba(93, 60, 131, 0.15);
+   642→}
+   643→
+   644→/* Hide custom cursor on touch devices */
+   645→@media (hover: none) and (pointer: coarse) {
+   646→  .cursor-dot,
+   647→  .cursor-ring {
+   648→    display: none !important;
+   649→  }
+   650→}
+   651→
+   652→/* ============================================
+   653→   TEXT REVEAL ANIMATION
+   654→   Professional character/word reveal
+   655→   ============================================ */
+   656→
+   657→.reveal-text {
+   658→  overflow: hidden;
+   659→}
+   660→
+   661→.reveal-text-inner {
+   662→  transform: translateY(100%);
+   663→  opacity: 0;
+   664→  transition: transform 0.8s var(--ease-out-quart),
+   665→              opacity 0.8s var(--ease-out-quart);
+   666→}
+   667→
+   668→.reveal-text.revealed .reveal-text-inner {
+   669→  transform: translateY(0);
+   670→  opacity: 1;
+   671→}
+   672→
+   673→/* Stagger children */
+   674→.stagger-reveal > * {
+   675→  opacity: 0;
+   676→  transform: translateY(24px);
+   677→  transition: opacity 0.6s var(--ease-out-quart),
+   678→              transform 0.6s var(--ease-out-quart);
+   679→}
+   680→
+   681→.stagger-reveal.revealed > *:nth-child(1) { transition-delay: 0ms; }
+   682→.stagger-reveal.revealed > *:nth-child(2) { transition-delay: 80ms; }
+   683→.stagger-reveal.revealed > *:nth-child(3) { transition-delay: 160ms; }
+   684→.stagger-reveal.revealed > *:nth-child(4) { transition-delay: 240ms; }
+   685→.stagger-reveal.revealed > *:nth-child(5) { transition-delay: 320ms; }
+   686→.stagger-reveal.revealed > *:nth-child(6) { transition-delay: 400ms; }
+   687→.stagger-reveal.revealed > *:nth-child(7) { transition-delay: 480ms; }
+   688→.stagger-reveal.revealed > *:nth-child(8) { transition-delay: 560ms; }
+   689→.stagger-reveal.revealed > *:nth-child(9) { transition-delay: 640ms; }
+   690→.stagger-reveal.revealed > *:nth-child(10) { transition-delay: 720ms; }
+   691→
+   692→.stagger-reveal.revealed > * {
+   693→  opacity: 1;
+   694→  transform: translateY(0);
+   695→}
+   696→
+   697→/* ============================================
+   698→   SCROLL REVEAL ANIMATIONS
+   699→   GSAP-inspired CSS animations
+   700→   ============================================ */
+   701→
+   702→/* Fade in up on scroll */
+   703→@keyframes fadeInUp {
+   704→  from {
+   705→    opacity: 0;
+   706→    transform: translateY(32px);
+   707→  }
+   708→  to {
+   709→    opacity: 1;
+   710→    transform: translateY(0);
+   711→  }
+   712→}
+   713→
+   714→.animate-fade-in-up {
+   715→  animation: fadeInUp 0.8s var(--ease-out-quart) forwards;
+   716→}
+   717→
+   718→/* Fade in on scroll */
+   719→@keyframes fadeIn {
+   720→  from { opacity: 0; }
+   721→  to { opacity: 1; }
+   722→}
+   723→
+   724→.animate-fade-in {
+   725→  animation: fadeIn 0.6s var(--ease-out-expo) forwards;
+   726→}
+   727→
+   728→/* Scale in on scroll */
+   729→@keyframes scaleIn {
+   730→  from {
+   731→    opacity: 0;
+   732→    transform: scale(0.96);
+   733→  }
+   734→  to {
+   735→    opacity: 1;
+   736→    transform: scale(1);
+   737→  }
+   738→}
+   739→
+   740→.animate-scale-in {
+   741→  animation: scaleIn 0.7s var(--ease-out-expo) forwards;
+   742→}
+   743→
+   744→/* Slide in from right (for RTL) */
+   745→@keyframes slideInRight {
+   746→  from {
+   747→    opacity: 0;
+   748→    transform: translateX(40px);
+   749→  }
+   750→  to {
+   751→    opacity: 1;
+   752→    transform: translateX(0);
+   753→  }
+   754→}
+   755→
+   756→.animate-slide-in-right {
+   757→  animation: slideInRight 0.7s var(--ease-out-quart) forwards;
+   758→}
+   759→
+   760→/* Slide in from left (for RTL) */
+   761→@keyframes slideInLeft {
+   762→  from {
+   763→    opacity: 0;
+   764→    transform: translateX(-40px);
+   765→  }
+   766→  to {
+   767→    opacity: 1;
+   768→    transform: translateX(0);
+   769→  }
+   770→}
+   771→
+   772→.animate-slide-in-left {
+   773→  animation: slideInLeft 0.7s var(--ease-out-quart) forwards;
+   774→}
+   775→
+   776→/* Gentle float animation */
+   777→@keyframes float {
+   778→  0%, 100% { transform: translateY(0) rotate(0deg); }
+   779→  50% { transform: translateY(-12px) rotate(1deg); }
+   780→}
+   781→
+   782→.animate-float {
+   783→  animation: float 4s var(--ease-in-out-quart) infinite;
+   784→}
+   785→
+   786→/* Gentle pulse */
+   787→@keyframes gentle-pulse {
+   788→  0%, 100% { opacity: 1; }
+   789→  50% { opacity: 0.7; }
+   790→}
+   791→
+   792→.animate-gentle-pulse {
+   793→  animation: gentle-pulse 3s var(--ease-in-out-quart) infinite;
+   794→}
+   795→
+   796→/* Initial hidden state for scroll reveal */
+   797→.reveal-hidden {
+   798→  opacity: 0;
+   799→  transform: translateY(32px);
+   800→}
+   801→
+   802→.reveal-visible {
+   803→  opacity: 1;
+   804→  transform: translateY(0);
+   805→  transition: opacity 0.8s var(--ease-out-quart),
+   806→              transform 0.8s var(--ease-out-quart);
+   807→}
+   808→
+   809→/* ============================================
+   810→   PAGE TRANSITION
+   811→   Cinematic fade + slight scale
+   812→   ============================================ */
+   813→
+   814→.page-transition-enter {
+   815→  opacity: 0;
+   816→  transform: scale(0.98) translateY(8px);
+   817→}
+   818→
+   819→.page-transition-active {
+   820→  opacity: 1;
+   821→  transform: scale(1) translateY(0);
+   822→  transition: opacity 0.6s var(--ease-out-quart),
+   823→              transform 0.6s var(--ease-out-quart);
+   824→}
+   825→
+   826→/* ============================================
+   827→   CARD SYSTEM
+   828→   Premium card styles
+   829→   ============================================ */
+   830→
+   831→.card {
+   832→  background-color: var(--card);
+   833→  border-radius: var(--radius-lg);
+   834→  transition: all var(--transition-base);
+   835→  border: 1px solid rgba(0, 0, 0, 0.04);
+   836→}
+   837→
+   838→.card:hover {
+   839→  box-shadow: var(--shadow-card-hover);
+   840→  transform: translateY(-4px);
+   841→}
+   842→
+   843→.card-flat {
+   844→  background-color: var(--card);
+   845→  border-radius: var(--radius-lg);
+   846→  border: 1px solid var(--border);
+   847→  transition: all var(--transition-base);
+   848→}
+   849→
+   850→.card-flat:hover {
+   851→  border-color: var(--color-primary);
+   852→  box-shadow: var(--shadow-md);
+   853→}
+   854→
+   855→/* Glass effect (for overlays) */
+   856→.glass {
+   857→  backdrop-filter: blur(20px);
+   858→  -webkit-backdrop-filter: blur(20px);
+   859→  background: rgba(255, 255, 255, 0.88);
+   860→  border: 1px solid rgba(255, 255, 255, 0.4);
+   861→}
+   862→
+   863→.dark .glass {
+   864→  background: rgba(37, 37, 66, 0.88);
+   865→  border: 1px solid rgba(255, 255, 255, 0.08);
+   866→}
+   867→
+   868→/* ============================================
+   869→   BENTO GRID LAYOUT
+   870→   Non-uniform grid for services
+   871→   ============================================ */
+   872→
+   873→.bento-grid {
+   874→  display: grid;
+   875→  grid-template-columns: repeat(2, 1fr);
+   876→  gap: var(--space-3);
+   877→}
+   878→
+   879→@media (min-width: 768px) {
+   880→  .bento-grid {
+   881→    grid-template-columns: repeat(3, 1fr);
+   882→    gap: var(--space-4);
+   883→  }
+   884→}
+   885→
+   886→@media (min-width: 1024px) {
+   887→  .bento-grid {
+   888→    grid-template-columns: repeat(4, 1fr);
+   889→    gap: var(--space-4);
+   890→  }
+   891→}
+   892→
+   893→.bento-item-span-2 {
+   894→  grid-column: span 2;
+   895→}
+   896→
+   897→.bento-item-row-span-2 {
+   898→  grid-row: span 2;
+   899→}
+   900→
+   901→/* ============================================
+   902→   HORIZONTAL SCROLL
+   903→   For team section
+   904→   ============================================ */
+   905→
+   906→.horizontal-scroll-container {
+   907→  overflow-x: auto;
+   908→  overflow-y: hidden;
+   909→  -webkit-overflow-scrolling: touch;
+   910→  scrollbar-width: none;
+   911→  -ms-overflow-style: none;
+   912→  scroll-snap-type: x mandatory;
+   913→}
+   914→
+   915→.horizontal-scroll-container::-webkit-scrollbar {
+   916→  display: none;
+   917→}
+   918→
+   919→.horizontal-scroll-item {
+   920→  scroll-snap-align: start;
+   921→  flex-shrink: 0;
+   922→}
+   923→
+   924→/* ============================================
+   925→   UTILITY CLASSES
+   926→   ============================================ */
+   927→
+   928→/* ── Text Utilities ── */
+   929→.text-primary { color: var(--color-primary); }
+   930→.text-navy { color: var(--color-navy); }
+   931→.text-gold { color: var(--color-gold); }
+   932→.text-sage { color: var(--color-sage); }
+   933→.text-cream { color: var(--color-cream); }
+   934→
+   935→/* ── Background Utilities ── */
+   936→.bg-cream { background-color: var(--color-cream); }
+   937→.bg-white { background-color: var(--color-white); }
+   938→.bg-primary { background-color: var(--color-primary); }
+   939→.bg-navy { background-color: var(--color-navy); }
+   940→.bg-purple-dark { background-color: #3D2565; }
+   941→
+   942→/* ── Spacing Utilities (8px base) ── */
+   943→.gap-1 { gap: var(--space-1); }
+   944→.gap-2 { gap: var(--space-2); }
+   945→.gap-3 { gap: var(--space-3); }
+   946→.gap-4 { gap: var(--space-4); }
+   947→.gap-6 { gap: var(--space-6); }
+   948→.gap-8 { gap: var(--space-8); }
+   949→
+   950→.mt-1 { margin-top: var(--space-1); }
+   951→.mt-2 { margin-top: var(--space-2); }
+   952→.mt-3 { margin-top: var(--space-3); }
+   953→.mt-4 { margin-top: var(--space-4); }
+   954→.mt-6 { margin-top: var(--space-6); }
+   955→.mt-8 { margin-top: var(--space-8); }
+   956→.mt-12 { margin-top: var(--space-12); }
+   957→.mt-16 { margin-top: var(--space-16); }
+   958→
+   959→.mb-1 { margin-bottom: var(--space-1); }
+   960→.mb-2 { margin-bottom: var(--space-2); }
+   961→.mb-3 { margin-bottom: var(--space-3); }
+   962→.mb-4 { margin-bottom: var(--space-4); }
+   963→.mb-6 { margin-bottom: var(--space-6); }
+   964→.mb-8 { margin-bottom: var(--space-8); }
+   965→.mb-12 { margin-bottom: var(--space-12); }
+   966→.mb-16 { margin-bottom: var(--space-16); }
+   967→
+   968→.p-1 { padding: var(--space-1); }
+   969→.p-2 { padding: var(--space-2); }
+   970→.p-3 { padding: var(--space-3); }
+   971→.p-4 { padding: var(--space-4); }
+   972→.p-6 { padding: var(--space-6); }
+   973→.p-8 { padding: var(--space-8); }
+   974→
+   975→/* Ghost number style for Why Us section */
+   976→.ghost-number {
+   977→  font-family: var(--font-heading-en);
+   978→  font-size: clamp(120px, 15vw, 200px);
+   979→  font-weight: 700;
+   980→  color: transparent;
+   981→  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+   982→  line-height: 1;
+   983→  position: absolute;
+   984→  top: 50%;
+   985→  left: 50%;
+   986→  transform: translate(-50%, -50%);
+   987→  user-select: none;
+   988→  pointer-events: none;
+   989→}
+   990→
+   991→/* Large quote styling */
+   992→.quote-large {
+   993→  font-family: var(--font-heading-ar);
+   994→  font-size: clamp(24px, 4vw, 42px);
+   995→  font-weight: 300;
+   996→  line-height: 1.5;
+   997→  font-style: italic;
+   998→}
+   999→
+  1000→.quote-mark {
+  1001→  font-family: Georgia, serif;
+  1002→  font-size: clamp(80px, 10vw, 140px);
+  1003→  line-height: 0.8;
+  1004→  color: var(--color-gold);
+  1005→  opacity: 0.3;
+  1006→}
+  1007→
+  1008→/* ============================================
+  1009→   SCROLLBAR STYLING
+  1010→   Minimal, elegant scrollbar
+  1011→   ============================================ */
+  1012→
+  1013→::-webkit-scrollbar {
+  1014→  width: 6px;
+  1015→  height: 6px;
+  1016→}
+  1017→
+  1018→::-webkit-scrollbar-track {
+  1019→  background: transparent;
+  1020→}
+  1021→
+  1022→::-webkit-scrollbar-thumb {
+  1023→  background: var(--color-sage);
+  1024→  border-radius: 3px;
+  1025→}
+  1026→
+  1027→::-webkit-scrollbar-thumb:hover {
+  1028→  background: var(--color-sage-dark);
+  1029→}
+  1030→
+  1031→/* Firefox scrollbar */
+  1032→* {
+  1033→  scrollbar-width: thin;
+  1034→  scrollbar-color: var(--color-sage) transparent;
+  1035→}
+  1036→
+  1037→/* ============================================
+  1038→   FOCUS & ACCESSIBILITY
+  1039→   ============================================ */
+  1040→
+  1041→*:focus-visible {
+  1042→  outline: 2px solid var(--color-primary);
+  1043→  outline-offset: 3px;
+  1044→}
+  1045→
+  1046→/* Skip to content link */
+  1047→.skip-to-content {
+  1048→  position: absolute;
+  1049→  top: -100%;
+  1050→  left: var(--space-4);
+  1051→  z-index: 10000;
+  1052→  padding: var(--space-2) var(--space-4);
+  1053→  background: var(--color-primary);
+  1054→  color: white;
+  1055→  border-radius: var(--radius-md);
+  1056→  transition: top var(--transition-fast);
+  1057→}
+  1058→
+  1059→.skip-to-content:focus {
+  1060→  top: var(--space-4);
+  1061→}
+  1062→
+  1063→/* ============================================
+  1064→   REDUCED MOTION SUPPORT
+  1065→   Respect user preferences
+  1066→   ============================================ */
+  1067→
+  1068→@media (prefers-reduced-motion: reduce) {
+  1069→  *,
+  1070→  *::before,
+  1071→  *::after {
+  1072→    animation-duration: 0.01ms !important;
+  1073→    animation-iteration-count: 1 !important;
+  1074→    transition-duration: 0.01ms !important;
+  1075→    scroll-behavior: auto !important;
+  1076→  }
+  1077→
+  1078→  .animate-float,
+  1079→  .animate-fade-in-up,
+  1080→  .animate-scale-in,
+  1081→  .animate-slide-in-right,
+  1082→  .animate-slide-in-left,
+  1083→  .animate-gentle-pulse {
+  1084→    animation: none !important;
+  1085→  }
+  1086→
+  1087→  .reveal-hidden {
+  1088→    opacity: 1;
+  1089→    transform: none;
+  1090→  }
+  1091→
+  1092→  .stagger-reveal > *,
+  1093→  .reveal-text-inner {
+  1094→    opacity: 1;
+  1095→    transform: none;
+  1096→    transition: none;
+  1097→  }
+  1098→}
+  1099→
+  1100→/* ============================================
+  1101→   RESPONSIVE HELPERS
+  1102→   ============================================ */
+  1103→
+  1104→/* Hide on mobile, show on desktop */
+  1105→.hide-mobile {
+  1106→  display: none;
+  1107→}
+  1108→
+  1109→@media (min-width: 1024px) {
+  1110→  .hide-mobile {
+  1111→    display: initial;
+  1112→  }
+  1113→}
+  1114→
+  1115→/* Show on mobile, hide on desktop */
+  1116→.show-mobile {
+  1117→  display: initial;
+  1118→}
+  1119→
+  1120→@media (min-width: 1024px) {
+  1121→  .show-mobile {
+  1122→    display: none;
+  1123→  }
+  1124→}
+  1125→
+  1126→/* ============================================
+  1127→   PRINT STYLES
+  1128→   ============================================ */
+  1129→
+  1130→@media print {
+  1131→  .header-main,
+  1132→  .cursor-dot,
+  1133→  .cursor-ring,
+  1134→  .btn,
+  1135→  .horizontal-scroll-container {
+  1136→    display: none !important;
+  1137→  }
+  1138→
+  1139→  body {
+  1140→    background: white;
+  1141→    color: black;
+  1142→  }
+  1143→
+  1144→  .card {
+  1145→    break-inside: avoid;
+  1146→    box-shadow: none;
+  1147→    border: 1px solid #ddd;
+  1148→  }
+  1149→}
+  1150→

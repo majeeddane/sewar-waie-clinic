@@ -1,15 +1,13 @@
+/* Fonts loaded via <link> in layout.tsx for optimal performance */
 @import "tailwindcss";
 @import "tw-animate-css";
 
 /* ============================================
    SEWAR WAIE - GLOBAL STYLES
-   Professional Design System v3.0
+   Professional Design System v4.0
    Apple-level discipline + ROSHN Arabic luxury
    Cuberto/Lusion timing precision (toned down)
    ============================================ */
-
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -75,6 +73,10 @@
   --font-heading-ar: 'Tajawal', sans-serif;
   --font-body-ar: 'IBM Plex Sans Arabic', sans-serif;
   --font-heading-en: 'Fraunces', serif;
+  
+  /* Font Aliases (for consistency across components) */
+  --font-display-arabic: 'Tajawal', sans-serif;
+  --font-display-ar: 'Tajawal', sans-serif;
 
   /* Font Sizes - Desktop (Apple-like scale) */
   --text-h1-desktop: clamp(48px, 5vw, 72px);
@@ -598,9 +600,52 @@ p:last-child {
 
 /* ============================================
    CUSTOM CURSOR
-   Cuberto-inspired smooth cursor
+   Premium smooth cursor - Apple-level refinement
+   Subtle, calming presence for healthcare context
    ============================================ */
 
+/* Inner dot - precise interaction point */
+.custom-cursor-dot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  will-change: transform, width, height, background-color;
+}
+
+/* Hover state - gentle expansion */
+.custom-cursor-dot.is-hovering {
+  background-color: rgba(93, 60, 131, 0.4) !important;
+}
+
+/* Click state - subtle shrink feedback */
+.custom-cursor-dot.is-clicking {
+  transform: translate(-50%, -50%) scale(0.85) !important;
+}
+
+/* Outer ring - elegant trailing effect */
+.custom-cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  border-radius: 50%;
+  will-change: transform, width, height, border-color, background-color;
+}
+
+/* Ring hover state - expands gracefully */
+.custom-cursor-ring.is-hovering {
+  width: 64px !important;
+  height: 64px !important;
+  border-color: rgba(93, 60, 131, 0.18) !important;
+  background-color: rgba(93, 60, 131, 0.04) !important;
+}
+
+/* Ring click state - subtle contract */
+.custom-cursor-ring.is-clicking {
+  transform: translate(-50%, -50%) scale(0.92) !important;
+}
+
+/* Legacy support - old class names */
 .cursor-dot {
   width: 8px;
   height: 8px;
@@ -609,7 +654,6 @@ p:last-child {
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: difference;
   transition: width 0.3s var(--ease-out-expo), 
               height 0.3s var(--ease-out-expo),
               background-color 0.3s var(--ease-out-expo);
@@ -644,7 +688,9 @@ p:last-child {
 /* Hide custom cursor on touch devices */
 @media (hover: none) and (pointer: coarse) {
   .cursor-dot,
-  .cursor-ring {
+  .cursor-ring,
+  .custom-cursor-dot,
+  .custom-cursor-ring {
     display: none !important;
   }
 }
