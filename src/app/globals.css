@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 /* Sewar Waie Color Palette */
@@ -44,6 +45,12 @@
   --chart-3: var(--color-navy);
   --chart-4: var(--color-sage);
   --chart-5: var(--color-gold-light);
+  
+  /* Font Families */
+  --font-display-en: 'DM Serif Display', 'Playfair Display', serif;
+  --font-body-en: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-family-arabic: 'Tajawal', 'Cairo', 'Noto Sans Arabic', sans-serif;
+  --font-family-english: 'Outfit', 'Plus Jakarta Sans', sans-serif;
 }
 
 .dark {
@@ -109,9 +116,6 @@
   --color-sewar-navy: #1F3D73;
   --color-sewar-sage: #90A36D;
   --color-sewar-cream: #FAFAF8;
-  
-  --font-family-arabic: 'Tajawal', 'Cairo', 'Noto Sans Arabic', sans-serif;
-  --font-family-english: 'Quicksand', 'Comfortaa', 'Nunito', sans-serif;
 }
 
 @layer base {
@@ -128,7 +132,7 @@
   }
   
   html[dir="ltr"] body {
-    font-family: var(--font-family-english);
+    font-family: var(--font-body-en);
   }
 }
 
@@ -272,6 +276,89 @@ html {
 /* Container */
 .container-custom {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* ============================================
+   HERO SECTION STYLES - Calm Premium
+   ============================================ */
+
+/* Hero Warm Dark Background - Deep Purple NOT near black */
+.hero-warm-dark {
+  background: linear-gradient(
+    160deg,
+    #4a3570 0%,     /* Deep purple - warm, not black */
+    #5D3C83 30%,    /* Primary purple */
+    #6b4d94 50%,    /* Lighter purple */
+    #5a4278 70%,    /* Back to warm */
+    #4a3a68 100%    /* Deep but warm */
+  );
+}
+
+/* Aurora animation for hero - calm and slow */
+@keyframes aurora-shift {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: translate(0, 0) scale(1); 
+  }
+  33% { 
+    opacity: 0.5;
+    transform: translate(20px, -15px) scale(1.05); 
+  }
+  66% { 
+    opacity: 0.4;
+    transform: translate(-15px, 10px) scale(1.02); 
+  }
+}
+
+/* Glassmorphism for hero cards */
+.hero-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Stats counter styling */
+.stat-number {
+  font-family: var(--font-display-en), var(--font-family-arabic);
+  font-weight: 700;
+  background: linear-gradient(135deg, #C29D44 0%, #F5D98A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   TYPOGRAPHY SCALE - Responsive & Premium
+   ============================================ */
+
+/* Display - Hero only */
+.text-display {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* H1 - Section titles */
+.text-h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* H2 - Card titles */
+.text-h2 {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  line-height: 1.35;
+}
+
+/* Gold gradient text for hero title */
+.hero-title-gradient {
+  font-family: var(--font-display-en), var(--font-family-arabic);
+  background: linear-gradient(135deg, #C29D44 0%, #F5D98A 50%, #E8C56B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ============================================

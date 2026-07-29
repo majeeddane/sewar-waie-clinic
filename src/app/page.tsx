@@ -14,7 +14,7 @@ import CTASection from '@/components/sections/CTASection';
 
 export default function HomePage() {
   return (
-    <>
+    <main>
       <HeroSection />
       <AboutSection />
       <ServicesSection />
@@ -25,6 +25,6 @@ export default function HomePage() {
       <FAQSection />
       <CTASection />
       <ContactSection />
-    </>
+    </main>
   );
 }

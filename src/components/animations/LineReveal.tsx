@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -61,7 +61,7 @@ export default function LineReveal({
   );
 }
 
-// Animated counter component
+// Animated counter component using Intersection Observer
 export function AnimatedCounter({
   value,
   suffix = '',
@@ -76,20 +76,57 @@ export function AnimatedCounter({
   className?: string;
 }) {
   const counterRef = useRef<HTMLSpanElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
+    const element = counterRef.current;
+    if (!element) return;
+
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    if (prefersReducedMotion && counterRef.current) {
-      counterRef.current.textContent = `${prefix}${value}${suffix}`;
+    if (prefersReducedMotion) {
+      element.textContent = `${prefix}${value}${suffix}`;
       return;
     }
+
+    // Use Intersection Observer for reliable visibility detection
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setIsVisible(true);
+            setHasAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the element is visible
+        rootMargin: '0px 0px -50px 0px', // Slightly before fully in view
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [value, suffix, prefix, hasAnimated]);
+
+  // Run animation when element becomes visible
+  useEffect(() => {
+    if (!isVisible) return;
 
     const element = counterRef.current;
     if (!element) return;
 
     let startTime: number | null = null;
+    let animationFrameId: number;
+
+    const easeOutCubic = (t: number): number => {
+      return 1 - Math.pow(1 - t, 3);
+    };
 
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
@@ -97,26 +134,28 @@ export function AnimatedCounter({
       const progress = Math.min(elapsed / (duration * 1000), 1);
       
       // Ease out cubic for smooth counting
-      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-      const currentValue = Math.floor(easeOutCubic * value);
+      const easedProgress = easeOutCubic(progress);
+      const currentValue = Math.floor(easedProgress * value);
       
       element.textContent = `${prefix}${currentValue}${suffix}`;
       
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        // Ensure final value is exact
+        element.textContent = `${prefix}${value}${suffix}`;
       }
     };
 
-    const tween = ScrollTrigger.create({
-      trigger: element,
-      start: 'top 85%',
-      onEnter: () => requestAnimationFrame(animate),
-    });
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
-      tween.kill();
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
-  }, [value, suffix, prefix, duration]);
+  }, [isVisible, value, suffix, prefix, duration]);
 
-  return <span ref={counterRef} className={className}>0</span>;
+  // Show initial value or 0 before animation
+  return <span ref={counterRef} className={className}>{hasAnimated ? `${prefix}0${suffix}` : `${prefix}0${suffix}`}</span>;
 }
